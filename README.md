@@ -1,6 +1,6 @@
 Statement of intent:
 
-Opine is my first 100% independent project (not done as an assignment for a course or tutorial). This will be a MERN (MongoDB, Express.js, ReactJS, and Node.js) stack project that will hopefully utilize advanced React-tools tools such as React Router and Redux, in addition to Web Sockets for real-time updates.
+Opine is my first 100% independent project (not done as an assignment for a course or tutorial). This will be a MERN (MongoDB, Express.js, ReactJS, and Node.js) stack project that will hopefully utilize advanced React-related tools such as React Router and Redux, in addition to Web Sockets for real-time updates.
 
 What will this project do, once completed? Users will be able to do one of two things: 
 
