@@ -1,0 +1,6 @@
+1. Make PostingsList component, included in home.txt. Nest Posting components in the list
+2. On mount, make ajax get request to "/postings"
+3. Add AddPosting component with form for adding posts
+4. Use socket to get updates in real time
+5. 
+6.

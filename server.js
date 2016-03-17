@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var db = mongoose.connection;
 var mongo = require('mongodb');
 var session = require('client-sessions');
-var Posting = require("./dbmodels/posting.js");
+var Posting = require(process.cwd() + "/dbmodels/posting.js"); Posting = mongoose.model("Posting");
 
 mongoose.connect('mongodb://localhost:27017/opine', function (err, db)
 //mongoose.connect(process.env.MONGOLAB_URI, function (err, db)
@@ -23,10 +23,10 @@ app.get('/', function(req, res) {
   console.log("home page");
   res.sendfile(public_dir + "/index.html");
 });
-app.get("/postings", function(req, res){
+app.get("/allPostings", function(req, res){
   console.log("postings accessed");
     var postings = [];
-    var postingStream = Posting.find({}).limit(50).stream();
+    var postingStream = Posting.find().sort({"timePosted": -1}).limit(50).stream();
     postingStream.on("data", function(doc){
             postings.push(doc);
     });
