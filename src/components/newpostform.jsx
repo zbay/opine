@@ -22,7 +22,7 @@ module.exports = React.createClass({
         <label>Question: </label><input placeholder="What do you want to hear opinions about?" name="question"/>
         <label>Asker: </label><input placeholder="Who's asking?" name="asker" onChange={this.onChange}/>
          <label>How to contact:</label><input placeholder="URL, email, phone, etc." name="contact" onChange={this.onChange}/>
-         <label>Expires: </label><input placeholder="What do you want to receive opinions about?" type="date" name="deadline" onChange={this.onChange}/>
+         <label>Deadline: </label><input placeholder="What do you want to receive opinions about?" type="date" name="deadline" onChange={this.onChange}/>
          <label>Category: </label><select name="category" onChange={this.onChange}>
             <option value="Politics">Politics</option>
             <option value="Sports">Sports</option>
@@ -35,7 +35,6 @@ module.exports = React.createClass({
     </form>);
     }
     else{
-        this.setState({successMessage: null, errorMessage: null});
         return (<span></span>);
     }
     },

@@ -33,7 +33,6 @@ module.exports = React.createClass({
         let that = this;
         axios.get("/category/" + category)
         .then(function(response){
-            console.log(response.data.postings);
             that.setState({postings: response.data.postings});
         });
     },
@@ -52,7 +51,7 @@ module.exports = React.createClass({
     },
     renderPostings: function(){
         return (this.state.postings.map(function(posting){
-            return (<Posting postingData={posting} />)
+            return (<Posting key={posting._id} postingData={posting} />)
         }));
     }
 });

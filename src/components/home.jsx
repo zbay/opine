@@ -13,6 +13,6 @@ module.exports = React.createClass({
         <ToggleFormButton visible={this.state.visibleForm} />
         <NewPostForm visible={this.state.visibleForm} />
         <PostingsList criteria="all" />
-        Testing homepage 123</div>);
+        </div>);
     }
 });

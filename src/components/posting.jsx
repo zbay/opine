@@ -13,8 +13,8 @@ module.exports = React.createClass({
         <h3>How can I opine?</h3>
         {this.props.postingData.howToContact}</div>
         <div className="postQuestion">
-        <h1>Filed Under:</h1>
-        {this.props.postingData.categories.join(", ")}</div>
+        <h3>Filed Under:</h3>
+        {this.props.postingData.category}</div>
         </div>);
     }
 });
