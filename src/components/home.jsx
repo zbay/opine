@@ -10,9 +10,18 @@ module.exports = React.createClass({
     },
     render: function(){
         return (<div><Jumbotron />
-        <ToggleFormButton visible={this.state.visibleForm} />
+        <ToggleFormButton visible={this.state.visibleForm} toggleVisible={this.toggleForm} />
         <NewPostForm visible={this.state.visibleForm} />
         <PostingsList criteria="all" />
         </div>);
+    },
+    toggleForm: function(){
+        console.log("toggling form");
+        if(!this.state.visibleForm){
+         this.setState({visibleForm: true});   
+        }
+        else{
+            this.setState({visibleForm: false});
+        }
     }
 });
