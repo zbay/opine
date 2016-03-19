@@ -19,11 +19,11 @@ module.exports = React.createClass({
         <span id="formSuccess">{this.state.successMessage ? this.state.successMessage : ""}</span>
         <span id="formError">{this.state.errorMessage ? this.state.errorMessage : ""}</span>
         </div>
-        <label>Question: </label><input placeholder="What do you want to hear opinions about?" name="question" onChange={this.onChange}/>
-        <label>Asker: </label><input placeholder="Who's asking?" name="asker" onChange={this.onChange}/>
-         <label>How to contact:</label><input placeholder="URL, email, phone, etc." name="contact" onChange={this.onChange}/>
-         <label>Deadline: </label><input placeholder="What do you want to receive opinions about?" type="date" name="deadline" onChange={this.onChange}/>
-         <label>Category: </label><select name="category" onChange={this.onChange}>
+        <label>Question: </label><input placeholder="What do you want to hear opinions about?" name="question" value={this.state.question} onChange={this.onChange}/>
+        <label>Asker: </label><input placeholder="Who's asking?" name="asker" value={this.state.asker} onChange={this.onChange}/>
+         <label>How to contact:</label><input placeholder="URL, email, phone, etc." name="contact" value={this.state.contact} onChange={this.onChange}/>
+         <label>Deadline: </label><input placeholder="What do you want to receive opinions about?" type="date" name="deadline" value={this.state.deadline} onChange={this.onChange}/>
+         <label>Category: </label><select name="category" value={this.state.category} onChange={this.onChange}>
             <option value="Miscellaneous">---</option>
             <option value="Politics">Politics</option>
             <option value="Sports">Sports</option>
@@ -45,8 +45,6 @@ module.exports = React.createClass({
         this.setState(state);  
     },
     newPost: function(e){
-        // http://blog.revathskumar.com/2015/07/submit-a-form-with-react.html
-        // figure out how to pass variables through axios
         let that = this;
          e.preventDefault();
          let postData = {
@@ -56,9 +54,8 @@ module.exports = React.createClass({
             deadline: that.state.deadline,
             category: that.state.category
         };
-        console.log(postData);
         axios.post("/addPosting", postData).then(function(response){
-            if(response.success){
+            if(response.data.success){
                 that.setState({successMessage: "Question successfully posted!", 
                     question: null,
                     asker: null,
@@ -69,7 +66,7 @@ module.exports = React.createClass({
                 });
             }
             else{
-                console.log(response.error);
+                console.log(response.data.error);
                 that.setState({errorMessage: "Your question was not posted! Please try again.",
                     successMessage: null
                 });
