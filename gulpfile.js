@@ -8,7 +8,7 @@ var exec = require('child_process').exec;
 
 gulp.task('default', function() {
   var bundler = watchify(browserify({
-    entries: ['./src/components/app.jsx'],
+    entries: ['./src/app.jsx'],
     transform: [reactify],
     extensions: ['.jsx'],
     debug: true,
