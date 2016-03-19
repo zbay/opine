@@ -10,7 +10,7 @@ module.exports = React.createClass({
          category: "Miscellaneous",
          successMessage: null,
          errorMessage: null
-     }
+     };
     },
     render: function(){
     if(this.props.visible){

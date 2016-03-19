@@ -1,6 +1,6 @@
-1. Make PostingsList component, included in home.txt. Nest Posting components in the list
-2. On mount, make ajax get request to "/postings"
-3. Add AddPosting component with form for adding posts
-4. Use socket to get updates in real time
-5. 
-6.
+4. Use socket to get updates in real time OR go to Redux
+5. React Router support
+6. Style form/postings
+7. Test categories rendering
+8. Figure out search
+9. Write About content
