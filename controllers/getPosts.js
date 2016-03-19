@@ -3,6 +3,8 @@ var Posting = require(process.cwd() + "/dbmodels/posting.js"); Posting = mongoos
 
 module.exports = function(app) {
 
+//currentDate: 
+
 app.get("/allPostings", function(req, res){
   console.log("postings accessed");
     var postings = [];

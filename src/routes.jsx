@@ -6,9 +6,8 @@ var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
 
 var Main = require("./components/main");
-var About = require("./components/about");
-var PostingsList = require("./components/postingslist");
-var ToggleFormButton = require("./components/toggleformbutton");
+var About = require("./components/dumb/about");
+var PostingsList = require("./components/post_related/postingslist");
 
 var AllWrapper = React.createClass({
     render: function(){

@@ -1,6 +1,6 @@
 var React = require('react');
-var Jumbotron = require("./jumbotron");
-var PostingsList = require("./postingslist");
+var Jumbotron = require("./dumb/jumbotron");
+var PostingsList = require("./post_related/postingslist");
 
 module.exports = React.createClass({
     render: function(){

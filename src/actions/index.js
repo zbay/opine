@@ -1,18 +1,23 @@
-var mongoose = require('mongoose');
-var Posting = require(process.cwd() + "../dbmodels/posting.js"); Posting = mongoose.model("Posting");
+import axios from 'axios';
 export const FETCH_POSTS = 'FETCH_POSTS';
 
 export function fetchWeather(criteria) {
     //add db retrieval and stuff
         switch(criteria){
             case "all":
-
+                var postingStream = Posting.find().sort({"timePosted": -1}).limit(50).stream();
+                postingStream.on("data", function(doc){
+                    postings.push(doc);
+                });
+                postingStream.on("end", function(){
+                    res.json({"postings": postings});
+                });
                 break;
             case "category":
-
+                Posting.find();
                 break;
             case "search":
-
+                //Posting.find();
                 break;
             default:
         }

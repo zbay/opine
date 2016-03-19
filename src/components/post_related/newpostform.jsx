@@ -45,8 +45,15 @@ module.exports = React.createClass({
         this.setState(state);  
     },
     newPost: function(e){
-        let that = this;
-         e.preventDefault();
+        e.preventDefault();
+         let that = this;
+        /* let currentDate = new Date();
+         let currentYear = currentDate.getFullYear();
+         let currentDay = currentDate.getDate();
+         let currentMonth = currentDate.getMonth()+1;
+         currentDate = new Date(currentYear + "-" + currentMonth + "-" + currentDay);
+         console.log("selectedDate: " + that.state.deadline + " - currentDate: " + currentDate);*/
+        if(that.state.question !== null && that.state.asker !== null && that.state.contact !== null && new Date(that.state.deadline) >= Date.now() ){
          let postData = {
             question: that.state.question,
             asker: that.state.asker,
@@ -71,6 +78,12 @@ module.exports = React.createClass({
                     successMessage: null
                 });
             }
-        });
+        });   
+        }
+        else{
+            that.setState({errorMessage: "Your question was not posted! Make sure to fill out all fields and choose a date in the future",
+                successMessage: null
+            });           
+        }
     }
 });
