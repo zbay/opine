@@ -1,5 +1,6 @@
 var http = require('http');
 var express = require('express');
+var bodyParser = require('body-parser');
 var path = require('path');
 var app = express();
 var mongoose = require('mongoose');
@@ -17,6 +18,11 @@ mongoose.connect('mongodb://localhost:27017/opine', function (err, db)
       console.log('Successfully connected to MongoDB.');
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
 var public_dir = './public/';
 
 app.get('/', function(req, res) {
@@ -64,9 +70,14 @@ app.post("/addPosting", function(req, res){
     if(!req.body.question || !req.body.asker || !req.body.contact || !req.body.deadline || !req.body.category){
         res.json({"error": "Please fill out the entire form."});
     }
-    var newPost = {"question": req.body.question, "asker": req.body.asker, "howToContact": req.body.contact, "deadline": req.body.deadline, "category": req.body.category};
-    Posting.insert(newPost, function(err, msg){
-        res.json({"success": true});
+    var newPost = new Posting({"question": req.body.question, "asker": req.body.asker, "howToContact": req.body.contact, "deadline": req.body.deadline, "category": req.body.category});
+    newPost.save(function(err, msg){
+        if(!err && msg){
+          res.json({"success": true}); 
+        }
+        else{
+          res.json({"error": newPost});
+        }
     });
 });
 

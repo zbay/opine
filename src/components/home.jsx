@@ -16,7 +16,6 @@ module.exports = React.createClass({
         </div>);
     },
     toggleForm: function(){
-        console.log("toggling form");
         if(!this.state.visibleForm){
          this.setState({visibleForm: true});   
         }

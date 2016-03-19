@@ -9,6 +9,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.9.1",
+    "body-parser": "^1.15.0",
     "browserify": "^9.0.3",
     "client-sessions": "^0.7.0",
     "exec": "^0.2.1",
