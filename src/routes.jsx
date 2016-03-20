@@ -11,19 +11,19 @@ var PostingsList = require("./components/post_related/postingslist");
 
 var AllWrapper = React.createClass({
     render: function(){
-        return (<PostingsList criteria="all" page={this.props.page}/>);
+        return (<PostingsList criteria="all" page={this.props.routeParams.page}/>);
     }
 });
 
 var CategoryWrapper = React.createClass({
     render: function(){
-        return (<PostingsList criteria="category" page={this.props.page} category={this.props.category}/>);
+        return (<PostingsList criteria="category" page={this.props.routeParams.page} category={this.props.routeParams.category}/>);
     }
 });
 
 var SearchWrapper = React.createClass({
     render: function(){
-        return (<PostingsList criteria="search" page={this.props.page} searchQuery={this.props.searchQuery}/>);
+        return (<PostingsList criteria="search" page={this.props.routeParams.page} searchQuery={this.props.routeParams.searchQuery}/>);
     }
 });
 

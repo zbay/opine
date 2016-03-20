@@ -12,6 +12,7 @@ module.exports = React.createClass({
       };  
     },
     componentWillMount: function(){
+          console.log("current page: " + this.props.page);
         let that = this;
         switch(this.props.criteria){
             case "all":
@@ -26,6 +27,22 @@ module.exports = React.createClass({
             default:
         }
     },
+    componentWillReceiveProps: function(){
+        console.log("current page: " + this.props.page);
+         let that = this;
+        switch(this.props.criteria){
+            case "all":
+                 that.retrieveAll(that.props.page);
+                break;
+            case "category":
+                that.retrieveCategory(that.props.category, that.props.page);
+                break;
+            case "search":
+                that.retrieveSearch(that.props.searchQuery, that.props.page);
+                break;
+            default:
+        }       
+    },
     retrieveAll: function(page){
         let that = this;
         axios.get("/allPostings/" + page)
@@ -34,16 +51,16 @@ module.exports = React.createClass({
             that.setState({postings: response.data.postings});
         });
     },
-    retrieveCategory: function(category){
+    retrieveCategory: function(category, page){
         let that = this;
-        axios.get("/category/" + category)
+        axios.get("/category/" + category + "/" + page)
         .then(function(response){
             that.setState({postings: response.data.postings});
         });
     },
-    retrieveSearch: function(searchQuery){
+    retrieveSearch: function(searchQuery, page){
         let that = this;
-        axios.get("/search/" + searchQuery)
+        axios.get("/search/" + searchQuery + "/" + page)
         .then(function(response){
             console.log(response.data.postings);
             that.setState({postings: response.data.postings});

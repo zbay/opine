@@ -10,6 +10,12 @@ footer{
     padding-top: 10px;
     padding-bottom: 10px;
 }
+#formSuccess{
+    color:green;
+}
+#formError{
+    color:red;
+}
 #postingList{
     border: 3px solid black;
 }

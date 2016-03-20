@@ -1,7 +1,7 @@
 "use strict";
 var mongoose = require('mongoose');
 var Posting = require(process.cwd() + "/dbmodels/posting.js"); Posting = mongoose.model("Posting");
-var perPage = 3;
+const perPage = 3;
 
 module.exports = function(app) {
 
