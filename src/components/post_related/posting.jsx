@@ -9,10 +9,10 @@ module.exports = React.createClass({
         <div className="postAsker">
         <h3>Who's asking?</h3>
         {this.props.postingData.asker}</div>
-        <div className="postQuestion">
+        <div className="postContact">
         <h3>How can I opine?</h3>
         {this.props.postingData.howToContact}</div>
-        <div className="postQuestion">
+        <div className="postCategory">
         <h3>Filed Under:</h3>
         {this.props.postingData.category}</div>
         </div>);

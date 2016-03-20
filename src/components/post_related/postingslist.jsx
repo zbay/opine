@@ -59,7 +59,7 @@ module.exports = React.createClass({
     },
     render: function(){
         return (
-        <div>
+        <div id="postingsList">
         <ToggleFormButton visible={this.state.visibleForm} toggleVisible={this.toggleForm} />
         <NewPostForm visible={this.state.visibleForm} />
         <div id="postingsList">

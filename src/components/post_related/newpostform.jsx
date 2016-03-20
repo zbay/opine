@@ -47,12 +47,6 @@ module.exports = React.createClass({
     newPost: function(e){
         e.preventDefault();
          let that = this;
-        /* let currentDate = new Date();
-         let currentYear = currentDate.getFullYear();
-         let currentDay = currentDate.getDate();
-         let currentMonth = currentDate.getMonth()+1;
-         currentDate = new Date(currentYear + "-" + currentMonth + "-" + currentDay);
-         console.log("selectedDate: " + that.state.deadline + " - currentDate: " + currentDate);*/
         if(that.state.question !== null && that.state.asker !== null && that.state.contact !== null && new Date(that.state.deadline) >= Date.now() ){
          let postData = {
             question: that.state.question,
