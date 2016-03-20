@@ -3,12 +3,11 @@ var Posting = require(process.cwd() + "/dbmodels/posting.js"); Posting = mongoos
 
 module.exports = function(app) {
 
-//currentDate: 
 
 app.get("/allPostings", function(req, res){
   console.log("postings accessed");
     var postings = [];
-    var postingStream = Posting.find().sort({"timePosted": -1}).limit(50).stream();
+    var postingStream = Posting.find({"deadline": {$gte: Date.now()}}).sort({"timePosted": -1}).limit(50).stream(); //less than or equal to in mongodb query
     postingStream.on("data", function(doc){
             postings.push(doc);
     });
@@ -20,7 +19,7 @@ app.get("/category/:category", function(req, res){
   console.log("category postings accessed");
     var postings = [];
     var postCategory = this.params.category;
-    var postingStream = Posting.find({"category": postCategory}).sort({"timePosted": -1}).limit(50).stream();
+    var postingStream = Posting.find({"category": postCategory, "deadline": {$gte: Date.now()}}).sort({"timePosted": -1}).limit(50).stream();
     postingStream.on("data", function(doc){
             postings.push(doc);
     });
