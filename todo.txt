@@ -1,6 +1,6 @@
-4. Use socket to get updates in real time OR go to Redux
-5. React Router support
-6. Style form/postings
+4. GET REDUX WORKING. Only action is new post?
+5. Get pagination working, using skip in addition to limit https://scalegrid.io/blog/fast-paging-with-mongodb/. Will need to refactor routes
+6. Better style for form/postings
 7. Test categories rendering
 8. Figure out search
-9. Write About content
+9. Write About content. Make homepage?

@@ -1,13 +1,15 @@
+"use strict";
 var mongoose = require('mongoose');
 var Posting = require(process.cwd() + "/dbmodels/posting.js"); Posting = mongoose.model("Posting");
+var perPage = 3;
 
 module.exports = function(app) {
 
 
-app.get("/allPostings", function(req, res){
-  console.log("postings accessed");
-    var postings = [];
-    var postingStream = Posting.find({"deadline": {$gte: Date.now()}}).sort({"timePosted": -1}).limit(50).stream(); //less than or equal to in mongodb query
+app.get("/allPostings/:page", function(req, res){
+    let page = req.params.page;
+    let postings = [];
+    let postingStream = Posting.find({"deadline": {$gte: Date.now()}}).skip(perPage * page).sort({"timePosted": -1}).limit(perPage).stream(); //less than or equal to in mongodb query
     postingStream.on("data", function(doc){
             postings.push(doc);
     });
@@ -15,11 +17,12 @@ app.get("/allPostings", function(req, res){
          res.json({"postings": postings});
     });
 });
-app.get("/category/:category", function(req, res){
+app.get("/category/:category/:page", function(req, res){
   console.log("category postings accessed");
-    var postings = [];
-    var postCategory = this.params.category;
-    var postingStream = Posting.find({"category": postCategory, "deadline": {$gte: Date.now()}}).sort({"timePosted": -1}).limit(50).stream();
+    let postings = [];
+    let postCategory = req.params.category;
+    let page = this.params.page
+    let postingStream = Posting.find({"category": postCategory, "deadline": {$gte: Date.now()}}).skip(perPage * page).sort({"timePosted": -1}).limit(perPage).stream();
     postingStream.on("data", function(doc){
             postings.push(doc);
     });
@@ -27,13 +30,14 @@ app.get("/category/:category", function(req, res){
          res.json({"postings": postings});
     });
 });
-app.get("/search/:searchQuery", function(req, res){
+app.get("/search/:searchQuery/:page", function(req, res){
   console.log("category postings accessed");
-    var postings = [];
-    var searchQuery = this.params.searchQuery;
+    let postings = [];
+    let searchQuery = req.params.searchQuery;
+    let page = this.params.page;
     //figure out how to best do searches in mongo
     /*
-    var postingStream = Posting.find({"categories": searchQuery}).sort({"timePosted": -1}).limit(50).stream();
+    var postingStream = Posting.find({"categories": searchQuery}).sort({"timePosted": -1}).limit(perPage).stream();
     postingStream.on("data", function(doc){
             postings.push(doc);
     });

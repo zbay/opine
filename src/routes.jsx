@@ -11,29 +11,29 @@ var PostingsList = require("./components/post_related/postingslist");
 
 var AllWrapper = React.createClass({
     render: function(){
-        return (<PostingsList criteria="all" />);
+        return (<PostingsList criteria="all" page={this.props.page}/>);
     }
 });
 
 var CategoryWrapper = React.createClass({
     render: function(){
-        return (<PostingsList criteria="category" />);
+        return (<PostingsList criteria="category" page={this.props.page} category={this.props.category}/>);
     }
 });
 
 var SearchWrapper = React.createClass({
     render: function(){
-        return (<PostingsList criteria="search" />);
+        return (<PostingsList criteria="search" page={this.props.page} searchQuery={this.props.searchQuery}/>);
     }
 });
 
 module.exports = (
   <Router history={HashHistory}>
     <Route path="/" component={Main}>
-      <IndexRoute component={AllWrapper} />
-      <Route path="about" component={About} />
-      <Route path="category/:id" component={CategoryWrapper} />
-      <Route path="search/:id" component={SearchWrapper} />
+      <IndexRoute component={About} />
+      <Route path="all/:page" component={AllWrapper}/>
+      <Route path="category/:category/:page" component={CategoryWrapper} />
+      <Route path="search/:searchQuery/:page" component={SearchWrapper} />
     </Route>
   </Router>
 );

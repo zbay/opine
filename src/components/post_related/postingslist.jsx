@@ -15,7 +15,7 @@ module.exports = React.createClass({
         let that = this;
         switch(this.props.criteria){
             case "all":
-                 that.retrieveAll();
+                 that.retrieveAll(that.props.page);
                 break;
             case "category":
                 that.retrieveCategory(that.props.category);
@@ -26,9 +26,9 @@ module.exports = React.createClass({
             default:
         }
     },
-    retrieveAll: function(){
+    retrieveAll: function(page){
         let that = this;
-        axios.get("/allPostings")
+        axios.get("/allPostings/" + page)
         .then(function(response){
             console.log(response.data.postings);
             that.setState({postings: response.data.postings});
@@ -41,9 +41,9 @@ module.exports = React.createClass({
             that.setState({postings: response.data.postings});
         });
     },
-    retrieveSearch: function(query){
+    retrieveSearch: function(searchQuery){
         let that = this;
-        axios.get("/search/" + query)
+        axios.get("/search/" + searchQuery)
         .then(function(response){
             console.log(response.data.postings);
             that.setState({postings: response.data.postings});
