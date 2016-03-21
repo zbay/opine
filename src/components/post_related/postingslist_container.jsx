@@ -4,9 +4,7 @@ var Posting = require("./dumb/posting");
 var PostingsList = require("./dumb/postingslist");
 var ToggleFormButton = require("./dumb/toggleformbutton");
 var NewPostForm = require("./newpostform");
-var ReactRouter = require('react-router');
-var Link = ReactRouter.Link;
-var BrowseButtons = require("./browsebuttons");
+var BrowseBar = require("./browsebar");
 
 module.exports = React.createClass({
     getInitialState: function(){
@@ -82,7 +80,7 @@ module.exports = React.createClass({
         <ToggleFormButton visible={this.state.visibleForm} toggleVisible={this.toggleForm} />
         <NewPostForm visible={this.state.visibleForm} />
         <PostingsList postings={this.state.postings} />
-        <button><Link to={"/" + this.props.criteria + "/" + (Number(this.props.page)-1)}>Page {"" + (Number(this.props.page)-1)}</Link></button><button><Link to={"/" + this.props.criteria + "/" + (Number(this.props.page)+1)}>Page {"" + (Number(this.props.page)+1)}</Link></button>
+        <BrowseBar page={this.props.page} criteria={this.props.criteria} hasNext={true}/>
         </div>);
     }
 });
