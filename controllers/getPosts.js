@@ -7,7 +7,7 @@ module.exports = function(app) {
 
 
 app.get("/allPostings/:page", function(req, res){
-    let page = req.params.page-1;
+    let page = req.params.page;
     let postings = [];
     let postingStream = Posting.find({"deadline": {$gte: Date.now()}}).skip(perPage * page).sort({"timePosted": -1}).limit(perPage).stream(); //less than or equal to in mongodb query
     postingStream.on("data", function(doc){

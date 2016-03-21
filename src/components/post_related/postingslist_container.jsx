@@ -82,7 +82,7 @@ module.exports = React.createClass({
         <ToggleFormButton visible={this.state.visibleForm} toggleVisible={this.toggleForm} />
         <NewPostForm visible={this.state.visibleForm} />
         <PostingsList postings={this.state.postings} />
-        <button><Link to={"/" + this.props.criteria + "/" + (Number(this.props.page)+1)}>Page {"" + (Number(this.props.page)+1)}</Link></button>
+        <button><Link to={"/" + this.props.criteria + "/" + (Number(this.props.page)-1)}>Page {"" + (Number(this.props.page)-1)}</Link></button><button><Link to={"/" + this.props.criteria + "/" + (Number(this.props.page)+1)}>Page {"" + (Number(this.props.page)+1)}</Link></button>
         </div>);
     }
 });

@@ -1,13 +1,9 @@
-4. GET REDUX WORKING. Only action is new post?
-5. Get pagination working, using skip in addition to limit https://scalegrid.io/blog/fast-paging-with-mongodb/. Will need to refactor routes
+4. GET REDUX WORKING (maybe). Only action is pagination?
+5. Get pagination working. Make a separate component, testing whether a next or previous button is warranted. Add previous button, category selector, and search bar
 6. Better style for form/postings
 7. Test categories rendering
 8. Figure out search
-9. Write About content. Make homepage?
-
-REDUX:
-1. Handle pagination
-2.
+9. Write About content.
 
 SOCKET.IO:
 1. Listen for new posts that fit some criteria (category, search, or none)
