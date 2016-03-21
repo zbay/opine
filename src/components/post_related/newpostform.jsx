@@ -24,7 +24,7 @@ module.exports = React.createClass({
          <label>How to contact:</label><input placeholder="URL, email, phone, etc." name="contact" value={this.state.contact} onChange={this.onChange}/>
          <label>Deadline: </label><input placeholder="What do you want to receive opinions about?" type="date" name="deadline" value={this.state.deadline} onChange={this.onChange}/>
          <label>Category: </label><select name="category" value={this.state.category} onChange={this.onChange}>
-            <option value="Miscellaneous">---</option>
+            <option>---</option>
             <option value="Politics">Politics</option>
             <option value="Sports">Sports</option>
             <option value="Culture">Culture</option>

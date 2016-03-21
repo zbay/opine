@@ -26,6 +26,7 @@
     "reactify": "^1.1.0",
     "redux": "^3.3.1",
     "redux-promise": "^0.5.3",
+    "socket.io": "^1.4.5",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^2.4.0"
   },

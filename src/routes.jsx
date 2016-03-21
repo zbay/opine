@@ -6,24 +6,24 @@ var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
 
 var Main = require("./components/main");
-var About = require("./components/dumb/about");
-var PostingsList = require("./components/post_related/postingslist");
+var About = require("./components/content_dumb/about");
+var PostingsListContainer = require("./components/post_related/postingslist_container");
 
 var AllWrapper = React.createClass({
     render: function(){
-        return (<PostingsList criteria="all" page={this.props.routeParams.page}/>);
+        return (<PostingsListContainer criteria="all" page={this.props.routeParams.page}/>);
     }
 });
 
 var CategoryWrapper = React.createClass({
     render: function(){
-        return (<PostingsList criteria="category" page={this.props.routeParams.page} category={this.props.routeParams.category}/>);
+        return (<PostingsListContainer criteria="category" page={this.props.routeParams.page} category={this.props.routeParams.category}/>);
     }
 });
 
 var SearchWrapper = React.createClass({
     render: function(){
-        return (<PostingsList criteria="search" page={this.props.routeParams.page} searchQuery={this.props.routeParams.searchQuery}/>);
+        return (<PostingsListContainer criteria="search" page={this.props.routeParams.page} searchQuery={this.props.routeParams.searchQuery}/>);
     }
 });
 

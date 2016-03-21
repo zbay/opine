@@ -1,5 +1,5 @@
 import axios from 'axios';
-export const FETCH_POSTS = 'FETCH_POSTS';
+export const NEW_POST = 'NEW_POST';
 
 export function fetchWeather(criteria) {
     //add db retrieval and stuff

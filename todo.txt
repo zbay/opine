@@ -4,3 +4,10 @@
 7. Test categories rendering
 8. Figure out search
 9. Write About content. Make homepage?
+
+REDUX:
+1. Handle pagination
+2.
+
+SOCKET.IO:
+1. Listen for new posts that fit some criteria (category, search, or none)
