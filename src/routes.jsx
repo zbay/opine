@@ -11,19 +11,20 @@ var PostingsListContainer = require("./components/post_related/postingslist_cont
 
 var AllWrapper = React.createClass({
     render: function(){
-        return (<PostingsListContainer criteria="all" page={this.props.routeParams.page}/>);
+        return (<PostingsListContainer criteria="all" page={this.props.routeParams.page} category={null} searchQuery={null}/>);
     }
 });
 
 var CategoryWrapper = React.createClass({
     render: function(){
-        return (<PostingsListContainer criteria="category" page={this.props.routeParams.page} category={this.props.routeParams.category}/>);
+        console.log("category param: " + this.props.routeParams.category);
+        return (<PostingsListContainer criteria="category" page={this.props.routeParams.page} category={this.props.routeParams.category} searchQuery={null}/>);
     }
 });
 
 var SearchWrapper = React.createClass({
     render: function(){
-        return (<PostingsListContainer criteria="search" page={this.props.routeParams.page} searchQuery={this.props.routeParams.searchQuery}/>);
+        return (<PostingsListContainer criteria="search" page={this.props.routeParams.page} searchQuery={this.props.routeParams.searchQuery} category={null}/>);
     }
 });
 
@@ -33,7 +34,7 @@ module.exports = (
       <IndexRoute component={About} />
       <Route path="all/:page" component={AllWrapper}/>
       <Route path="category/:category/:page" component={CategoryWrapper} />
-      <Route path="search/:searchQuery/:page" component={SearchWrapper} />
+      <Route path="search/:search/:page" component={SearchWrapper} />
     </Route>
   </Router>
 );

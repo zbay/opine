@@ -8,42 +8,64 @@ var BrowseBar = require("./browsebar");
 
 module.exports = React.createClass({
     getInitialState: function(){
+        let that = this;
+        console.log(that.props);
+        var thisAddendum = "";
+        if(that.props.criteria != "all"){
+            if(that.props.criteria == "category"){
+                thisAddendum = that.props.category + "/";
+            }
+            if(that.props.criteria == "search"){
+                thisAddendum = that.props.searchQuery + "/";
+            }
+        }
       return {postings: [], 
-          visibleForm: false
+          visibleForm: false,
+          addendum: thisAddendum
       };  
     },
     componentWillMount: function(){
         let that = this;
-        switch(this.props.criteria){
+        switch(that.props.criteria){
             case "all":
                  that.retrieveAll(that.props.page);
                 break;
             case "category":
-                that.retrieveCategory(that.props.category);
+                that.retrieveCategory(that.props.category, that.props.page);
                 break;
             case "search":
-                that.retrieveSearch(that.props.searchQuery);
+                that.retrieveSearch(that.props.searchQuery, that.props.page);
                 break;
             default:
         }
     },
     componentWillReceiveProps: function(nextProps){
          let that = this;
+         console.log(nextProps);
+          var thisAddendum = "";
+        if(nextProps.criteria != "all"){
+            if(nextProps.criteria == "category"){
+                thisAddendum = nextProps.category + "/";
+            }
+            if(nextProps.criteria == "search"){
+                thisAddendum = nextProps.searchQuery + "/";
+            }
+            that.setState({addendum: thisAddendum});
+        }
         switch(nextProps.criteria){
             case "all":
                  that.retrieveAll(nextProps.page);
                 break;
             case "category":
-                that.retrieveCategory(nextProps.category, (nextProps.page));
+                that.retrieveCategory(nextProps.category, nextProps.page);
                 break;
             case "search":
-                that.retrieveSearch(nextProps.searchQuery, (nextProps.page));
+                that.retrieveSearch(nextProps.searchQuery, nextProps.page);
                 break;
             default:
         }       
     },
     retrieveAll: function(page){
-        console.log("retrieving: " + page);
         let that = this;
         axios.get("/allPostings/" + page)
         .then(function(response){
@@ -74,16 +96,14 @@ module.exports = React.createClass({
             this.setState({visibleForm: false});
         }
     },
-    getPostQuantity: function(){
-        axios.get("");
-    },
     render: function(){
+        console.log("The addendum for button: " + this.state.addendum);
         return (
         <div id="postListContainer">
         <ToggleFormButton visible={this.state.visibleForm} toggleVisible={this.toggleForm} />
         <NewPostForm visible={this.state.visibleForm} />
         <PostingsList postings={this.state.postings} />
-        <BrowseBar page={this.props.page} criteria={this.props.criteria} hasNext={this.state.postings.length > 0} page={this.props.page}/>
+        <BrowseBar page={this.props.page} criteria={this.props.criteria} hasNext={this.state.postings.length > 0} page={this.props.page} addendum={this.state.addendum}/>
         </div>);
     }
 });

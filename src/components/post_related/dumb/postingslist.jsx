@@ -15,7 +15,7 @@ module.exports = React.createClass({
         }));   
         }
         else{
-            if(this.props.page === 1)
+            if(this.props.page <= 1)
             {
             return(<div id="errorMessage">There are no open questions! Go ahead and post one, to get us started.</div>);    
             }
