@@ -7,7 +7,7 @@ module.exports = function(app) {
 
 
 app.get("/allPostings/:page", function(req, res){
-    let page = req.params.page;
+    let page = req.params.page -1;
     let postings = [];
     let postingStream = Posting.find({"deadline": {$gte: Date.now()}}).skip(perPage * page).sort({"timePosted": -1}).limit(perPage).stream(); //less than or equal to in mongodb query
     postingStream.on("data", function(doc){
@@ -34,7 +34,7 @@ app.get("/searchPostings/:searchQuery/:page", function(req, res){
   console.log("category postings accessed");
     let postings = [];
     let searchQuery = req.params.searchQuery;
-    let page = this.params.page;
+    let page = this.params.page - 1;
     //figure out how to best do searches in mongo
     /*
     var postingStream = Posting.find({"categories": searchQuery}).sort({"timePosted": -1}).limit(perPage).stream();

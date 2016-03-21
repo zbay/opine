@@ -27,17 +27,17 @@ module.exports = React.createClass({
             default:
         }
     },
-    componentWillReceiveProps: function(){
+    componentWillReceiveProps: function(nextProps){
          let that = this;
-        switch(this.props.criteria){
+        switch(nextProps.criteria){
             case "all":
-                 that.retrieveAll(that.props.page-1);
+                 that.retrieveAll(nextProps.page);
                 break;
             case "category":
-                that.retrieveCategory(that.props.category, (that.props.page));
+                that.retrieveCategory(nextProps.category, (nextProps.page));
                 break;
             case "search":
-                that.retrieveSearch(that.props.searchQuery, (that.props.page));
+                that.retrieveSearch(nextProps.searchQuery, (nextProps.page));
                 break;
             default:
         }       
@@ -74,13 +74,16 @@ module.exports = React.createClass({
             this.setState({visibleForm: false});
         }
     },
+    getPostQuantity: function(){
+        axios.get("");
+    },
     render: function(){
         return (
         <div id="postListContainer">
         <ToggleFormButton visible={this.state.visibleForm} toggleVisible={this.toggleForm} />
         <NewPostForm visible={this.state.visibleForm} />
         <PostingsList postings={this.state.postings} />
-        <BrowseBar page={this.props.page} criteria={this.props.criteria} hasNext={true}/>
+        <BrowseBar page={this.props.page} criteria={this.props.criteria} hasNext={this.state.postings.length > 0} page={this.props.page}/>
         </div>);
     }
 });
