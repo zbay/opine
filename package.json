@@ -21,11 +21,8 @@
     "mongoose": "^4.4.7",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
-    "react-redux": "^4.4.1",
     "react-router": "^2.0.1",
     "reactify": "^1.1.0",
-    "redux": "^3.3.1",
-    "redux-promise": "^0.5.3",
     "socket.io": "^1.4.5",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^2.4.0"
