@@ -19,11 +19,16 @@ module.exports = React.createClass({
         <span id="formSuccess">{this.state.successMessage ? this.state.successMessage : ""}</span>
         <span id="formError">{this.state.errorMessage ? this.state.errorMessage : ""}</span>
         </div>
-        <label>Question: </label><input placeholder="What do you want to hear opinions about?" name="question" value={this.state.question} onChange={this.onChange}/>
-        <label>Asker: </label><input placeholder="Who's asking?" name="asker" value={this.state.asker} onChange={this.onChange}/>
-         <label>How to contact:</label><input placeholder="URL, email, phone, etc." name="contact" value={this.state.contact} onChange={this.onChange}/>
-         <label>Deadline: </label><input placeholder="What do you want to receive opinions about?" type="date" name="deadline" value={this.state.deadline} onChange={this.onChange}/>
-         <label>Category: </label><select name="category" value={this.state.category} onChange={this.onChange}>
+        <label>Question:</label><br />
+        <input placeholder="What do you want to hear opinions about?" name="question" value={this.state.question} onChange={this.onChange}/><br /><br />
+        <label>Asker:</label><br />
+        <input placeholder="Who's asking?" name="asker" value={this.state.asker} onChange={this.onChange}/><br /><br />
+         <label>How to contact:</label><br />
+         <input placeholder="URL, email, phone, etc." name="contact" value={this.state.contact} onChange={this.onChange}/><br /><br />
+         <label>Deadline:</label><br />
+         <input placeholder="What do you want to receive opinions about?" type="date" name="deadline" value={this.state.deadline} onChange={this.onChange}/><br /><br />
+         <label>Category:</label><br />
+         <select name="category" value={this.state.category} onChange={this.onChange}>
             <option>---</option>
             <option value="Politics">Politics</option>
             <option value="Sports">Sports</option>
@@ -31,7 +36,7 @@ module.exports = React.createClass({
             <option value="Feedback">Feedback/Comment</option>
             <option value="Technical">Technical</option>
             <option value="Miscellaneous">Other</option>
-         </select>
+         </select><br /><br />
          <button type="submit">Post Question</button>
     </form>);
     }

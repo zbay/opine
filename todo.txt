@@ -1,9 +1,10 @@
-4. GET REDUX WORKING (maybe). Only action is pagination?
-5. Get pagination working. Make a separate component, testing whether a next or previous button is warranted. Add previous button, category selector, and search bar
-6. Better style for form/postings
-7. Test categories rendering
-8. Figure out search
-9. Write About content.
-
-SOCKET.IO:
-1. Listen for new posts that fit some criteria (category, search, or none)
+1. Figure out search
+2. Write About content.
+3. Refactor browsebar links as onclick buttons only
+4. Lighten pine tree in logo
+5. 4chanify it. Make each post addressable, and add comments.
+6. Allow users to follow posts via HTML5 local storage
+7. Component type checking
+8. Data checking (dates, especially) and sanitization
+9. Improved style
+10. Limit IP addresses to 3 posts per minute

@@ -24,6 +24,6 @@ app.use(bodyParser.urlencoded({
 routes(app);
 
 console.log("Listening on Port 8080");
-app.listen(8080);
+var server = app.listen(8080);
 }
 });
