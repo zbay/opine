@@ -1,6 +1,7 @@
 var React = require('react');
 var ReactRouter = require('react-router');
 var Link = ReactRouter.Link;
+var CategorySelector = require("./categoryselector");
 module.exports = React.createClass({
     render: function(){
         var showPrev = false;
@@ -22,6 +23,8 @@ module.exports = React.createClass({
         <Link to={"/" + that.props.criteria + "/" + that.props.addendum + (Number(that.props.page)+1)}>Page {"" + (Number(that.props.page)+1)}</Link>
         </button>: <span></span>
         }
+        <span>Browse by category: </span>
+        <CategorySelector />
         </div>);
     }
     });
