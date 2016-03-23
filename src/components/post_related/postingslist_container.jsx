@@ -105,7 +105,7 @@ module.exports = React.createClass({
         <br /><br />
         <NewPostForm visible={this.state.visibleForm} />
         <PostingsList postings={this.state.postings} />
-        <BrowseBar page={this.props.page} criteria={this.props.criteria} hasNext={this.state.postings.length > 0} addendum={this.state.addendum}/>
+        <BrowseBar page={Number(this.props.page)} criteria={this.props.criteria} hasNext={this.state.postings.length > 0} addendum={this.state.addendum}/>
         </div>);
     }
 });

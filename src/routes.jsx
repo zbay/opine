@@ -11,20 +11,20 @@ var PostingsListContainer = require("./components/post_related/postingslist_cont
 
 var AllWrapper = React.createClass({
     render: function(){
-        return (<PostingsListContainer criteria="all" page={Number(this.props.routeParams.page)} category={null} searchQuery={null}/>);
+        return (<PostingsListContainer criteria="all" page={this.props.routeParams.page} category={null} searchQuery={null}/>);
     }
 });
 
 var CategoryWrapper = React.createClass({
     render: function(){
         console.log("category param: " + this.props.routeParams.category);
-        return (<PostingsListContainer criteria="category" page={Number(this.props.routeParams.page)} category={this.props.routeParams.category} searchQuery={null}/>);
+        return (<PostingsListContainer criteria="category" page={this.props.routeParams.page} category={this.props.routeParams.category} searchQuery={null}/>);
     }
 });
 
 var SearchWrapper = React.createClass({
     render: function(){
-        return (<PostingsListContainer criteria="search" page={Number(this.props.routeParams.page)} searchQuery={this.props.routeParams.searchQuery} category={null}/>);
+        return (<PostingsListContainer criteria="search" page={this.props.routeParams.page} searchQuery={this.props.routeParams.searchQuery} category={null}/>);
     }
 });
 

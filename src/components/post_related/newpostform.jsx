@@ -1,5 +1,6 @@
 var React = require('react');
 var axios = require('axios');
+var dateRegex =/^(\d{4})(\/|-)(\d{1,2})(\/|-)(\d{1,2})$/;
 module.exports = React.createClass({
     propTypes: {
       visible: React.PropTypes.bool
@@ -29,7 +30,7 @@ module.exports = React.createClass({
          <label>How to contact:</label><br />
          <input placeholder="URL, email, phone, etc." name="contact" value={this.state.contact} onChange={this.onChange}/><br /><br />
          <label>Deadline:</label><br />
-         <input placeholder="Format: MM/DD/YYYY" type="date" name="deadline" value={this.state.deadline} onChange={this.onChange}/><br /><br />
+         <input placeholder="Format: YYYY/MM/DD" type="date" name="deadline" value={this.state.deadline} onChange={this.onChange}/><br /><br />
          <label>Category:</label><br />
          <select name="category" value={this.state.category} onChange={this.onChange}>
             <option>---</option>
@@ -50,19 +51,21 @@ module.exports = React.createClass({
     onChange: function(e){
         var state = {};
         state[e.target.name] =  e.target.value;
-        this.setState(state);  
+        this.setState(state);
     },
     newPost: function(e){
         e.preventDefault();
+        let fixedDeadline = this.state.deadline.replace(/\//g, "-");
         let that = this;
-        console.log(that.state.deadline);
-        
-        if(that.state.question !== null && that.state.asker !== null && that.state.contact !== null && new Date(that.state.deadline) >= Date.now() ){
+        console.log(fixedDeadline);
+        console.log("matching? " + fixedDeadline.match(dateRegex));
+        if(fixedDeadline.match(dateRegex) !== null){ //if the deadline meets the MM/DD/YYYY format
+        if(that.state.question !== null && that.state.asker !== null && that.state.contact !== null && new Date(fixedDeadline) >= Date.now() ){
          let postData = {
             question: that.state.question,
             asker: that.state.asker,
             contact: that.state.contact,
-            deadline: that.state.deadline,
+            deadline: fixedDeadline,
             category: that.state.category
         };
         axios.post("/addPosting", postData).then(function(response){
@@ -76,7 +79,7 @@ module.exports = React.createClass({
                     errorMessage: null
                 });
             }
-            else{
+            else{ //if the posting was unsuccesful
                 console.log(response.data.error);
                 that.setState({errorMessage: "Your question was not posted! Please try again.",
                     successMessage: null
@@ -84,10 +87,17 @@ module.exports = React.createClass({
             }
         });   
         }
-        else{
+        else{ //If a field is blank or the deadline chosen is in the past
             that.setState({errorMessage: "Your question was not posted! Make sure to fill out all fields and choose a date in the future",
                 successMessage: null
             });           
+        }       
         }
+        else{ //if the deadline doesn't meet the MM/DD/YYYY format
+            that.setState({errorMessage: "Your question was not posted! Please make sure it fits the YYYY/MM/DD date format.",
+                successMessage: null
+            });        
+        }
+
     }
 });
