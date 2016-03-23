@@ -2,7 +2,7 @@ var React = require('react');
 var axios = require('axios');
 module.exports = React.createClass({
     propTypes: {
-      visible: React.PropTypes.boolean  
+      visible: React.PropTypes.bool
     },
     getInitialState: function(){
      return {
@@ -29,7 +29,7 @@ module.exports = React.createClass({
          <label>How to contact:</label><br />
          <input placeholder="URL, email, phone, etc." name="contact" value={this.state.contact} onChange={this.onChange}/><br /><br />
          <label>Deadline:</label><br />
-         <input placeholder="What do you want to receive opinions about?" type="date" name="deadline" value={this.state.deadline} onChange={this.onChange}/><br /><br />
+         <input placeholder="Format: MM/DD/YYYY" type="date" name="deadline" value={this.state.deadline} onChange={this.onChange}/><br /><br />
          <label>Category:</label><br />
          <select name="category" value={this.state.category} onChange={this.onChange}>
             <option>---</option>
@@ -54,7 +54,9 @@ module.exports = React.createClass({
     },
     newPost: function(e){
         e.preventDefault();
-         let that = this;
+        let that = this;
+        console.log(that.state.deadline);
+        
         if(that.state.question !== null && that.state.asker !== null && that.state.contact !== null && new Date(that.state.deadline) >= Date.now() ){
          let postData = {
             question: that.state.question,

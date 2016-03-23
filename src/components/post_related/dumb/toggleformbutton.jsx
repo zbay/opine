@@ -1,7 +1,7 @@
 var React = require('react');
 module.exports = React.createClass({
     propTypes: {
-      visible: React.PropTypes.boolean,
+      visible: React.PropTypes.bool,
       toggleVisible: React.PropTypes.func.isRequired
     },
     render: function(){

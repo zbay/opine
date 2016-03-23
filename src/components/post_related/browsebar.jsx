@@ -5,7 +5,7 @@ var HashHistory = require('react-router/lib/hashHistory');
 var CategorySelector = require("./categoryselector");
 module.exports = React.createClass({
     propTypes: {
-      page: React.PropTypes.number.isRequired,
+      page: React.PropTypes.string.isRequired,
       criteria: React.PropTypes.string.isRequired,
       addendum: React.PropTypes.string.isRequired
     },
@@ -20,7 +20,9 @@ module.exports = React.createClass({
             showNext = false;
         }
         return (
-        <div id="browseBar">
+        <div id="browseBar" className="container">
+        <div className="row">
+        <div className="col-sm-4">
         {showPrev ? <button onClick={this.prevPage}>
         Page {"" + (Number(that.props.page)-1)}
         </button> : <span></span>
@@ -28,16 +30,22 @@ module.exports = React.createClass({
         {showNext ? <button onClick={this.nextPage}>
         Page {"" + (Number(that.props.page)+1)}
         </button>: <span></span>
-        }&nbsp;
+        }
+        </div>
+        <div className="col-sm-4" id="categoryColumn">
         <span>Browse by category: </span>&nbsp;
-        <CategorySelector />&nbsp;
+        <CategorySelector />
+        </div>
+        <div className="col-sm-4" id="searchColumn">
         <label>Search Questions: </label>&nbsp;<input name="searchQuery" />
+        </div>
+        </div>
         </div>);
     },
     prevPage: function(){
-        HashHistory.push("/" + this.props.criteria + "/" + this.props.addendum + (Number(this.props.page)-1));
+        HashHistory.push("/" + this.props.criteria + "/" + this.props.addendum + Number(this.props.page-1));
     },
     nextPage: function(){
-        HashHistory.push("/" + this.props.criteria + "/" + this.props.addendum + (Number(this.props.page)+1));
+        HashHistory.push("/" + this.props.criteria + "/" + this.props.addendum + Number(this.props.page+1));
     }
     });

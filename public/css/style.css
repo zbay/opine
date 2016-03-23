@@ -23,6 +23,13 @@ footer{
 #postingList{
     border: 3px solid black;
 }
+#formSuccess, #formError, #errorMessage{
+    font-weight:bold;
+    margin-bottom: 10px;
+}
+#categoryColumn, #searchColumn{
+    padding:10px;
+}
 .posting{
     border: 1px solid black;
     margin-bottom: 10px;

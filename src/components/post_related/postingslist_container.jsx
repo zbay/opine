@@ -11,7 +11,7 @@ module.exports = React.createClass({
       criteria: React.PropTypes.string.isRequired,
       category: React.PropTypes.string,
       searchQuery: React.PropTypes.string,
-      page: React.PropTypes.number.isRequired,
+      page: React.PropTypes.string.isRequired
     },
     getInitialState: function(){
         let that = this;
@@ -33,13 +33,13 @@ module.exports = React.createClass({
         let that = this;
         switch(that.props.criteria){
             case "all":
-                 that.retrieveAll(that.props.page);
+                 that.retrieveAll(Number(that.props.page));
                 break;
             case "category":
-                that.retrieveCategory(that.props.category, that.props.page);
+                that.retrieveCategory(that.props.category, Number(that.props.page));
                 break;
             case "search":
-                that.retrieveSearch(that.props.searchQuery, that.props.page);
+                that.retrieveSearch(that.props.searchQuery, Number(that.props.page));
                 break;
             default:
         }
@@ -58,13 +58,13 @@ module.exports = React.createClass({
         }
         switch(nextProps.criteria){
             case "all":
-                 that.retrieveAll(nextProps.page);
+                 that.retrieveAll(Number(nextProps.page));
                 break;
             case "category":
-                that.retrieveCategory(nextProps.category, nextProps.page);
+                that.retrieveCategory(nextProps.category, Number(nextProps.page));
                 break;
             case "search":
-                that.retrieveSearch(nextProps.searchQuery, nextProps.page);
+                that.retrieveSearch(nextProps.searchQuery, Number(nextProps.page));
                 break;
             default:
         }       
@@ -105,7 +105,7 @@ module.exports = React.createClass({
         <br /><br />
         <NewPostForm visible={this.state.visibleForm} />
         <PostingsList postings={this.state.postings} />
-        <BrowseBar page={this.props.page} criteria={this.props.criteria} hasNext={this.state.postings.length > 0} page={this.props.page} addendum={this.state.addendum}/>
+        <BrowseBar page={this.props.page} criteria={this.props.criteria} hasNext={this.state.postings.length > 0} addendum={this.state.addendum}/>
         </div>);
     }
 });
