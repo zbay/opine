@@ -12,14 +12,17 @@ module.exports = React.createClass({
             <option value="Feedback">Feedback/Comment</option>
             <option value="Technical">Technical</option>
             <option value="Miscellaneous">Other</option>
+            <option value="All">All</option>
          </select>);
     },
     onChange: function(e){
-        if(e.target.value !== "None"){
+        if(e.target.value !== "All"){
          HashHistory.push("/category/" + e.target.value + "/1");   
         }
         else{
-            HashHistory.push("/all/1");
+            if(e.target.value !== "None"){
+             HashHistory.push("/all/1");   
+            }
         }
     }
 });

@@ -2,6 +2,9 @@ var React = require('react');
 var Posting = require("./posting");
 
 module.exports = React.createClass({
+    propTypes: {
+        postings: React.PropTypes.array.isRequired
+    },
     render: function(){
         return (
         <div id="postingsList">

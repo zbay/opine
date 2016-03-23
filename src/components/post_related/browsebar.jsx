@@ -4,6 +4,11 @@ var Link = ReactRouter.Link;
 var HashHistory = require('react-router/lib/hashHistory');
 var CategorySelector = require("./categoryselector");
 module.exports = React.createClass({
+    propTypes: {
+      page: React.PropTypes.number.isRequired,
+      criteria: React.PropTypes.string.isRequired,
+      addendum: React.PropTypes.string.isRequired
+    },
     render: function(){
         var showPrev = false;
         var showNext = true;
@@ -25,7 +30,8 @@ module.exports = React.createClass({
         </button>: <span></span>
         }&nbsp;
         <span>Browse by category: </span>&nbsp;
-        <CategorySelector />
+        <CategorySelector />&nbsp;
+        <label>Search Questions: </label>&nbsp;<input name="searchQuery" />
         </div>);
     },
     prevPage: function(){

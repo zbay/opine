@@ -1,6 +1,9 @@
 var React = require('react');
 var axios = require('axios');
 module.exports = React.createClass({
+    propTypes: {
+      visible: React.PropTypes.boolean  
+    },
     getInitialState: function(){
      return {
          question: null,

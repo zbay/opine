@@ -5,13 +5,17 @@
     background-color: #404040;
     width: 100%;
 }
+select{
+    color: white;
+    background-color: #404040;
+}
 footer{
     margin-top: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
 }
 #formSuccess{
-    color:green;
+    color:#339966;
 }
 #formError, #errorMessage{
     color:red;
@@ -22,8 +26,10 @@ footer{
 .posting{
     border: 1px solid black;
     margin-bottom: 10px;
-    margin-bottom: 10px;
+    padding-bottom:10px;
     border-radius: 2px;
+    background: url("../img/questionbackground.png") repeat;
+    font-weight: bold;
 }
 #newPostForm{
     text-align:center;
@@ -40,11 +46,16 @@ footer{
 }
 button{
     color:#FFDAB9;
-    background-color:green;
+    background-color:#339966;
     border-radius:3px;
     border: 1px solid black;
     padding:10px;
+    margin-left:10px;
+    margin-right:10px;
 }
 label{
-    color:green;
+    color:#339966;
+}
+.posting h3{
+    color: #339966;
 }

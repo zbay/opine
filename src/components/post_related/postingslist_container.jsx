@@ -7,9 +7,14 @@ var NewPostForm = require("./newpostform");
 var BrowseBar = require("./browsebar");
 
 module.exports = React.createClass({
+    propTypes: {
+      criteria: React.PropTypes.string.isRequired,
+      category: React.PropTypes.string,
+      searchQuery: React.PropTypes.string,
+      page: React.PropTypes.number.isRequired,
+    },
     getInitialState: function(){
         let that = this;
-        console.log(that.props);
         var thisAddendum = "";
         if(that.props.criteria != "all"){
             if(that.props.criteria == "category"){
@@ -41,7 +46,6 @@ module.exports = React.createClass({
     },
     componentWillReceiveProps: function(nextProps){
          let that = this;
-         console.log(nextProps);
           var thisAddendum = "";
         if(nextProps.criteria != "all"){
             if(nextProps.criteria == "category"){
@@ -69,7 +73,6 @@ module.exports = React.createClass({
         let that = this;
         axios.get("/allPostings/" + page)
         .then(function(response){
-            console.log(response.data.postings);
             that.setState({postings: response.data.postings});
         });
     },
@@ -84,7 +87,6 @@ module.exports = React.createClass({
         let that = this;
         axios.get("/searchPostings/" + searchQuery + "/" + page)
         .then(function(response){
-            console.log(response.data.postings);
             that.setState({postings: response.data.postings});
         });
     },
@@ -97,7 +99,6 @@ module.exports = React.createClass({
         }
     },
     render: function(){
-        console.log("The addendum for button: " + this.state.addendum);
         return (
         <div id="postListContainer">
         <ToggleFormButton visible={this.state.visibleForm} toggleVisible={this.toggleForm} />

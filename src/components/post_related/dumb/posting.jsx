@@ -1,6 +1,9 @@
 var React = require('react');
 
 module.exports = React.createClass({
+    propTypes: {
+        postingData: React.PropTypes.object.isRequired
+    },
     render: function(){
         return (<div className="posting">
         <div className="postQuestion">
