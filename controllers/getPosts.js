@@ -1,5 +1,6 @@
 "use strict";
 var mongoose = require('mongoose');
+var ObjectId = mongoose.Types.ObjectId;
 var Posting = require(process.cwd() + "/dbmodels/posting.js"); Posting = mongoose.model("Posting");
 const perPage = 3;
 
@@ -42,5 +43,12 @@ app.get("/searchPostings/:searchQuery/:page", function(req, res){
     postingStream.on("end", function(){
          res.json({"postings": postings});
     });
+});
+app.get("/question/:id", function(req, res){
+  let postID = ObjectId(req.params.id);
+  var postingStream = Posting.findOne({_id: postID}).stream();
+  postingStream.on("data", function(doc){
+     res.json({"postData": doc});
+  });
 });
 }

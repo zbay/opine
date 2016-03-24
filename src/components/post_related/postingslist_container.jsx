@@ -3,7 +3,6 @@ var axios = require('axios');
 var HashHistory = require('react-router/lib/hashHistory');
 var Posting = require("./dumb/posting");
 var PostingsList = require("./dumb/postingslist");
-var ToggleFormButton = require("./dumb/toggleformbutton");
 var NewPostForm = require("./newpostform");
 var ActionBar = require("./actionbar");
 var PageBar = require("./pagebar");

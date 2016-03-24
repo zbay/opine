@@ -36,7 +36,7 @@ footer{
     border: 1px solid black;
     margin-bottom: 10px;
     padding-bottom:10px;
-    border-radius: 2px;
+    border-radius: 10px;
     background: url("../img/questionbackground.png") repeat;
     font-weight: bold;
 }

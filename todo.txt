@@ -1,4 +1,4 @@
-1. 
+1. Better error handling at the server
 2. Write About content.
 3.
 4. Periodic deletion of expired questions
