@@ -18,7 +18,6 @@ app.get("/allPostings/:page", function(req, res){
     });
 });
 app.get("/categoryPostings/:category/:page", function(req, res){
-  console.log("category postings accessed");
     let postings = [];
     let postCategory = req.params.category;
     let page = Number(req.params.page) - 1;
@@ -31,18 +30,15 @@ app.get("/categoryPostings/:category/:page", function(req, res){
     });
 });
 app.get("/searchPostings/:searchQuery/:page", function(req, res){
-  console.log("category postings accessed");
     let postings = [];
     let searchQuery = req.params.searchQuery;
     let page = req.params.page - 1;
-    //figure out how to best do searches in mongo
-    /*
-    var postingStream = Posting.find({"categories": searchQuery}).sort({"timePosted": -1}).limit(perPage).stream();
+    var postingStream = Posting.find({$text: {$search: searchQuery}}).sort({"timePosted": -1}).skip(perPage * page).limit(perPage).stream();
     postingStream.on("data", function(doc){
             postings.push(doc);
     });
     postingStream.on("end", function(){
          res.json({"postings": postings});
-    });*/
+    });
 });
 }

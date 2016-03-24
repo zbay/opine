@@ -9,7 +9,7 @@ var Main = require("./components/main");
 var About = require("./components/content_dumb/about");
 var PostingsListContainer = require("./components/post_related/postingslist_container");
 var BadLink = require("./components/content_dumb/badlink");
-var BadLink = require("./components/content_dumb/servererror");
+var ServerError = require("./components/content_dumb/servererror");
 
 var AllWrapper = React.createClass({
     render: function(){
@@ -26,7 +26,7 @@ var CategoryWrapper = React.createClass({
 
 var SearchWrapper = React.createClass({
     render: function(){
-        return (<PostingsListContainer criteria="search" page={this.props.routeParams.page} searchQuery={this.props.routeParams.searchQuery} category={null}/>);
+        return (<PostingsListContainer criteria="search" page={this.props.routeParams.page} search={this.props.routeParams.search} category={null}/>);
     }
 });
 

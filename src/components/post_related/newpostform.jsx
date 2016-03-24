@@ -57,8 +57,6 @@ module.exports = React.createClass({
         e.preventDefault();
         let fixedDeadline = this.state.deadline.replace(/\//g, "-");
         let that = this;
-        console.log(fixedDeadline);
-        console.log("matching? " + fixedDeadline.match(dateRegex));
         if(fixedDeadline.match(dateRegex) !== null){ //if the deadline meets the MM/DD/YYYY format
         if(that.state.question !== null && that.state.asker !== null && that.state.contact !== null && new Date(fixedDeadline) >= Date.now() ){
          let postData = {

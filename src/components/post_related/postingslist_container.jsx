@@ -11,7 +11,7 @@ module.exports = React.createClass({
     propTypes: {
       criteria: React.PropTypes.string.isRequired,
       category: React.PropTypes.string,
-      searchQuery: React.PropTypes.string,
+      search: React.PropTypes.string,
       page: React.PropTypes.string.isRequired
     },
     getInitialState: function(){
@@ -22,7 +22,7 @@ module.exports = React.createClass({
                 thisAddendum = that.props.category + "/";
             }
             if(that.props.criteria == "search"){
-                thisAddendum = that.props.searchQuery + "/";
+                thisAddendum = that.props.search + "/";
             }
         }
       return {postings: [], 
@@ -40,7 +40,7 @@ module.exports = React.createClass({
                 that.retrieveCategory(that.props.category, Number(that.props.page));
                 break;
             case "search":
-                that.retrieveSearch(that.props.searchQuery, Number(that.props.page));
+                that.retrieveSearch(that.props.search, Number(that.props.page));
                 break;
             default:
         }
@@ -53,7 +53,7 @@ module.exports = React.createClass({
                 thisAddendum = nextProps.category + "/";
             }
             if(nextProps.criteria == "search"){
-                thisAddendum = nextProps.searchQuery + "/";
+                thisAddendum = nextProps.search + "/";
             }
             that.setState({addendum: thisAddendum});
         }
@@ -65,7 +65,7 @@ module.exports = React.createClass({
                 that.retrieveCategory(nextProps.category, Number(nextProps.page));
                 break;
             case "search":
-                that.retrieveSearch(nextProps.searchQuery, Number(nextProps.page));
+                that.retrieveSearch(nextProps.search, Number(nextProps.page));
                 break;
             default:
         }       
@@ -74,20 +74,23 @@ module.exports = React.createClass({
         let that = this;
         axios.get("/allPostings/" + page)
         .then(function(response){
-            that.setState({postings: response.data.postings});
+            that.setState({postings: response.data});
         });
     },
     retrieveCategory: function(category, page){
         let that = this;
         axios.get("/categoryPostings/" + category + "/" + page)
         .then(function(response){
+              console.log("searchResponse: " + JSON.stringify(response.data));
             that.setState({postings: response.data.postings});
         });
     },
     retrieveSearch: function(searchQuery, page){
         let that = this;
+        console.log("searching: " + searchQuery);
         axios.get("/searchPostings/" + searchQuery + "/" + page)
         .then(function(response){
+            console.log("searchResponse: " + JSON.stringify(response.data));
             that.setState({postings: response.data.postings});
         });
     },

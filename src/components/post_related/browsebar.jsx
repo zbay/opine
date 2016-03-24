@@ -8,6 +8,11 @@ module.exports = React.createClass({
       criteria: React.PropTypes.string.isRequired,
       addendum: React.PropTypes.string.isRequired
     },
+    getInitialState: function(){
+        return {
+            search: ""
+        }
+    },
     render: function(){
         var showPrev = false;
         var showNext = true;
@@ -36,7 +41,10 @@ module.exports = React.createClass({
         <CategorySelector />
         </div>
         <div className="col-sm-4" id="searchColumn">
-        <label>Search Questions: </label>&nbsp;<input name="searchQuery" />
+        <form onSubmit={this.submitSearch}>
+        <label>Search Questions: </label>&nbsp;<input name="search" value={this.state.search} onChange={this.onChange}/>
+        <button type="submit">Go</button>
+        </form>
         </div>
         </div>
         </div>);
@@ -46,5 +54,18 @@ module.exports = React.createClass({
     },
     nextPage: function(){
         HashHistory.push("/" + this.props.criteria + "/" + this.props.addendum + Number(this.props.page+1));
+    },
+    onChange: function(e){
+        var state = {};
+        state[e.target.name] =  e.target.value;
+        this.setState(state);
+    },
+    submitSearch: function(e){
+        //finish this. need to add state for the search query, and use it to make the URL
+        e.preventDefault();
+        let that = this;
+        if(that.state.search.length > 0){
+           HashHistory.push("/search/" + that.state.search + "/1");   
+        }
     }
     });
