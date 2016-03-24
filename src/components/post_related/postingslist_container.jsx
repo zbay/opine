@@ -5,7 +5,7 @@ var Posting = require("./dumb/posting");
 var PostingsList = require("./dumb/postingslist");
 var ToggleFormButton = require("./dumb/toggleformbutton");
 var NewPostForm = require("./newpostform");
-var BrowseBar = require("./browsebar");
+var ActionBar = require("./actionbar");
 var PageBar = require("./pagebar");
 
 module.exports = React.createClass({
@@ -103,9 +103,8 @@ module.exports = React.createClass({
     render: function(){
         return (
         <div id="postListContainer">
-        <BrowseBar page={Number(this.props.page)} criteria={this.props.criteria} hasNext={this.state.postings.length > 0} addendum={this.state.addendum}/>
-        <ToggleFormButton visible={this.state.visibleForm} toggleVisible={this.toggleForm} />
-        <br /><br />
+        <ActionBar visibleForm={this.state.visibleForm} toggleVisible={this.toggleForm}/>
+        <br />
         <NewPostForm visible={this.state.visibleForm} newPostsRender={this.newPostsRender} />
         <PostingsList postings={this.state.postings} />
        <PageBar page={Number(this.props.page)} criteria={this.props.criteria} hasNext={this.state.postings.length > 0} addendum={this.state.addendum}/>

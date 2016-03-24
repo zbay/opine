@@ -1,12 +1,10 @@
 var React = require('react');
-var ReactRouter = require('react-router');
 var HashHistory = require('react-router/lib/hashHistory');
 var CategorySelector = require("./categoryselector");
 module.exports = React.createClass({
     propTypes: {
-      page: React.PropTypes.string.isRequired,
-      criteria: React.PropTypes.string.isRequired,
-      addendum: React.PropTypes.string.isRequired
+      visibleForm: React.PropTypes.bool,
+      toggleVisible: React.PropTypes.func.isRequired
     },
     getInitialState: function(){
         return {
@@ -14,19 +12,11 @@ module.exports = React.createClass({
         }
     },
     render: function(){
-        var showPrev = false;
-        var showNext = true;
-        let that = this;
-        if(this.props.page > 1){
-            showPrev = true;
-        }
-        if(!this.props.hasNext){
-            showNext = false;
-        }
         return (
-        <div id="browseBar" className="container">
+        <div id="actionBar" className="container">
         <div className="row">
-        <div className="col-sm-4">
+        <div className="col-sm-4" id="toggleColumn">
+        <button id="toggleForm" onClick={this.props.toggleVisible}>{this.props.visibleForm ? "Hide Question Form" : "Ask Something"}</button>
         </div>
         <div className="col-sm-4" id="categoryColumn">
         <label>Browse by category: </label>&nbsp;
@@ -40,12 +30,6 @@ module.exports = React.createClass({
         </div>
         </div>
         </div>);
-    },
-    prevPage: function(){
-        HashHistory.push("/" + this.props.criteria + "/" + this.props.addendum + Number(this.props.page-1));
-    },
-    nextPage: function(){
-        HashHistory.push("/" + this.props.criteria + "/" + this.props.addendum + Number(this.props.page+1));
     },
     onChange: function(e){
         var state = {};

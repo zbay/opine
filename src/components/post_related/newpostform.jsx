@@ -41,7 +41,7 @@ module.exports = React.createClass({
             <option value="Technical">Technical</option>
             <option value="Miscellaneous">Other</option>
          </select><br /><br />
-         <button type="submit">Post Question</button>
+         <button type="submit">Post New Question</button>
     </form>);
     }
     else{

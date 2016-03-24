@@ -1,4 +1,4 @@
-1. Figure out search
+1. 
 2. Write About content.
 3.
 4. Periodic deletion of expired questions
@@ -8,5 +8,3 @@
 8. Data sanitization
 10. Limit IP addresses to 3 posts per minute
 11. SASSify style.css
-
-$**_text is the name of the all-fields text index for search. In getPosts.js, implement search!
