@@ -4,6 +4,5 @@
 4. Periodic deletion of expired questions
 5. 4chanify it. Make each post addressable, and add comments.
 6. Allow users to follow posts via HTML5 local storage
-7. Error/success message flow and style
-8. Data checking (dates, especially) and sanitization. Apply regex to all incoming dates
+8. Data sanitization
 10. Limit IP addresses to 3 posts per minute

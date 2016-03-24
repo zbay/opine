@@ -22,7 +22,7 @@ module.exports = React.createClass({
         <div id="formAlert">
         <span id="formSuccess">{this.state.successMessage ? this.state.successMessage : ""}</span>
         <span id="formError">{this.state.errorMessage ? this.state.errorMessage : ""}</span>
-        </div>
+        </div><br />
         <label>Question:</label><br />
         <input placeholder="What do you want to hear opinions about?" name="question" value={this.state.question} onChange={this.onChange}/><br /><br />
         <label>Asker:</label><br />
@@ -78,6 +78,7 @@ module.exports = React.createClass({
                     category: "Miscellaneous",
                     errorMessage: null
                 });
+                that.props.newPostsRender();
             }
             else{ //if the posting was unsuccesful
                 console.log(response.data.error);
@@ -88,7 +89,7 @@ module.exports = React.createClass({
         });   
         }
         else{ //If a field is blank or the deadline chosen is in the past
-            that.setState({errorMessage: "Your question was not posted! Make sure to fill out all fields and choose a date in the future",
+            that.setState({errorMessage: "Your question was not posted! Make sure to fill out all fields and choose a date in the future.",
                 successMessage: null
             });           
         }       

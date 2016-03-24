@@ -1,5 +1,6 @@
 var React = require('react');
 var axios = require('axios');
+var HashHistory = require('react-router/lib/hashHistory');
 var Posting = require("./dumb/posting");
 var PostingsList = require("./dumb/postingslist");
 var ToggleFormButton = require("./dumb/toggleformbutton");
@@ -103,9 +104,12 @@ module.exports = React.createClass({
         <div id="postListContainer">
         <ToggleFormButton visible={this.state.visibleForm} toggleVisible={this.toggleForm} />
         <br /><br />
-        <NewPostForm visible={this.state.visibleForm} />
+        <NewPostForm visible={this.state.visibleForm} newPostsRender={this.newPostsRender} />
         <PostingsList postings={this.state.postings} />
         <BrowseBar page={Number(this.props.page)} criteria={this.props.criteria} hasNext={this.state.postings.length > 0} addendum={this.state.addendum}/>
         </div>);
-    }
+    },
+newPostsRender: function(){
+  HashHistory.push("/" + this.props.criteria + "/" + this.state.addendum + "1");
+}
 });

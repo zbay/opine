@@ -1,6 +1,5 @@
 var React = require('react');
 var ReactRouter = require('react-router');
-var Link = ReactRouter.Link;
 var HashHistory = require('react-router/lib/hashHistory');
 var CategorySelector = require("./categoryselector");
 module.exports = React.createClass({

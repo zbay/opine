@@ -15,7 +15,7 @@ footer{
     padding-bottom: 10px;
 }
 #formSuccess{
-    color:#339966;
+    color:blue;
 }
 #formError, #errorMessage{
     color:red;
@@ -25,6 +25,7 @@ footer{
 }
 #formSuccess, #formError, #errorMessage{
     font-weight:bold;
+    font-size:200%;
     margin-bottom: 10px;
 }
 #categoryColumn, #searchColumn{
