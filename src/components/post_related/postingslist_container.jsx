@@ -6,6 +6,7 @@ var PostingsList = require("./dumb/postingslist");
 var ToggleFormButton = require("./dumb/toggleformbutton");
 var NewPostForm = require("./newpostform");
 var BrowseBar = require("./browsebar");
+var PageBar = require("./pagebar");
 
 module.exports = React.createClass({
     propTypes: {
@@ -102,11 +103,12 @@ module.exports = React.createClass({
     render: function(){
         return (
         <div id="postListContainer">
+        <BrowseBar page={Number(this.props.page)} criteria={this.props.criteria} hasNext={this.state.postings.length > 0} addendum={this.state.addendum}/>
         <ToggleFormButton visible={this.state.visibleForm} toggleVisible={this.toggleForm} />
         <br /><br />
         <NewPostForm visible={this.state.visibleForm} newPostsRender={this.newPostsRender} />
         <PostingsList postings={this.state.postings} />
-        <BrowseBar page={Number(this.props.page)} criteria={this.props.criteria} hasNext={this.state.postings.length > 0} addendum={this.state.addendum}/>
+       <PageBar page={Number(this.props.page)} criteria={this.props.criteria} hasNext={this.state.postings.length > 0} addendum={this.state.addendum}/>
         </div>);
     },
 newPostsRender: function(){

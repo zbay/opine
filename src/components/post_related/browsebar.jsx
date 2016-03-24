@@ -27,22 +27,14 @@ module.exports = React.createClass({
         <div id="browseBar" className="container">
         <div className="row">
         <div className="col-sm-4">
-        {showPrev ? <button onClick={this.prevPage}>
-        Page {"" + (Number(that.props.page)-1)}
-        </button> : <span></span>
-        }
-        {showNext ? <button onClick={this.nextPage}>
-        Page {"" + (Number(that.props.page)+1)}
-        </button>: <span></span>
-        }
         </div>
         <div className="col-sm-4" id="categoryColumn">
-        <span>Browse by category: </span>&nbsp;
+        <label>Browse by category: </label>&nbsp;
         <CategorySelector />
         </div>
         <div className="col-sm-4" id="searchColumn">
         <form onSubmit={this.submitSearch}>
-        <label>Search Questions: </label>&nbsp;<input name="search" value={this.state.search} onChange={this.onChange}/>
+        <label>Search: </label>&nbsp;<input name="search" value={this.state.search} onChange={this.onChange}/>
         <button type="submit">Go</button>
         </form>
         </div>

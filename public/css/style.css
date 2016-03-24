@@ -29,7 +29,7 @@ footer{
     margin-bottom: 10px;
     text-align:center;
 }
-#categoryColumn, #searchColumn{
+#categoryColumn{
     padding:10px;
 }
 .posting{
