@@ -17,16 +17,17 @@ footer{
 #formSuccess{
     color:blue;
 }
-#formError, #errorMessage{
+#formError, #errorMessage, #fourohfour{
     color:red;
 }
 #postingList{
     border: 3px solid black;
 }
-#formSuccess, #formError, #errorMessage{
+#formSuccess, #formError, #errorMessage, #fourohfour{
     font-weight:bold;
     font-size:200%;
     margin-bottom: 10px;
+    text-align:center;
 }
 #categoryColumn, #searchColumn{
     padding:10px;

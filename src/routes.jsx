@@ -8,6 +8,7 @@ var Route = ReactRouter.Route;
 var Main = require("./components/main");
 var About = require("./components/content_dumb/about");
 var PostingsListContainer = require("./components/post_related/postingslist_container");
+var BadLink = require("./components/content_dumb/badlink");
 
 var AllWrapper = React.createClass({
     render: function(){
@@ -35,6 +36,7 @@ module.exports = (
       <Route path="all/:page" component={AllWrapper}/>
       <Route path="category/:category/:page" component={CategoryWrapper} />
       <Route path="search/:search/:page" component={SearchWrapper} />
+      <Route path="*" status={404} component={BadLink}/>
     </Route>
   </Router>
 );

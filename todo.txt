@@ -1,8 +1,11 @@
 1. Figure out search
 2. Write About content.
-3. Live rendering of posted questions (by the user, only)
+3. 404s and 500s and other error messages
 4. Periodic deletion of expired questions
 5. 4chanify it. Make each post addressable, and add comments.
 6. Allow users to follow posts via HTML5 local storage
 8. Data sanitization
 10. Limit IP addresses to 3 posts per minute
+11. SASSify style.css
+
+$**_text is the name of the all-fields text index for search. In getPosts.js, implement search!
