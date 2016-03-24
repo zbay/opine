@@ -33,7 +33,9 @@ app.get("/searchPostings/:searchQuery/:page", function(req, res){
     let postings = [];
     let searchQuery = req.params.searchQuery;
     let page = req.params.page - 1;
-    var postingStream = Posting.find({$text: {$search: searchQuery}}).sort({"timePosted": -1}).skip(perPage * page).limit(perPage).stream();
+    var postingStream = Posting.find({$text: {$search: searchQuery}}, {score: {$meta: "textScore"}})
+    .sort({score: {$meta: "textScore"}, "timePosted": -1}).skip(perPage * page)
+    .limit(perPage).stream();
     postingStream.on("data", function(doc){
             postings.push(doc);
     });

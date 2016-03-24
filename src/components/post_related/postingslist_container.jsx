@@ -74,23 +74,20 @@ module.exports = React.createClass({
         let that = this;
         axios.get("/allPostings/" + page)
         .then(function(response){
-            that.setState({postings: response.data});
+            that.setState({postings: response.data.postings});
         });
     },
     retrieveCategory: function(category, page){
         let that = this;
         axios.get("/categoryPostings/" + category + "/" + page)
         .then(function(response){
-              console.log("searchResponse: " + JSON.stringify(response.data));
             that.setState({postings: response.data.postings});
         });
     },
     retrieveSearch: function(searchQuery, page){
         let that = this;
-        console.log("searching: " + searchQuery);
         axios.get("/searchPostings/" + searchQuery + "/" + page)
         .then(function(response){
-            console.log("searchResponse: " + JSON.stringify(response.data));
             that.setState({postings: response.data.postings});
         });
     },
