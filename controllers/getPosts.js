@@ -44,11 +44,18 @@ app.get("/searchPostings/:searchQuery/:page", function(req, res){
          res.json({"postings": postings});
     });
 });
-app.get("/question/:id", function(req, res){
+app.get("/question/:id", function(req, res){ //get a question and it's comments
+  let postID = ObjectId(req.params.id);
+  var postingStream = Posting.findOne({_id: postID}, {comments: 0}).stream();
+  postingStream.on("data", function(doc){
+     res.json({"postData": doc});
+  });
+});
+app.get("/comments/:id", function(req, res){ //get a post's comments, on refresh only
   let postID = ObjectId(req.params.id);
   var postingStream = Posting.findOne({_id: postID}).stream();
   postingStream.on("data", function(doc){
-     res.json({"postData": doc});
+     res.json({"postData": doc.comments});
   });
 });
 }

@@ -8,10 +8,11 @@ module.exports = React.createClass({
         questionID: React.PropTypes.string.isRequired
     },
     getInitialState: function(){
-      return {question: null}  
+      return {question: null, comments: []}  
     },
     componentWillMount: function(){
       this.retrieveQuestion();  
+      this.retrieveComments();
     },
     render: function(){
         if(this.state.question !== null){
@@ -34,8 +35,8 @@ module.exports = React.createClass({
         <h3>Deadline: </h3>
         {this.state.question.deadline.substring(0,10)}
         </div>
-        <NewCommentForm questionID={this.props.questionID}/>
-        <CommentsList comments={this.state.question.comments} />
+        <NewCommentForm questionID={this.props.questionID} refreshComments={this.retrieveComments}/>
+        <CommentsList comments={this.state.comments} />
         </div>
         );            
         }
@@ -50,5 +51,12 @@ module.exports = React.createClass({
         .then(function(response){
             that.setState({question: response.data.postData});
         });
+    },
+    retrieveComments: function(){
+         let that = this;
+        axios.get("/comments/" + that.props.questionID)
+        .then(function(response){
+            that.setState({comments: response.data.postData});
+        });       
     }
 });

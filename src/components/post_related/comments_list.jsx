@@ -1,5 +1,4 @@
 var React = require('react');
-var NewCommentForm = require("./new_comment_form");
 
 module.exports = React.createClass({
     propTypes: {

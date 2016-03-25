@@ -1,7 +1,6 @@
 var React = require('react');
 var axios = require('axios');
 var HashHistory = require('react-router/lib/hashHistory');
-var Posting = require("./dumb/posting");
 var PostingsList = require("./dumb/postingslist");
 var NewPostForm = require("./newpostform");
 var ActionBar = require("./actionbar");
