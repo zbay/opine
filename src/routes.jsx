@@ -10,7 +10,6 @@ var About = require("./components/content_dumb/about");
 var PostingsListContainer = require("./components/post_related/postingslist_container");
 var Question = require("./components/post_related/question");
 var BadLink = require("./components/content_dumb/badlink");
-var ServerError = require("./components/content_dumb/servererror");
 
 var AllWrapper = React.createClass({
     render: function(){
@@ -45,7 +44,6 @@ module.exports = (
       <Route path="search/:search/:page" component={SearchWrapper} />
       <Route path="question/:id" component={QuestionWrapper}/>
       <Route path="*" status={404} component={BadLink}/>
-      <Route path="*" status={500} component={ServerError}/>
     </Route>
   </Router>
 );

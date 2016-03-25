@@ -1,4 +1,5 @@
 var React = require('react');
+var NewCommentForm = require("./new_comment_form");
 
 module.exports = React.createClass({
     propTypes: {
@@ -16,7 +17,7 @@ module.exports = React.createClass({
         }
         else{
           return (this.props.comments.map(function(comment, index){
-            return (<div className="comment"><span className="commentNumber">{index}. </span>{comment.text}</div>)
+            return (<div className="comment" key={index}><span className="commentNumber">{index+1}. </span>{comment.text}</div>)
         }));   
         }
     }

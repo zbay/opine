@@ -1,6 +1,7 @@
 var React = require('react');
 var axios = require('axios');
 var CommentsList = require("./comments_list");
+var NewCommentForm = require("./new_comment_form");
 
 module.exports = React.createClass({
     propTypes: {
@@ -33,8 +34,8 @@ module.exports = React.createClass({
         <h3>Deadline: </h3>
         {this.state.question.deadline.substring(0,10)}
         </div>
+        <NewCommentForm questionID={this.props.questionID}/>
         <CommentsList comments={this.state.question.comments} />
-        <NewCommentForm />
         </div>
         );            
         }
@@ -47,7 +48,6 @@ module.exports = React.createClass({
         let that = this;
         axios.get("/question/" + that.props.questionID)
         .then(function(response){
-            console.log("response: " + JSON.stringify(response.data));
             that.setState({question: response.data.postData});
         });
     }

@@ -1,10 +1,12 @@
 1. Better error handling at the server
 2. Write About content.
-3.
+3. Allow 24 hours later than you currently do, for new post deadlines
 4. Periodic deletion of expired questions
 5. Add comments. Start at comments_list.jsx and make new_comment_form
 6. Allow users to follow posts via HTML5 local storage
-7.
+7. React Router server-side?
 8. Data sanitization
 10. Limit IP addresses to 3 posts per minute
 11. SASSify style.css
+
+DRY: error/success spans in a div
