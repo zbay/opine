@@ -18,9 +18,9 @@ gulp.task('default', function() {
     fullPaths: true
   }));
   
-gulp.src('sass/**/*.scss')
+gulp.src('src/scss/*.scss')
   .pipe(sass().on('error', sass.logError))
-  .pipe(gulp.dest('./css/'));
+  .pipe(gulp.dest('./public/css/'));
 
   function build(file) {
     if (file) gutil.log('Recompiling ' + file);

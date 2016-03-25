@@ -1,0 +1,74 @@
+.jumbotron, footer {
+  text-align: center;
+  color: white;
+  font-family: verdana;
+  background-color: #404040;
+  width: 100%; }
+
+select {
+  color: white;
+  background-color: #404040; }
+
+footer {
+  margin-top: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px; }
+
+#formSuccess {
+  color: blue; }
+
+#formError, #errorMessage, #fourohfour {
+  color: red; }
+
+#postingList {
+  border: 3px solid black; }
+
+#formSuccess, #formError, #errorMessage, #fourohfour {
+  font-weight: bold;
+  font-size: 200%;
+  margin-bottom: 10px;
+  text-align: center; }
+
+#categoryColumn {
+  padding: 10px; }
+
+.posting {
+  border: 1px solid black;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-radius: 10px;
+  background: url("../img/questionbackground.png") repeat;
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center; }
+
+#newPostForm {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  border: 5px solid #FFDAB9;
+  padding-bottom: 10px;
+  border-radius: 10px; }
+  #newPostForm input {
+    min-width: 75%; }
+
+#postListContainer, #actionBar {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center; }
+
+button {
+  color: #FFDAB9;
+  background-color: #339966;
+  border-radius: 3px;
+  border: 1px solid black;
+  padding: 10px;
+  margin-left: 10px;
+  margin-right: 10px; }
+
+label {
+  color: #339966; }
+
+.posting h3 {
+  color: #339966; }

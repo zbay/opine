@@ -53,25 +53,20 @@ footer{
     border-radius: $standard_space;
     background: url("../img/questionbackground.png") repeat;
     font-weight: bold;
-    margin-left:auto;
-    margin-right:auto;
-    text-align:center;
+    @include fullCentered();
 }
 #newPostForm{
-    text-align:center;
-    margin-left:auto;
-    margin-right:auto;
+    @include fullCentered();
     border: 5px solid #FFDAB9;
     padding-bottom: $standard_space;
     border-radius:$standard_space;
+    
+    input{
+         min-width: 75%;
+    }
 }
-#newPostForm input{
-    min-width: 75%;
-}
-#postListContainer{
-    margin-left:auto;
-    margin-right:auto;
-    text-align:center;
+#postListContainer, #actionBar{
+   @include fullCentered();
 }
 button{
     color: $ear_peach;
@@ -87,9 +82,4 @@ label{
 }
 .posting h3{
     color: $tree_green;
-}
-#actionBar{
-    text-align:center;
-    margin-left:auto;
-    margin-right:auto;
 }
