@@ -2,7 +2,7 @@
 2. Write About content.
 3.
 4. Periodic deletion of expired questions
-5. 4chanify it. Make each post addressable, and add comments.
+5. Add comments. Start at comments_list.jsx and make new_comment_form
 6. Allow users to follow posts via HTML5 local storage
 7.
 8. Data sanitization

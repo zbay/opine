@@ -1,0 +1,95 @@
+$ear_peach: #FFDAB9;
+$tree_green: #339966;
+$header_footer_background: #404040;
+$header_footer_font: white;
+$success_color: blue;
+$error_color: red;
+$standard_space: 10px;
+
+@mixin fullCentered(){
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+}
+
+.jumbotron, footer{
+    text-align:center;
+    color: $header_footer_font;
+    font-family: verdana;
+    background-color: $header_footer_background;
+    width: 100%;
+}
+select{
+    color:  $header_footer_font;
+    background-color: $header_footer_background;
+}
+footer{
+    margin-top: $standard_space;
+    padding-top: $standard_space;
+    padding-bottom: $standard_space;
+}
+#formSuccess{
+    color:$success_color;
+}
+#formError, #errorMessage, #fourohfour{
+    color:$error_color;
+}
+#postingList{
+    border: 3px solid black;
+}
+#formSuccess, #formError, #errorMessage, #fourohfour{
+    font-weight:bold;
+    font-size:200%;
+    margin-bottom: $standard_space;
+    text-align:center;
+}
+#categoryColumn{
+    padding:$standard_space;
+}
+.posting{
+    border: 1px solid black;
+    margin-bottom: $standard_space;
+    padding-bottom:$standard_space;
+    border-radius: $standard_space;
+    background: url("../img/questionbackground.png") repeat;
+    font-weight: bold;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+}
+#newPostForm{
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
+    border: 5px solid #FFDAB9;
+    padding-bottom: $standard_space;
+    border-radius:$standard_space;
+}
+#newPostForm input{
+    min-width: 75%;
+}
+#postListContainer{
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+}
+button{
+    color: $ear_peach;
+    background-color: $tree_green;
+    border-radius:3px;
+    border: 1px solid black;
+    padding: $standard_space;
+    margin-left:$standard_space;
+    margin-right:$standard_space;
+}
+label{
+    color:$tree_green;
+}
+.posting h3{
+    color: $tree_green;
+}
+#actionBar{
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
+}

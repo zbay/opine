@@ -8,7 +8,7 @@ var Route = ReactRouter.Route;
 var Main = require("./components/main");
 var About = require("./components/content_dumb/about");
 var PostingsListContainer = require("./components/post_related/postingslist_container");
-var Question = require("./components/post_related/dumb/question");
+var Question = require("./components/post_related/question");
 var BadLink = require("./components/content_dumb/badlink");
 var ServerError = require("./components/content_dumb/servererror");
 

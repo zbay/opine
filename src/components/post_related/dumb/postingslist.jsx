@@ -8,16 +8,14 @@ module.exports = React.createClass({
     },
     render: function(){
         return (
-        <div id="postingsList" className="container">
-        <div className="row">
+        <div id="postingsList">
         {this.renderPostings()}
-        </div>
         </div>);
     },
     renderPostings: function(){
         if(this.props.postings.length > 0){
           return (this.props.postings.map(function(posting){
-            return (<div className="col-xs-12"><Posting key={posting._id} postingData={posting} /></div>)
+            return (<Posting key={posting._id} postingData={posting} />)
         }));   
         }
         else{ //if there are postings

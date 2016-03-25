@@ -39,6 +39,9 @@ footer{
     border-radius: 10px;
     background: url("../img/questionbackground.png") repeat;
     font-weight: bold;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
 }
 #newPostForm{
     text-align:center;
@@ -70,4 +73,9 @@ label{
 }
 .posting h3{
     color: #339966;
+}
+#actionBar{
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
 }

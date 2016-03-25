@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var sass = require('gulp-sass');
 var gutil = require('gulp-util');
 var source = require('vinyl-source-stream');
 var browserify = require('browserify');
@@ -16,6 +17,10 @@ gulp.task('default', function() {
     packageCache: {},
     fullPaths: true
   }));
+  
+gulp.src('sass/**/*.scss')
+  .pipe(sass().on('error', sass.logError))
+  .pipe(gulp.dest('./css/'));
 
   function build(file) {
     if (file) gutil.log('Recompiling ' + file);
