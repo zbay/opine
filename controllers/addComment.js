@@ -1,10 +1,11 @@
 var mongoose = require('mongoose');
 var ObjectId = mongoose.Types.ObjectId;
 var Posting = require(process.cwd() + "/dbmodels/posting.js"); Posting = mongoose.model("Posting");
+var sanitizeBody = require("./helpers/sanitizeBody");
 
 module.exports = function(app) {
     
-    app.post("/addComment", function(req, res){
+    app.post("/addComment", sanitizeBody, function(req, res){
     if(!req.body.commentText || !req.body.questionID){
         res.json({"error": "Please submit a comment."});
     }

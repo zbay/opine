@@ -18,6 +18,7 @@
     "gulp-concat": "^2.5.2",
     "gulp-react": "^3.0.1",
     "gulp-util": "^3.0.4",
+    "mongo-sanitize": "^1.0.0",
     "mongodb": "^2.1.7",
     "mongoose": "^4.4.7",
     "react": "^0.14.7",

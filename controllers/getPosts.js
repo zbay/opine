@@ -2,13 +2,13 @@
 var mongoose = require('mongoose');
 var ObjectId = mongoose.Types.ObjectId;
 var Posting = require(process.cwd() + "/dbmodels/posting.js"); Posting = mongoose.model("Posting");
-const perPage = 3;
-const dailySeconds = 86400;
+var sanitizeBody = require("./helpers/sanitizeBody");
+const perPage = 50;
 
 module.exports = function(app) {
 
 
-app.get("/allPostings/:page", function(req, res){
+app.get("/allPostings/:page", sanitizeBody, function(req, res){
     let page = Number(req.params.page) -1;
     let postings = [];
     let postingStream = Posting.find().skip(perPage * page).sort({"timePosted": -1}).limit(perPage).stream(); //less than or equal to in mongodb query
@@ -19,7 +19,7 @@ app.get("/allPostings/:page", function(req, res){
          res.json({"postings": postings});
     });
 });
-app.get("/categoryPostings/:category/:page", function(req, res){
+app.get("/categoryPostings/:category/:page", sanitizeBody, function(req, res){
     let postings = [];
     let postCategory = req.params.category;
     let page = Number(req.params.page) - 1;
@@ -32,7 +32,7 @@ app.get("/categoryPostings/:category/:page", function(req, res){
          res.json({"postings": postings});
     });
 });
-app.get("/searchPostings/:searchQuery/:page", function(req, res){
+app.get("/searchPostings/:searchQuery/:page", sanitizeBody, function(req, res){
     let postings = [];
     let searchQuery = req.params.searchQuery;
     let page = req.params.page - 1;
@@ -46,14 +46,14 @@ app.get("/searchPostings/:searchQuery/:page", function(req, res){
          res.json({"postings": postings});
     });
 });
-app.get("/question/:id", function(req, res){ //get a question and it's comments
+app.get("/question/:id", sanitizeBody, function(req, res){ //get a question and it's comments
   let postID = ObjectId(req.params.id);
   var postingStream = Posting.findOne({_id: postID}, {comments: 0}).stream();
   postingStream.on("data", function(doc){
      res.json({"postData": doc});
   });
 });
-app.post("/favoritePostings", function(req, res){
+app.post("/favoritePostings", sanitizeBody, function(req, res){
     let postings = [];
     let page = req.body.page - 1;
     let beginning = perPage*page;
@@ -79,7 +79,7 @@ app.post("/favoritePostings", function(req, res){
         });
     }
 });
-app.get("/comments/:id", function(req, res){ //get a post's comments, on refresh only
+app.get("/comments/:id", sanitizeBody, function(req, res){ //get a post's comments, on refresh only
   let postID = ObjectId(req.params.id);
   var postingStream = Posting.findOne({_id: postID}).stream();
   postingStream.on("data", function(doc){

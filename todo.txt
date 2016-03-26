@@ -1,6 +1,6 @@
 1. Better error handling at the server
 2. Write About content.
-3. Allow 24 hours later than you currently do, for new post deadlines
+3. 
 4. Periodic deletion of expired questions
 5. Clearly mark "My Favorites"
 6. Sort by expiring and by most commented
