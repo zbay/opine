@@ -1,4 +1,6 @@
 var React = require('react');
+var ReactRouter = require('react-router');
+var Link = ReactRouter.Link;
 
 module.exports = React.createClass({
     propTypes: {
@@ -7,7 +9,7 @@ module.exports = React.createClass({
     render: function(){
         return (<div className="posting">
         <div className="postQuestion">
-        <h3>Question</h3>
+        <h3><Link to={"question/" + this.props.postingData._id}>Question</Link></h3>
         {this.props.postingData.question}</div>
         <div className="postAsker">
         <h3>Who's asking?</h3>

@@ -76,7 +76,9 @@ module.exports = React.createClass({
                     category: "Miscellaneous",
                     errorMessage: null
                 });
-                that.props.newPostsRender();
+                if(that.props.newPostsRender){
+                  that.props.newPostsRender();   
+                }
             }
             else{ //if the posting was unsuccesful
                 console.log(response.data.error);

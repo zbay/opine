@@ -87,6 +87,11 @@ label, #commentHeader {
 
 .posting h3 {
   color: #339966; }
+  .posting h3 a {
+    color: #FFDAB9;
+    background-color: green;
+    padding: 5px;
+    border-radius: 10px; }
 
 #commentHeader {
   text-align: center; }

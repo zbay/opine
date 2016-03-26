@@ -98,6 +98,12 @@ label, #commentHeader{
 }
 .posting h3{
     color: $tree_green;
+    a{
+    color:$ear_peach;
+    background-color: green;
+    padding:$standard_space/2;
+    border-radius:$standard_space;
+    }
 }
 #commentHeader{
     text-align:center;
