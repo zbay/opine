@@ -11,7 +11,7 @@ module.exports = function(app) {
 app.get("/allPostings/:page", function(req, res){
     let page = Number(req.params.page) -1;
     let postings = [];
-    let postingStream = Posting.find({"deadline": {$gte: (Date.now()/1000) - dailySeconds}}).skip(perPage * page).sort({"timePosted": -1}).limit(perPage).stream(); //less than or equal to in mongodb query
+    let postingStream = Posting.find().skip(perPage * page).sort({"timePosted": -1}).limit(perPage).stream(); //less than or equal to in mongodb query
     postingStream.on("data", function(doc){
             postings.push(doc);
     });
@@ -23,7 +23,7 @@ app.get("/categoryPostings/:category/:page", function(req, res){
     let postings = [];
     let postCategory = req.params.category;
     let page = Number(req.params.page) - 1;
-    let postingStream = Posting.find({"category": postCategory, "deadline": {$gte: (Date.now()/1000) - dailySeconds}})
+    let postingStream = Posting.find({"category": postCategory})
     .skip(perPage * page).sort({"timePosted": -1}).limit(perPage).stream();
     postingStream.on("data", function(doc){
             postings.push(doc);
