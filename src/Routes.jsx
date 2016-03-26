@@ -5,11 +5,11 @@ var HashHistory = require('react-router/lib/hashHistory');
 var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
 
-var Main = require("./components/main");
-var About = require("./components/content_dumb/about");
-var PostingsListContainer = require("./components/post_related/postingslist_container");
-var Question = require("./components/post_related/question");
-var BadLink = require("./components/content_dumb/badlink");
+var Main = require("./components/Main");
+var About = require("./components/StatelessContent/About");
+var Question = require("./components/Questions/StandaloneQuestion");
+var PostingsListContainer = require("./components/Questions/PostingsListContainer");
+var BadLink = require("./components/StatelessContent/BadLink");
 
 var AllWrapper = React.createClass({
     render: function(){

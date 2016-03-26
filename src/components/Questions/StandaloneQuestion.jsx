@@ -1,9 +1,9 @@
 var React = require('react');
 var axios = require('axios');
 
-var CommentsList = require("./comments_list");
-var NewCommentForm = require("./new_comment_form");
-var ActionBar = require("./actionbar");
+var CommentsList = require("../Comments/CommentsList");
+var NewCommentForm = require("../Comments/NewCommentForm");
+var ActionBar = require("../Navigation/ActionBar");
 
 module.exports = React.createClass({
     propTypes: {

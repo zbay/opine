@@ -1,10 +1,9 @@
 var React = require('react');
 var axios = require('axios');
 var HashHistory = require('react-router/lib/hashHistory');
-var PostingsList = require("./dumb/postingslist");
-var NewPostForm = require("./newpostform");
-var ActionBar = require("./actionbar");
-var PageBar = require("./pagebar");
+var PostingsList = require("./Stateless/PostingsList");
+var ActionBar = require("../Navigation/ActionBar");
+var PageBar = require("../Navigation/PageBar");
 
 module.exports = React.createClass({
     propTypes: {

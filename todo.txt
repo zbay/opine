@@ -11,4 +11,4 @@
 11. 
 12. Mongo queries: exclude fields you won't retrieve
 
-DRY: error/success spans in a div. ActionBar and NewPostForm combo needed.
+DRY: error/success spans in a div.

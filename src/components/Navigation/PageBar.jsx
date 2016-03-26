@@ -1,6 +1,6 @@
 var React = require('react');
 var HashHistory = require('react-router/lib/hashHistory');
-var CategorySelector = require("./categoryselector");
+
 module.exports = React.createClass({
     propTypes: {
       page: React.PropTypes.string.isRequired,

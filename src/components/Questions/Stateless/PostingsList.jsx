@@ -1,5 +1,5 @@
 var React = require('react');
-var Posting = require("./posting");
+var Posting = require("./Posting");
 
 module.exports = React.createClass({
     propTypes: {

@@ -1,7 +1,7 @@
 var React = require('react');
 var HashHistory = require('react-router/lib/hashHistory');
-var CategorySelector = require("./categoryselector");
-var NewPostForm = require("./newpostform");
+var CategorySelector = require("./CategorySelector");
+var NewPostForm = require("../Questions/NewPostForm");
 module.exports = React.createClass({
     propTypes: {
       visibleForm: React.PropTypes.bool,

@@ -1,5 +1,4 @@
 var React = require('react');
-var ReactRouter = require('react-router');
 var HashHistory = require('react-router/lib/hashHistory');
 
 module.exports = React.createClass({

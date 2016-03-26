@@ -1,6 +1,6 @@
 var React = require('react');
-var Jumbotron = require("./ui_dumb/jumbotron");
-var Footer = require("./ui_dumb/footer");
+var Jumbotron = require("./StatelessUI/Jumbotron");
+var Footer = require("./StatelessUI/Footer");
 
 module.exports = React.createClass({
     render: function(){
