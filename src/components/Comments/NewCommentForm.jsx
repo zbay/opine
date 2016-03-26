@@ -12,8 +12,8 @@ module.exports = React.createClass({
     render: function(){
         return (<div id="newCommentForm">
         <div id="formAlert">
-        <span id="formSuccess">{this.state.successMessage ? this.state.successMessage : ""}</span>
-        <span id="formError">{this.state.errorMessage ? this.state.errorMessage : ""}</span>
+        {this.state.successMessage ? (<div id="formSuccess">{this.state.successMessage}</div>): (<span></span>)}
+        {this.state.errorMessage ? ( <span id="formError">{this.state.errorMessage}</span>): (<span></span>)}
         </div><br />
         <button onClick={this.toggleVisible}>{this.state.visible ? "Hide Comment Form": "Write Comment"}</button>
         {this.state.visible ? 
@@ -52,6 +52,9 @@ module.exports = React.createClass({
                      that.setState({successMessage: null, errorMessage: null}); 
                  }
              });
+         }
+         else{
+             that.setState({successMessage: null});
          }
     }
 });

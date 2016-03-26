@@ -2,7 +2,6 @@ $ear_peach: #FFDAB9;
 $tree_green: #339966;
 $header_footer_background: #404040;
 $header_footer_font: white;
-$success_color: blue;
 $error_color: red;
 $standard_space: 10px;
 
@@ -33,7 +32,20 @@ footer{
     @include fullCentered();
 }
 #formSuccess{
-    color:$success_color;
+    color:white;
+    background-color:$header_footer_background;
+    font-family: verdana;
+    padding: $standard_space;
+    margin-top:$standard_space;
+    border-radius:$standard_space;
+    max-width:95%;
+    @include fullCentered();
+}
+#errorMessage{
+    padding: $standard_space;
+    margin-top:$standard_space;    
+    max-width:95%;
+    @include fullCentered();
 }
 #formError, #errorMessage, #fourohfour{
     color:$error_color;

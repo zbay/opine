@@ -1,6 +1,8 @@
 var React = require('react');
 var axios = require('axios');
+var DateJS = require('datejs');
 var dateRegex =/^(\d{4})(\/|-)(\d{1,2})(\/|-)(\d{1,2})$/;
+const dailySeconds = 86400;
 module.exports = React.createClass({
     propTypes: {
       visible: React.PropTypes.bool
@@ -20,8 +22,8 @@ module.exports = React.createClass({
     if(this.props.visible){
         return (<form id="newPostForm" onSubmit={this.newPost}>
         <div id="formAlert">
-        <span id="formSuccess">{this.state.successMessage ? this.state.successMessage : ""}</span>
-        <span id="formError">{this.state.errorMessage ? this.state.errorMessage : ""}</span>
+        {this.state.successMessage ? (<div id="formSuccess">{this.state.successMessage}</div>): (<span></span>)}
+        {this.state.errorMessage ? ( <span id="formError">{this.state.errorMessage}</span>): (<span></span>)}
         </div><br />
         <label>Question:</label><br />
         <input placeholder="What do you want to hear opinions about?" name="question" value={this.state.question} onChange={this.onChange}/><br /><br />
@@ -58,7 +60,8 @@ module.exports = React.createClass({
         let fixedDeadline = this.state.deadline.replace(/\//g, "-");
         let that = this;
         if(fixedDeadline.match(dateRegex) !== null){ //if the deadline meets the MM/DD/YYYY format
-        if(that.state.question !== null && that.state.asker !== null && that.state.contact !== null && new Date(fixedDeadline) >= Date.now() ){
+        if(that.state.question !== null && that.state.asker !== null && that.state.contact !== null && 
+        Date.parse(fixedDeadline).getTime()/1000 > (Math.floor(Date.now() / 1000) - (dailySeconds)) ){
          let postData = {
             question: that.state.question,
             asker: that.state.asker,
@@ -89,7 +92,7 @@ module.exports = React.createClass({
         });   
         }
         else{ //If a field is blank or the deadline chosen is in the past
-            that.setState({errorMessage: "Your question was not posted! Make sure to fill out all fields and choose a date in the future.",
+            that.setState({errorMessage: "Your question was not posted! Make sure to fill out all fields and choose a date that hasn't passed.",
                 successMessage: null
             });           
         }       
