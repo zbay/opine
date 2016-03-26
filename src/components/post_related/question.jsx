@@ -1,7 +1,7 @@
 var React = require('react');
 var axios = require('axios');
+
 var CommentsList = require("./comments_list");
-var NewPostForm = require("./newpostform");
 var NewCommentForm = require("./new_comment_form");
 var ActionBar = require("./actionbar");
 
@@ -19,8 +19,7 @@ module.exports = React.createClass({
     render: function(){
         if(this.state.question !== null){
         return (<div>
-        <ActionBar toggleVisible={this.toggleForm} visibleForm={this.state.visibleForm}/>
-        <NewPostForm visible={this.state.visibleForm} />
+        <ActionBar visibleForm={this.state.visibleForm}/>
         <div className="posting">
         <div className="postQuestion">
         <h3>Question</h3>

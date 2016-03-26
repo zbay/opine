@@ -90,20 +90,10 @@ module.exports = React.createClass({
             that.setState({postings: response.data.postings});
         });
     },
-    toggleForm: function(){
-        if(!this.state.visibleForm){
-         this.setState({visibleForm: true});   
-        }
-        else{
-            this.setState({visibleForm: false});
-        }
-    },
     render: function(){
         return (
         <div id="postListContainer">
-        <ActionBar visibleForm={this.state.visibleForm} toggleVisible={this.toggleForm}/>
-        <br />
-        <NewPostForm visible={this.state.visibleForm} newPostsRender={this.newPostsRender} />
+        <ActionBar visibleForm={this.state.visibleForm} newPostsRender={this.newPostsRender}/>
         <PostingsList postings={this.state.postings} />
        <PageBar page={Number(this.props.page)} criteria={this.props.criteria} hasNext={this.state.postings.length > 0} addendum={this.state.addendum}/>
         </div>);

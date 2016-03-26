@@ -1,22 +1,25 @@
 var React = require('react');
 var HashHistory = require('react-router/lib/hashHistory');
 var CategorySelector = require("./categoryselector");
+var NewPostForm = require("./newpostform");
 module.exports = React.createClass({
     propTypes: {
       visibleForm: React.PropTypes.bool,
-      toggleVisible: React.PropTypes.func.isRequired
+      newPostsRender: React.PropTypes.func
     },
     getInitialState: function(){
         return {
-            search: ""
+            search: "",
+            visibleForm: false
         }
     },
     render: function(){
         return (
+        <div>
         <div id="actionBar" className="container">
         <div className="row">
         <div className="col-sm-3" id="toggleColumn">
-        <button id="toggleForm" onClick={this.props.toggleVisible}>{this.props.visibleForm ? "Hide Question Form" : "Ask Something"}</button>
+        <button id="toggleForm" onClick={this.toggleForm}>{this.state.visibleForm ? "Hide Question Form" : "Ask Something"}</button>
         </div>
         <div className="col-sm-4" id="categoryColumn">
         <label>Browse by category: </label>&nbsp;
@@ -29,6 +32,9 @@ module.exports = React.createClass({
         </form>
         </div>
         </div>
+        </div>
+        <br />
+        <NewPostForm visible={this.state.visibleForm} newPostsRender={this.props.newPostsRender} />
         </div>);
     },
     onChange: function(e){
@@ -43,5 +49,13 @@ module.exports = React.createClass({
         if(that.state.search.length > 0){
            HashHistory.push("/search/" + that.state.search + "/1");   
         }
-    }
+    },
+    toggleForm: function(){
+        if(!this.state.visibleForm){
+         this.setState({visibleForm: true});   
+        }
+        else{
+            this.setState({visibleForm: false});
+        }
+    },
     });
