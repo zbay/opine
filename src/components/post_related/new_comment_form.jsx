@@ -11,7 +11,7 @@ module.exports = React.createClass({
       return {visible: false, comment: "", errorMessage: null, successMessage: null}  
     },
     render: function(){
-        return (<div>
+        return (<div id="newCommentForm">
         <div id="formAlert">
         <span id="formSuccess">{this.state.successMessage ? this.state.successMessage : ""}</span>
         <span id="formError">{this.state.errorMessage ? this.state.errorMessage : ""}</span>
@@ -20,7 +20,9 @@ module.exports = React.createClass({
         {this.state.visible ? 
         (<form id="commentForm" onSubmit={this.postComment}>
         <br />
-        <textarea name="comment" value={this.state.comment} onChange={this.onChange}/>
+        <textarea id="commentInput" name="comment" value={this.state.comment} onChange={this.onChange}/>
+        <br />
+        <br />
         <button type="submit">Post Comment</button>
         </form>)
         : 
@@ -44,7 +46,7 @@ module.exports = React.createClass({
              axios.post("/addComment", commentData).then(function(response){
                  console.log(JSON.stringify(response));
                  if(response.data.success){
-                     that.setState({successMessage: "Comment successfully posted!", errorMessage: null});
+                     that.setState({successMessage: "Comment successfully posted!", errorMessage: null, comment: ""});
                      that.props.refreshComments(); // sends call up to show all the post's comments, including the new one
                  }
                  else{

@@ -12,7 +12,10 @@ select {
 footer {
   margin-top: 10px;
   padding-top: 10px;
-  padding-bottom: 10px; }
+  padding-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center; }
 
 #formSuccess {
   color: blue; }
@@ -53,10 +56,22 @@ footer {
   #newPostForm input {
     min-width: 75%; }
 
-#postListContainer, #actionBar {
+#commentInput {
+  min-width: 75%;
+  min-height: 100px; }
+
+#postListContainer, #actionBar, #newCommentForm {
   margin-left: auto;
   margin-right: auto;
   text-align: center; }
+
+#commentList {
+  min-width: 75%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto; }
+  #commentList #commentHeader {
+    text-align: center; }
 
 button {
   color: #FFDAB9;
@@ -67,8 +82,26 @@ button {
   margin-left: 10px;
   margin-right: 10px; }
 
-label {
+label, #commentHeader {
   color: #339966; }
 
 .posting h3 {
   color: #339966; }
+
+#commentHeader {
+  text-align: center; }
+
+.comment {
+  background-color: #d3d3d3;
+  border: 3px solid #FFDAB9;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 10px; }
+
+footer {
+  min-width: 100%; }
+
+.commentNumber {
+  color: #339966;
+  font-weight: bold; }

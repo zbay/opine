@@ -6,9 +6,12 @@ $success_color: blue;
 $error_color: red;
 $standard_space: 10px;
 
-@mixin fullCentered(){
+@mixin marginCentered(){
     margin-left:auto;
     margin-right:auto;
+}
+@mixin fullCentered(){
+    @include marginCentered();
     text-align:center;
 }
 
@@ -27,6 +30,7 @@ footer{
     margin-top: $standard_space;
     padding-top: $standard_space;
     padding-bottom: $standard_space;
+    @include fullCentered();
 }
 #formSuccess{
     color:$success_color;
@@ -65,8 +69,20 @@ footer{
          min-width: 75%;
     }
 }
-#postListContainer, #actionBar{
+#commentInput{
+    min-width: 75%;
+    min-height: 100px;
+}
+#postListContainer, #actionBar, #newCommentForm{
    @include fullCentered();
+}
+#commentList{
+    min-width: 75%;
+    max-width: 100%;
+    @include marginCentered();
+    #commentHeader{
+        text-align:center;
+    }
 }
 button{
     color: $ear_peach;
@@ -77,9 +93,27 @@ button{
     margin-left:$standard_space;
     margin-right:$standard_space;
 }
-label{
+label, #commentHeader{
     color:$tree_green;
 }
 .posting h3{
     color: $tree_green;
+}
+#commentHeader{
+    text-align:center;
+}
+.comment{
+    background-color: #d3d3d3;
+    border: 3px solid $ear_peach;
+    margin-top: $standard_space;
+    margin-bottom: $standard_space;
+    padding: $standard_space;
+    border-radius: $standard_space;
+}
+footer{
+   min-width:100%;
+}
+.commentNumber{
+    color: $tree_green;
+    font-weight: bold;
 }

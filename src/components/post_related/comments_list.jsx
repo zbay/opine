@@ -7,6 +7,7 @@ module.exports = React.createClass({
     render: function(){
         return (
         <div id="commentList" className="container">
+        <h3 id="commentHeader">Comments:</h3>
         {this.renderComments()}
         </div>);
     },
@@ -16,7 +17,7 @@ module.exports = React.createClass({
         }
         else{
           return (this.props.comments.map(function(comment, index){
-            return (<div className="comment" key={index}><span className="commentNumber">{index+1}. </span>{comment.text}</div>)
+            return (<div className="comment" key={index}><span className="commentNumber">{index+1}.&nbsp;&nbsp;</span>{comment.text}</div>)
         }));   
         }
     }
