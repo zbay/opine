@@ -15,7 +15,7 @@ module.exports = React.createClass({
     getInitialState: function(){
         let that = this;
         var thisAddendum = "";
-        if(that.props.criteria != "all"){
+        if(that.props.criteria != "all" && that.props.criteria != "favorites"){
             if(that.props.criteria == "category"){
                 thisAddendum = that.props.category + "/";
             }
@@ -40,6 +40,8 @@ module.exports = React.createClass({
             case "search":
                 that.retrieveSearch(that.props.search, Number(that.props.page));
                 break;
+            case "favorites":
+                that.retrieveFavorites(Number(that.props.page));
             default:
         }
     },
@@ -65,6 +67,8 @@ module.exports = React.createClass({
             case "search":
                 that.retrieveSearch(nextProps.search, Number(nextProps.page));
                 break;
+            case "favorites":
+                that.retrieveFavorites(Number(nextProps.page));
             default:
         }       
     },
@@ -88,6 +92,20 @@ module.exports = React.createClass({
         .then(function(response){
             that.setState({postings: response.data.postings});
         });
+    },
+    retrieveFavorites: function(page){
+        let that = this;
+        let questions = {"favorites": JSON.parse(localStorage.getItem("favorites")), "page": page};
+        console.log("fave postings: " + JSON.stringify(questions));
+        axios.post("/favoritePostings", questions)
+        .then(function(response){
+            if(!response.data.TypeError){
+              that.setState({postings: response.data.postings});   
+            }
+            else{
+                console.log(response.data.TypeError);
+            }
+        });      
     },
     render: function(){
         return (

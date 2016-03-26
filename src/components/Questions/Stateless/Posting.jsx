@@ -6,6 +6,19 @@ module.exports = React.createClass({
     propTypes: {
         postingData: React.PropTypes.object.isRequired
     },
+    getInitialState: function(){
+        var isFavorite = false;
+        console.log(localStorage);
+        var currentFavorites = JSON.parse(localStorage.getItem("favorites"));
+        if(currentFavorites){
+            for(let i = 0; i < currentFavorites.length; i++){
+            if(currentFavorites[i] == this.props.postingData._id){
+                isFavorite = true;
+            }
+        }   
+        }
+        return {favorited: isFavorite};
+    },
     render: function(){
         return (<div className="posting">
         <div className="postQuestion">
@@ -19,7 +32,17 @@ module.exports = React.createClass({
         {this.props.postingData.howToContact}</div>
         <div className="postCategory">
         <h3>Filed Under:</h3>
-        {this.props.postingData.category}</div>
+        {this.props.postingData.category}</div><br />
+        {this.state.favorited? (<span></span>): <button onClick={this.addFavorite}>Add To My Favorites</button>}
         </div>);
+    },
+    addFavorite: function(){
+        var currentFavorites = JSON.parse(localStorage.getItem("favorites"));
+        if(currentFavorites === null){
+            currentFavorites = [];
+        }
+        currentFavorites.push(this.props.postingData._id);
+        localStorage.setItem("favorites", JSON.stringify(currentFavorites));
+        this.setState({favorited: true});
     }
 });

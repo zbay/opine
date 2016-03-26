@@ -2,7 +2,7 @@
 2. Write About content.
 3. Allow 24 hours later than you currently do, for new post deadlines
 4. Periodic deletion of expired questions
-5. 
+5. Clearly mark "My Favorites"
 6. Allow users to follow posts via HTML5 local storage
 7. React Router server-side?
 8. Data sanitization
@@ -11,4 +11,4 @@
 11. 
 12. Mongo queries: exclude fields you won't retrieve
 
-DRY: error/success spans in a div.
+DRY: error/success spans in a div. Merge Posting and Question into one

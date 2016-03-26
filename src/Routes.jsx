@@ -29,11 +29,18 @@ var SearchWrapper = React.createClass({
     }
 });
 
+var FavoriteWrapper = React.createClass({
+    render: function(){
+        return(<PostingsListContainer criteria="favorites" page={this.props.routeParams.page}/>);
+    }
+});
+
 var QuestionWrapper = React.createClass({
     render: function(){
         return (<Question questionID={this.props.routeParams.id} />);
     }
 });
+
 
 module.exports = (
   <Router history={HashHistory}>
@@ -43,6 +50,7 @@ module.exports = (
       <Route path="category/:category/:page" component={CategoryWrapper} />
       <Route path="search/:search/:page" component={SearchWrapper} />
       <Route path="question/:id" component={QuestionWrapper}/>
+      <Route path="favorites/:page" component={FavoriteWrapper}/>
       <Route path="*" status={404} component={BadLink}/>
     </Route>
   </Router>

@@ -51,6 +51,32 @@ app.get("/question/:id", function(req, res){ //get a question and it's comments
      res.json({"postData": doc});
   });
 });
+app.post("/favoritePostings", function(req, res){
+    let postings = [];
+    let page = req.body.page - 1;
+    let beginning = perPage*page;
+    let ending = (perPage*page) + perPage;
+    let favorites = req.body.favorites;
+    if(ending >= favorites.length){
+        ending = favorites.length-1;
+    }
+    if(beginning >= favorites.length){
+        res.json({"postings": []});
+    }
+    for(let i = beginning; i < ending; i++){
+        Posting.findOne({_id: ObjectId(favorites[i])}).sort({timePosted: -1}).exec(function(err, question){
+            if(err){
+                res.json({error: err});
+            }
+            else{
+                postings.push(question);   
+                if(postings.length == ending-beginning){
+                    res.json({"postings": postings});
+                }
+            }
+        });
+    }
+});
 app.get("/comments/:id", function(req, res){ //get a post's comments, on refresh only
   let postID = ObjectId(req.params.id);
   var postingStream = Posting.findOne({_id: postID}).stream();

@@ -5,6 +5,7 @@ module.exports = React.createClass({
     render: function(){
         return (<select id="catBrowse" onChange={this.onChange}>
             <option value="None">---</option>
+            <option value="Favorites">My Favorites</option>
             <option value="Politics">Politics</option>
             <option value="Sports">Sports</option>
             <option value="Culture">Culture</option>
@@ -16,7 +17,12 @@ module.exports = React.createClass({
     },
     onChange: function(e){
         if(e.target.value !== "All"){
-         HashHistory.push("/category/" + e.target.value + "/1");   
+            if(e.target.value == "Favorites"){
+                HashHistory.push("/favorites/1");
+            }
+            else{
+               HashHistory.push("/category/" + e.target.value + "/1");      
+            }
         }
         else{
             if(e.target.value !== "None"){
