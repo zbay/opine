@@ -8,7 +8,6 @@ module.exports = React.createClass({
     },
     getInitialState: function(){
         var isFavorite = false;
-        console.log(localStorage);
         var currentFavorites = JSON.parse(localStorage.getItem("favorites"));
         if(currentFavorites){
             for(let i = 0; i < currentFavorites.length; i++){

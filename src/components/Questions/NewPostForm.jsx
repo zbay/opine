@@ -8,15 +8,21 @@ module.exports = React.createClass({
       visible: React.PropTypes.bool
     },
     getInitialState: function(){
-     return {
+        return {
          question: null,
          asker: null,
          contact: null,
          deadline: null,
          category: "Miscellaneous",
          successMessage: null,
-         errorMessage: null
+         errorMessage: null,
      };
+    },
+    componentDidMount: function(){
+    let that = this;
+    axios.get("https://api.ipify.org?format=json").then( function (data) {
+        that.setState({IP: data.data.ip});
+    });
     },
     render: function(){
     if(this.props.visible){
@@ -67,8 +73,10 @@ module.exports = React.createClass({
             asker: that.state.asker,
             contact: that.state.contact,
             deadline: fixedDeadline,
-            category: that.state.category
+            category: that.state.category,
+            IP: that.state.IP
         };
+        console.log(postData);
         axios.post("/addPosting", postData).then(function(response){
             if(response.data.success){
                 that.setState({successMessage: "Question successfully posted!", 

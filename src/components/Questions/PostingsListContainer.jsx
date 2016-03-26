@@ -96,7 +96,6 @@ module.exports = React.createClass({
     retrieveFavorites: function(page){
         let that = this;
         let questions = {"favorites": JSON.parse(localStorage.getItem("favorites")), "page": page};
-        console.log("fave postings: " + JSON.stringify(questions));
         axios.post("/favoritePostings", questions)
         .then(function(response){
             if(!response.data.TypeError){
