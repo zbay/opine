@@ -7,7 +7,7 @@ module.exports = React.createClass({
     render: function(){
         return (
         <div id="commentList" className="container">
-        <h3 id="commentHeader">Comments:</h3>
+        {this.props.comments.length > 0 ? (<h3 id="commentHeader">Comments:</h3>): (<span></span>)}
         {this.renderComments()}
         </div>);
     },
