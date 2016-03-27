@@ -12,6 +12,7 @@
     "body-parser": "^1.15.0",
     "browserify": "^9.0.3",
     "datejs": "^1.0.0-rc3",
+    "dotenv": "^2.0.0",
     "exec": "^0.2.1",
     "express": "^4.13.4",
     "gulp": "^3.8.11",
