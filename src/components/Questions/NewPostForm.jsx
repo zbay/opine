@@ -1,8 +1,10 @@
 var React = require('react');
 var axios = require('axios');
 var DateJS = require('datejs');
-var dateRegex =/^(\d{4})(\/|-)(\d{1,2})(\/|-)(\d{1,2})$/;
+var dateRegex =/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;
 const dailySeconds = 86400;
+const maxYear = 2120;
+
 module.exports = React.createClass({
     propTypes: {
       visible: React.PropTypes.bool
@@ -29,7 +31,7 @@ module.exports = React.createClass({
         return (<form id="newPostForm" onSubmit={this.newPost}>
         <div id="formAlert">
         {this.state.successMessage ? (<div id="formSuccess">{this.state.successMessage}</div>): (<span></span>)}
-        {this.state.errorMessage ? ( <span id="formError">{this.state.errorMessage}</span>): (<span></span>)}
+        {this.state.errorMessage ? ( <div id="formError">{this.state.errorMessage}</div>): (<span></span>)}
         </div><br />
         <label>Question:</label><br />
         <input placeholder="What do you want to hear opinions about?" name="question" value={this.state.question} onChange={this.onChange}/><br /><br />
@@ -65,9 +67,10 @@ module.exports = React.createClass({
         e.preventDefault();
         let fixedDeadline = this.state.deadline.replace(/\//g, "-");
         let that = this;
-        if(fixedDeadline.match(dateRegex) !== null){ //if the deadline meets the MM/DD/YYYY format
+        if(fixedDeadline.match(dateRegex) !== null && Number(fixedDeadline.slice(0, 4) < maxYear)){ //if the deadline meets the MM/DD/YYYY format and year isn't huge
         if(that.state.question !== null && that.state.asker !== null && that.state.contact !== null && 
         Date.parse(fixedDeadline).getTime()/1000 > (Math.floor(Date.now() / 1000) - (dailySeconds)) ){
+            let redirectCategory = that.state.category;
          let postData = {
             question: that.state.question,
             asker: that.state.asker,
@@ -88,7 +91,7 @@ module.exports = React.createClass({
                     errorMessage: null
                 });
                 if(that.props.newPostsRender){
-                  that.props.newPostsRender();   
+                  that.props.newPostsRender(redirectCategory);   
                 }
             }
             else{ //if the posting was unsuccesful
@@ -106,7 +109,7 @@ module.exports = React.createClass({
         }       
         }
         else{ //if the deadline doesn't meet the MM/DD/YYYY format
-            that.setState({errorMessage: "Your question was not posted! Please make sure it fits the YYYY/MM/DD date format.",
+            that.setState({errorMessage: "Your question was not posted! Please make sure it fits the YYYY/MM/DD date format and isn't too far in the future.",
                 successMessage: null
             });        
         }

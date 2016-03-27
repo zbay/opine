@@ -115,9 +115,14 @@ module.exports = React.createClass({
         {this.props.criteria === "favorites" ? (<span></span>): (<PageBar page={Number(this.props.page)} criteria={this.props.criteria} hasNext={this.state.postings.length > 0} addendum={this.state.addendum}/>)}
         </div>);
     },
-newPostsRender: function(){
+newPostsRender: function(redirectCategory){
+    if(this.props.criteria === "category"){
+        HashHistory.push("/category/" + redirectCategory + "/1");   
+    }
+    else{
 if(this.props.criteria !== "favorites"){
  HashHistory.push("/" + this.props.criteria + "/" + this.state.addendum + "1");   
+}
 }
 }
 });

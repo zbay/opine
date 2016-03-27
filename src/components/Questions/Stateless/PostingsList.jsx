@@ -18,7 +18,7 @@ module.exports = React.createClass({
     componentDidMount: function(){
         setTimeout(this.showError, 2000);
     },
-    willRecieveProps: function(){
+    componentWillReceiveProps: function(){
       this.showError();
     },
     showError: function(){

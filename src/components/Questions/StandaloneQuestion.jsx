@@ -10,12 +10,21 @@ module.exports = React.createClass({
         questionID: React.PropTypes.string.isRequired
     },
     getInitialState: function(){
-      return {question: null, comments: [], isLoading: true}  
+        var isFavorite = false;
+        var currentFavorites = JSON.parse(localStorage.getItem("favorites"));
+        if(currentFavorites){
+            for(let i = 0; i < currentFavorites.length; i++){
+            if(currentFavorites[i] == this.props.questionID){
+                isFavorite = true;
+            }
+        }   
+        }
+      return {question: null, comments: [], isLoading: true, favorited: isFavorite}  
     },
     componentDidMount: function(){
         setTimeout(this.showError, 2000);
     },
-    willRecieveProps: function(){
+    componentWillReceiveProps: function(){
       this.showError();
     },
     showError: function(){
@@ -45,7 +54,8 @@ module.exports = React.createClass({
         <h3>Posted On: </h3>
         {this.state.question.timePosted.substring(0,10)}
         <h3>Deadline: </h3>
-        {this.state.question.deadline.substring(0,10)}
+        {this.state.question.deadline.substring(0,10)}<br /><br />
+        {this.state.favorited? (<span></span>): <button onClick={this.addFavorite}>Add To My Favorites</button>}
         </div>
         <NewCommentForm questionID={this.props.questionID} refreshComments={this.retrieveComments}/>
         <br />
@@ -84,5 +94,17 @@ module.exports = React.createClass({
         else{
             this.setState({visibleForm: false});
         }
+    },
+    addFavorite: function(){
+        var currentFavorites = JSON.parse(localStorage.getItem("favorites"));
+        if(currentFavorites.length >= 100){
+            currentFavorites.shift();
+        }
+        if(currentFavorites === null){
+            currentFavorites = [];
+        }
+        currentFavorites.push(this.props.questionID);
+        localStorage.setItem("favorites", JSON.stringify(currentFavorites));
+        this.setState({favorited: true});
     }
 });

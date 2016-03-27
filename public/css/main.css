@@ -22,8 +22,7 @@ footer {
   margin-right: auto;
   text-align: center; }
 
-#formSuccess {
-  color: white;
+#formSuccess, #formError {
   background-color: #404040;
   font-family: verdana;
   padding: 10px;
@@ -33,6 +32,9 @@ footer {
   margin-left: auto;
   margin-right: auto;
   text-align: center; }
+
+#formSuccess {
+  color: white; }
 
 #errorMessage {
   padding: 10px;

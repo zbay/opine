@@ -33,8 +33,7 @@ footer{
     padding-bottom: $standard_space;
     @include fullCentered();
 }
-#formSuccess{
-    color:white;
+#formSuccess, #formError{
     background-color:$header_footer_background;
     font-family: verdana;
     padding: $standard_space;
@@ -42,6 +41,9 @@ footer{
     border-radius:$standard_space;
     max-width:95%;
     @include fullCentered();
+}
+#formSuccess{
+    color:white;
 }
 #errorMessage{
     padding: $standard_space;
