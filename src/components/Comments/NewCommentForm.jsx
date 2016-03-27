@@ -9,6 +9,12 @@ module.exports = React.createClass({
     getInitialState: function(){
       return {visible: false, comment: "", errorMessage: null, successMessage: null}  
     },
+    componentDidMount: function(){
+    let that = this;
+    axios.get("https://api.ipify.org?format=json").then( function (data) {
+        that.setState({IP: data.data.ip});
+    });
+    },
     render: function(){
         return (<div id="newCommentForm">
         <div id="formAlert">
@@ -41,7 +47,7 @@ module.exports = React.createClass({
          e.preventDefault(); // so that only React handles the form data
          let that = this;
          if(this.state.comment.length > 0 && this.props.questionID){
-             var commentData = {"questionID": that.props.questionID, "commentText": that.state.comment};
+             var commentData = {"questionID": that.props.questionID, "commentText": that.state.comment, "IP": this.state.IP};
              axios.post("/addComment", commentData).then(function(response){
                  console.log(JSON.stringify(response));
                  if(response.data.success){

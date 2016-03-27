@@ -10,7 +10,7 @@ module.exports = function(app) {
         res.json({"error": "Please submit a comment."});
     }
     else{
-       Posting.update({_id: ObjectId(req.body.questionID)}, {$addToSet: {comments: {text: req.body.commentText}}}).lean().exec(function(err, msg){
+       Posting.update({_id: ObjectId(req.body.questionID)}, {$addToSet: {comments: {text: req.body.commentText, IP: req.body.IP}}}).lean().exec(function(err, msg){
            if(err){
               res.json({"error": err});  
            }
