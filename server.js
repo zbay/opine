@@ -7,7 +7,7 @@ var routes = require('./controllers');
 var mongoose = require('mongoose');
 var db = mongoose.connection;
 var mongo = require('mongodb');
-var dotenv = require('dotenv').load();
+//var dotenv = require('dotenv').load();
 
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost:27017/opine', function (err, db)
 {
