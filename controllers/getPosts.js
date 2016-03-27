@@ -55,27 +55,22 @@ app.get("/question/:id", sanitizeBody, function(req, res){ //get a question and 
 });
 app.post("/favoritePostings", sanitizeBody, function(req, res){
     let postings = [];
-    let page = req.body.page - 1;
-    let beginning = perPage*page;
-    let ending = (perPage*page) + perPage;
+    let iterateCount = 0;
     let favorites = req.body.favorites;
-    if(ending >= favorites.length){
-        ending = favorites.length-1;
-    }
-    if(beginning >= favorites.length){
-        res.json({"postings": []});
-    }
-    for(let i = beginning; i < ending; i++){
-        Posting.findOne({_id: ObjectId(favorites[i])}).sort({timePosted: -1}).exec(function(err, question){
-            if(err){
+    for(let i = favorites.length-1; i >= 0; i--){
+        Posting.findOne({_id: ObjectId(favorites[i])}, function(err, question){
+             if(err){
                 res.json({error: err});
             }
             else{
-                postings.push(question);   
-                if(postings.length == ending-beginning){
+                if(question !== null){
+                 postings.push(question);   
+                }
+                iterateCount++;
+                if(iterateCount == req.body.favorites.length){
                     res.json({"postings": postings});
                 }
-            }
+            }           
         });
     }
 });

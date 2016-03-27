@@ -19,7 +19,7 @@ var AllWrapper = React.createClass({
 
 var CategoryWrapper = React.createClass({
     render: function(){
-        return (<PostingsListContainer criteria="category" page={this.props.routeParams.page} category={this.props.routeParams.category} searchQuery={null}/>);
+        return (<PostingsListContainer criteria="category" page={this.props.routeParams.page} category={this.props.routeParams.category} search={null}/>);
     }
 });
 
@@ -31,7 +31,7 @@ var SearchWrapper = React.createClass({
 
 var FavoriteWrapper = React.createClass({
     render: function(){
-        return(<PostingsListContainer criteria="favorites" page={this.props.routeParams.page}/>);
+        return(<PostingsListContainer criteria="favorites" page={1} search={null} category={null}/>);
     }
 });
 
@@ -50,7 +50,7 @@ module.exports = (
       <Route path="category/:category/:page" component={CategoryWrapper} />
       <Route path="search/:search/:page" component={SearchWrapper} />
       <Route path="question/:id" component={QuestionWrapper}/>
-      <Route path="favorites/:page" component={FavoriteWrapper}/>
+      <Route path="favorites" component={FavoriteWrapper}/>
       <Route path="*" status={404} component={BadLink}/>
     </Route>
   </Router>

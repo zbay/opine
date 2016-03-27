@@ -95,14 +95,15 @@ module.exports = React.createClass({
     },
     retrieveFavorites: function(page){
         let that = this;
-        let questions = {"favorites": JSON.parse(localStorage.getItem("favorites")), "page": page};
+        let questions = {"favorites": JSON.parse(localStorage.getItem("favorites"))};
+        console.log(JSON.stringify(questions));
         axios.post("/favoritePostings", questions)
         .then(function(response){
-            if(!response.data.TypeError){
+            if(!response.data.error){
               that.setState({postings: response.data.postings});   
             }
             else{
-                console.log(response.data.TypeError);
+                console.log(response.data.error);
             }
         });      
     },
@@ -110,11 +111,13 @@ module.exports = React.createClass({
         return (
         <div id="postListContainer">
         <ActionBar visibleForm={this.state.visibleForm} newPostsRender={this.newPostsRender}/>
-        <PostingsList postings={this.state.postings} />
-       <PageBar page={Number(this.props.page)} criteria={this.props.criteria} hasNext={this.state.postings.length > 0} addendum={this.state.addendum}/>
+        <PostingsList postings={this.state.postings} page={this.props.page} />
+        {this.props.criteria === "favorites" ? (<span></span>): (<PageBar page={Number(this.props.page)} criteria={this.props.criteria} hasNext={this.state.postings.length > 0} addendum={this.state.addendum}/>)}
         </div>);
     },
 newPostsRender: function(){
-  HashHistory.push("/" + this.props.criteria + "/" + this.state.addendum + "1");
+if(this.props.criteria !== "favorites"){
+ HashHistory.push("/" + this.props.criteria + "/" + this.state.addendum + "1");   
+}
 }
 });
