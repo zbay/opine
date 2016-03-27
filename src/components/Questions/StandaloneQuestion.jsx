@@ -10,7 +10,16 @@ module.exports = React.createClass({
         questionID: React.PropTypes.string.isRequired
     },
     getInitialState: function(){
-      return {question: null, comments: []}  
+      return {question: null, comments: [], isLoading: true}  
+    },
+    componentDidMount: function(){
+        setTimeout(this.showError, 2000);
+    },
+    willRecieveProps: function(){
+      this.showError();
+    },
+    showError: function(){
+         this.setState({isLoading: false}); 
     },
     componentWillMount: function(){
       this.retrieveQuestion();  
@@ -45,7 +54,12 @@ module.exports = React.createClass({
         );            
         }
         else{
-            return (<div id="errorMessage">The question could not be loaded. Either the URL is wrong, or the post has been deleted.</div>);
+            if(!this.state.isLoading){
+             return (<div id="errorMessage">The question could not be loaded. Either the URL is wrong, or the post has been deleted.</div>);   
+            }
+            else{
+             return (<div id="spinner"><img src="./img/loading_spinner.gif"/></div>);
+            }
         }
 
     },

@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var ObjectId = mongoose.Types.ObjectId;
 var Posting = require(process.cwd() + "/dbmodels/posting.js"); Posting = mongoose.model("Posting");
 var sanitizeBody = require("./helpers/sanitizeBody");
-const perPage = 50;
+const perPage = 20;
 
 module.exports = function(app) {
 

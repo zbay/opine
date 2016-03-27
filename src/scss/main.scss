@@ -13,7 +13,9 @@ $standard_space: 10px;
     @include marginCentered();
     text-align:center;
 }
-
+#spinner{
+    @include fullCentered();
+}
 .jumbotron, footer{
     text-align:center;
     color: $header_footer_font;
