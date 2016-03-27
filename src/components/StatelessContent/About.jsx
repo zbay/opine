@@ -15,9 +15,8 @@ module.exports = React.createClass({
        <p>To get started posting, click "Ask Something" and fill out the form.</p>
        
        <h2>Notes for Frequent Users</h2>
-       <p>Note that all posts will be automatically deleted from the website, a few days after their deadline has passed.</p>
-       <p>All posts you create will be automatically saved in your browser as a "favorite", accessed under the "My Favorites" category.
-       You can also manually add favorites to your list. Please do not delete cookies from this site, if you want to keep your favorites list.</p>
+       <p>Note that all posts will be automatically deleted from the website, two or three days after their deadline has passed.</p>
+       <p>You can keep track of up to 100 interesting posts by adding them to your "favorites" list. Please do not delete cookies from this site, if you want to keep your favorites list.</p>
        <p>There are no plans to add user accounts to this site. Feel free to identify yourself, but the site will stay anonymous to promote freedom of
        expression and entertaining trolls. We do save your IP address, and will ban it from posting if you spam the site or otherwise cross a basic ine of decency.</p>
         </div>);

@@ -10,7 +10,7 @@ module.exports = React.createClass({
         questionID: React.PropTypes.string.isRequired
     },
     getInitialState: function(){
-      return {question: null, comments: [], visibleForm: false}  
+      return {question: null, comments: []}  
     },
     componentWillMount: function(){
       this.retrieveQuestion();  
@@ -19,7 +19,7 @@ module.exports = React.createClass({
     render: function(){
         if(this.state.question !== null){
         return (<div>
-        <ActionBar visibleForm={this.state.visibleForm}/>
+        <ActionBar />
         <div className="posting">
         <div className="postQuestion">
         <h3>Question</h3>

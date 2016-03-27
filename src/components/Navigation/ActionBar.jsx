@@ -4,7 +4,6 @@ var CategorySelector = require("./CategorySelector");
 var NewPostForm = require("../Questions/NewPostForm");
 module.exports = React.createClass({
     propTypes: {
-      visibleForm: React.PropTypes.bool,
       newPostsRender: React.PropTypes.func
     },
     getInitialState: function(){

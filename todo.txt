@@ -11,11 +11,11 @@
 11. 
 12. Mongo queries: exclude fields you won't retrieve
 13. Heroku
-14. Local storage: automatically add posts that you make to local storage favorites, and automatically delete favorites once the number is over 100
+14. Local storage: automatically add posts that you make to local storage favorites
 15. Set a reasonable maximum date for deadline
 16. About: examples and styling
 17. No page arrow if the number of posts is less than perPage (add perPage in)
 18. Redirect search, all, and favorites without page and slash to their "/1" in router
-19. Add navigatino to 404
+19. 
 
-DRY: error/success spans in a div. Merge Posting and Question into one
+DRY: error/success spans in a div. Merge Posting and Question into one. Make AddFavorite an exporting helper method

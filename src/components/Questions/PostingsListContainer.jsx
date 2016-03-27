@@ -110,7 +110,7 @@ module.exports = React.createClass({
     render: function(){
         return (
         <div id="postListContainer">
-        <ActionBar visibleForm={this.state.visibleForm} newPostsRender={this.newPostsRender}/>
+        <ActionBar newPostsRender={this.newPostsRender}/>
         <PostingsList postings={this.state.postings} page={this.props.page} />
         {this.props.criteria === "favorites" ? (<span></span>): (<PageBar page={Number(this.props.page)} criteria={this.props.criteria} hasNext={this.state.postings.length > 0} addendum={this.state.addendum}/>)}
         </div>);
