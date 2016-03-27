@@ -93,7 +93,7 @@ module.exports = React.createClass({
         }
         else{
             this.setState({visibleForm: false});
-        }
+        } //frivolous comment
     },
     addFavorite: function(){
         var currentFavorites = JSON.parse(localStorage.getItem("favorites"));
