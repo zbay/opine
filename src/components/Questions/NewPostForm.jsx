@@ -93,7 +93,7 @@ module.exports = React.createClass({
             }
             else{ //if the posting was unsuccesful
                 console.log(response.data.error);
-                that.setState({errorMessage: "Your question was not posted! Please try again.",
+                that.setState({errorMessage: response.data.error,
                     successMessage: null
                 });
             }

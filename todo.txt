@@ -7,7 +7,7 @@
 7. React Router server-side?
 8. Test your sanitization
 9. Send user to the category of the new post, after the new post
-10. Limit IP addresses to 3 posts per minute
+10. Check if IP address is banned before posting
 11. Account for the possibility that a post has been deleted from local storage
 12. Mongo queries: exclude fields you won't retrieve
 

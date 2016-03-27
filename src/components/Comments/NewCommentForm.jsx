@@ -55,7 +55,7 @@ module.exports = React.createClass({
                      that.props.refreshComments(); // sends call up to show all the post's comments, including the new one
                  }
                  else{
-                     that.setState({successMessage: null, errorMessage: null}); 
+                     that.setState({successMessage: null, errorMessage: response.data.error}); 
                  }
              });
          }
