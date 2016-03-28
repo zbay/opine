@@ -20,8 +20,9 @@ module.exports = React.createClass({
        <h2>Notes for Frequent Users</h2>
        <p>Note that all posts will be automatically deleted from the website, two or three days after their deadline has passed.</p>
        <p>You can keep track of up to 100 interesting posts by adding them to your "favorites" list. Please do not delete cookies from this site, if you want to keep your favorites list.</p>
-       <p>There are no plans to add user accounts to this site. Feel free to identify yourself, but the site will stay anonymous to promote freedom of
-       expression and entertaining trolls. We do save your IP address, and will ban it from posting if you spam the site or otherwise cross a basic line of decency.</p><br />
+       <p>There are no plans to add user accounts to this site. Feel free to identify yourself in your question contact info, 
+       but the site will remain an officially anonymous platform.
+       We do save your IP address, and will ban it from posting if you spam the site or otherwise cross a line of decency.</p><br />
         
         <h3>Sample question 2 (standalone version)</h3>
        <img src="./img/jetsqb.png" />
