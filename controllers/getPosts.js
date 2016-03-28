@@ -46,7 +46,7 @@ app.get("/searchPostings/:searchQuery/:page", sanitizeBody, function(req, res){
          res.json({"postings": postings});
     });
 });
-app.get("/question/:id", sanitizeBody, function(req, res){ //get a question and it's comments
+app.get("/questionData/:id", sanitizeBody, function(req, res){ //get a question and it's comments
   let postID = ObjectId(req.params.id);
   var postingStream = Posting.findOne({_id: postID}, {comments: 0}).stream();
   postingStream.on("data", function(doc){

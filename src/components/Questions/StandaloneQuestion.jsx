@@ -71,11 +71,10 @@ module.exports = React.createClass({
              return (<div id="spinner"><img src="./img/loading_spinner.gif"/></div>);
             }
         }
-
     },
     retrieveQuestion: function(){
         let that = this;
-        axios.get("/question/" + that.props.questionID)
+        axios.get("/questionData/" + that.props.questionID)
         .then(function(response){
             that.setState({question: response.data.postData});
         });
