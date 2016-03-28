@@ -37,7 +37,7 @@ module.exports = React.createClass({
     },
     addFavorite: function(){
         var currentFavorites = JSON.parse(localStorage.getItem("favorites"));
-        if(currentFavorites.length >= 100){
+        if(currentFavorites.length && currentFavorites.length >= 100){
             currentFavorites.shift();
         }
         if(currentFavorites === null){
