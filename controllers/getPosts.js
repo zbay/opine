@@ -7,8 +7,7 @@ const perPage = 20;
 
 module.exports = function(app) {
 
-
-app.get("/allPostings/:page", sanitizeBody, function(req, res){
+app.get("/allPostings/:page", sanitizeBody, function(req, res){ // retrieve the most recent questions, paginated
     let page = Number(req.params.page) -1;
     let postings = [];
     let postingStream = Posting.find().skip(perPage * page).sort({"timePosted": -1}).limit(perPage).stream(); //less than or equal to in mongodb query
@@ -19,7 +18,7 @@ app.get("/allPostings/:page", sanitizeBody, function(req, res){
          res.json({"postings": postings});
     });
 });
-app.get("/categoryPostings/:category/:page", sanitizeBody, function(req, res){
+app.get("/categoryPostings/:category/:page", sanitizeBody, function(req, res){ //retrieve the most recent questions in a certain category, paginated
     let postings = [];
     let postCategory = req.params.category;
     let page = Number(req.params.page) - 1;
@@ -32,7 +31,7 @@ app.get("/categoryPostings/:category/:page", sanitizeBody, function(req, res){
          res.json({"postings": postings});
     });
 });
-app.get("/searchPostings/:searchQuery/:page", sanitizeBody, function(req, res){
+app.get("/searchPostings/:searchQuery/:page", sanitizeBody, function(req, res){ //retrieve the most relevant questions to a user search query, paginated
     let postings = [];
     let searchQuery = req.params.searchQuery;
     let page = req.params.page - 1;
@@ -46,14 +45,14 @@ app.get("/searchPostings/:searchQuery/:page", sanitizeBody, function(req, res){
          res.json({"postings": postings});
     });
 });
-app.get("/questionData/:id", sanitizeBody, function(req, res){ //get a question and it's comments
+app.get("/questionData/:id", sanitizeBody, function(req, res){ // retrieve a question and it's comments
   let postID = ObjectId(req.params.id);
   var postingStream = Posting.findOne({_id: postID}, {comments: 0}).stream();
   postingStream.on("data", function(doc){
      res.json({"postData": doc});
   });
 });
-app.post("/favoritePostings", sanitizeBody, function(req, res){
+app.post("/favoritePostings", sanitizeBody, function(req, res){ //retrieve list of user favorites (as saved in LocalStorage)
     let postings = [];
     let iterateCount = 0;
     let favorites = req.body.favorites;
@@ -74,7 +73,7 @@ app.post("/favoritePostings", sanitizeBody, function(req, res){
         });
     }
 });
-app.get("/comments/:id", sanitizeBody, function(req, res){ //get a post's comments, on refresh only
+app.get("/comments/:id", sanitizeBody, function(req, res){ // retrieve a post's comments, on refresh only
   let postID = ObjectId(req.params.id);
   var postingStream = Posting.findOne({_id: postID}).stream();
   postingStream.on("data", function(doc){

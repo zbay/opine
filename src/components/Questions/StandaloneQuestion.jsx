@@ -76,6 +76,7 @@ module.exports = React.createClass({
         let that = this;
         axios.get("/questionData/" + that.props.questionID)
         .then(function(response){
+            console.log((response));
             that.setState({question: response.data.postData});
         });
     },
