@@ -1,4 +1,4 @@
-Statement of intent:
+About Opine:
 
 Opine is my first 100% independent project (not done as an assignment for a course or tutorial). It was built with the MERN (MongoDB, Express.js, ReactJS, and Node.js) stack. It is a proof-of-concept deal, and not a production project.
 
