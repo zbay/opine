@@ -4,7 +4,7 @@ var Posting = require("./Posting");
 module.exports = React.createClass({
     propTypes: {
         postings: React.PropTypes.array.isRequired,
-        page: React.PropTypes.number.isRequired
+        page: React.PropTypes.string.isRequired
     },
     render: function(){
         return (

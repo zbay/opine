@@ -31,7 +31,7 @@ var SearchWrapper = React.createClass({
 
 var FavoriteWrapper = React.createClass({
     render: function(){
-        return(<PostingsListContainer criteria="favorites" page={1} search={null} category={null}/>);
+        return(<PostingsListContainer criteria="favorites" page={"1"} search={null} category={null}/>);
     }
 });
 

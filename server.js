@@ -7,6 +7,8 @@ var routes = require('./controllers');
 var mongoose = require('mongoose');
 var db = mongoose.connection;
 var mongo = require('mongodb');
+//https://ifelse.io/2015/08/27/server-side-rendering-with-react-and-react-router/ try this
+
 //var dotenv = require('dotenv').load();
 
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost:27017/opine', function (err, db)
