@@ -72,39 +72,41 @@ module.exports = React.createClass({
             default:
         }       
     },
-    retrieveAll: function(page){
+    retrieveAll: function(page){ //get all questions, from the server
         let that = this;
         axios.get("/allPostings/" + page)
         .then(function(response){
             that.setState({postings: response.data.postings});
         });
     },
-    retrieveCategory: function(category, page){
+    retrieveCategory: function(category, page){ //get all questions in a category, from the server
         let that = this;
         axios.get("/categoryPostings/" + category + "/" + page)
         .then(function(response){
             that.setState({postings: response.data.postings});
         });
     },
-    retrieveSearch: function(searchQuery, page){
+    retrieveSearch: function(searchQuery, page){ // get search results from the server
         let that = this;
         axios.get("/searchPostings/" + searchQuery + "/" + page)
         .then(function(response){
             that.setState({postings: response.data.postings});
         });
     },
-    retrieveFavorites: function(page){
+    retrieveFavorites: function(page){ //if "favorites" cookie exists, use their IDs to fetch the rest of their data
         let that = this;
         let questions = {"favorites": JSON.parse(localStorage.getItem("favorites"))};
-        axios.post("/favoritePostings", questions)
-        .then(function(response){
+        if(questions && questions.length){
+            axios.post("/favoritePostings", questions)
+            .then(function(response){
             if(!response.data.error){
               that.setState({postings: response.data.postings});   
             }
             else{
                 console.log(response.data.error);
             }
-        });      
+        });         
+        }
     },
     render: function(){
         return (
