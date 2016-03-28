@@ -13,23 +13,24 @@ module.exports = React.createClass({
       page: React.PropTypes.string.isRequired
     },
     getInitialState: function(){
+      return {postings: [], 
+          visibleForm: false,
+          addendum: ""
+      };  
+    },
+    componentWillMount: function(){
         let that = this;
         var thisAddendum = "";
         if(that.props.criteria != "all" && that.props.criteria != "favorites"){
             if(that.props.criteria == "category"){
                 thisAddendum = that.props.category + "/";
+                this.setState({addendum: thisAddendum});
             }
             if(that.props.criteria == "search"){
                 thisAddendum = that.props.search + "/";
+                this.setState({addendum: thisAddendum});
             }
         }
-      return {postings: [], 
-          visibleForm: false,
-          addendum: thisAddendum
-      };  
-    },
-    componentWillMount: function(){
-        let that = this;
         switch(that.props.criteria){
             case "all":
                  that.retrieveAll(Number(that.props.page));
