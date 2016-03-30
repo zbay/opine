@@ -15,7 +15,7 @@ module.exports = React.createClass({
        <p>To get started posting, click "Ask Something" and fill out the form.</p><br />
        
        <h3>Sample question 1 (list version)</h3>
-        <img src="./img/reactblog.png"/><br />
+        <img src="./img/reactblog.png" className="img-responsive"/><br />
        
        <h2>Notes for Frequent Users</h2>
        <p>Note that all posts will be automatically deleted from the website, two or three days after their deadline has passed.</p>
@@ -25,7 +25,7 @@ module.exports = React.createClass({
        We do save your IP address, and will ban it from posting if you spam the site or otherwise cross a line of decency.</p><br />
         
         <h3>Sample question 2 (standalone version)</h3>
-       <img src="./img/jetsqb.png" />
+       <img src="./img/jetsqb.png" className="img-responsive"/>
         </div>);
     }
 });
