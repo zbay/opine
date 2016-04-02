@@ -61,6 +61,7 @@ footer {
 
 .posting {
   border: 1px solid black;
+  max-width: 90%;
   margin-bottom: 10px;
   padding-bottom: 10px;
   border-radius: 10px;
@@ -134,3 +135,6 @@ footer {
 .commentNumber {
   color: #339966;
   font-weight: bold; }
+
+#pageBar {
+  max-width: 90%; }

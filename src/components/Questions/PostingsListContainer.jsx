@@ -4,7 +4,6 @@ var BrowserHistory = require('react-router/lib/browserHistory');
 var PostingsList = require("./Stateless/PostingsList");
 var ActionBar = require("../Navigation/ActionBar");
 var PageBar = require("../Navigation/PageBar");
-var localStorage = localStorage;
 
 module.exports = React.createClass({
     propTypes: {
