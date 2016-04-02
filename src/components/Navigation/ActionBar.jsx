@@ -1,5 +1,5 @@
 var React = require('react');
-var HashHistory = require('react-router/lib/hashHistory');
+var BrowserHistory = require('react-router/lib/browserHistory');
 var CategorySelector = require("./CategorySelector");
 var NewPostForm = require("../Questions/NewPostForm");
 module.exports = React.createClass({
@@ -46,7 +46,7 @@ module.exports = React.createClass({
         e.preventDefault();
         let that = this;
         if(that.state.search.length > 0){
-           HashHistory.push("/search/" + that.state.search + "/1");   
+           BrowserHistory.push("/search/" + that.state.search + "/1");   
         }
     },
     toggleForm: function(){

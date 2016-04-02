@@ -1,9 +1,10 @@
 var React = require('react');
 var axios = require('axios');
-var HashHistory = require('react-router/lib/hashHistory');
+var BrowserHistory = require('react-router/lib/browserHistory');
 var PostingsList = require("./Stateless/PostingsList");
 var ActionBar = require("../Navigation/ActionBar");
 var PageBar = require("../Navigation/PageBar");
+var localStorage = localStorage;
 
 module.exports = React.createClass({
     propTypes: {
@@ -13,7 +14,8 @@ module.exports = React.createClass({
       page: React.PropTypes.string.isRequired
     },
     getInitialState: function(){
-      return {postings: [], 
+      return {
+          postings: [], 
           visibleForm: false,
           addendum: ""
       };  
@@ -75,21 +77,24 @@ module.exports = React.createClass({
     },
     retrieveAll: function(page){ //get all questions, from the server
         let that = this;
-        axios.get("/allPostings/" + page)
+        let pageData = {"page": page};
+        axios.post("/allPostings", pageData)
         .then(function(response){
             that.setState({postings: response.data.postings});
         });
     },
     retrieveCategory: function(category, page){ //get all questions in a category, from the server
         let that = this;
-        axios.get("/categoryPostings/" + category + "/" + page)
+          let queryData = {"category": category, "page": page};
+        axios.post("/categoryPostings", queryData)
         .then(function(response){
             that.setState({postings: response.data.postings});
         });
     },
     retrieveSearch: function(searchQuery, page){ // get search results from the server
         let that = this;
-        axios.get("/searchPostings/" + searchQuery + "/" + page)
+          let queryData = {"category": searchQuery, "page": page};
+        axios.post("/searchPostings", queryData)
         .then(function(response){
             that.setState({postings: response.data.postings});
         });
@@ -114,16 +119,16 @@ module.exports = React.createClass({
         <div id="postListContainer">
         <ActionBar newPostsRender={this.newPostsRender}/>
         <PostingsList postings={this.state.postings} page={this.props.page} />
-        {this.props.criteria === "favorites" ? (<span></span>): (<PageBar page={this.props.page} criteria={this.props.criteria} hasNext={this.state.postings.length > 0} addendum={this.state.addendum}/>)}
+        {this.props.criteria === "favorites" ? (<span></span>): (<PageBar page={this.props.page} criteria={this.props.criteria} hasNext={this.state.postings} addendum={this.state.addendum}/>)}
         </div>);
     },
 newPostsRender: function(redirectCategory){
     if(this.props.criteria === "category"){
-        HashHistory.push("/category/" + redirectCategory + "/1");   
+        BrowserHistory.push("/category/" + redirectCategory + "/1");   
     }
     else{
 if(this.props.criteria !== "favorites"){
- HashHistory.push("/" + this.props.criteria + "/" + this.state.addendum + "1");   
+ BrowserHistory.push("/" + this.props.criteria + "/" + this.state.addendum + "1");   
 }
 }
 }

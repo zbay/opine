@@ -41,7 +41,7 @@ module.exports = React.createClass({
             }
         }
         else{
-            return (<img src="./img/loading_spinner.gif"/>);
+            return (<img src="/img/loading_spinner.gif"/>);
         }
         }
     }

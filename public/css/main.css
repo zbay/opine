@@ -64,7 +64,7 @@ footer {
   margin-bottom: 10px;
   padding-bottom: 10px;
   border-radius: 10px;
-  background: url("../img/questionbackground.png") repeat;
+  background: url("/img/questionbackground.png") repeat;
   font-weight: bold;
   margin-left: auto;
   margin-right: auto;

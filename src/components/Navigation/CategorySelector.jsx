@@ -1,5 +1,5 @@
 var React = require('react');
-var HashHistory = require('react-router/lib/hashHistory');
+var BrowserHistory = require('react-router/lib/browserHistory');
 
 module.exports = React.createClass({
     render: function(){
@@ -18,15 +18,15 @@ module.exports = React.createClass({
     onChange: function(e){
         if(e.target.value !== "All"){
             if(e.target.value == "Favorites"){
-                HashHistory.push("/favorites");
+                BrowserHistory.push("/favorites");
             }
             else{
-               HashHistory.push("/category/" + e.target.value + "/1");      
+               BrowserHistory.push("/category/" + e.target.value + "/1");      
             }
         }
         else{
             if(e.target.value !== "None"){
-             HashHistory.push("/all/1");   
+             BrowserHistory.push("/all/1");   
             }
         }
     }

@@ -68,7 +68,7 @@ module.exports = React.createClass({
              return (<div id="errorMessage">The question could not be loaded. Either the URL is wrong, or the post has been deleted.</div>);   
             }
             else{
-             return (<div id="spinner"><img src="./img/loading_spinner.gif"/></div>);
+             return (<div id="spinner"><img src="/img/loading_spinner.gif"/></div>);
             }
         }
     },

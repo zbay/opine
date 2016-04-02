@@ -7,8 +7,8 @@ const perPage = 20;
 
 module.exports = function(app) {
 
-app.get("/allPostings/:page", sanitizeBody, function(req, res){ // retrieve the most recent questions, paginated
-    let page = Number(req.params.page) -1;
+app.post("/allPostings", sanitizeBody, function(req, res){ // retrieve the most recent questions, paginated
+    let page = Number(req.body.page) -1;
     let postings = [];
     let postingStream = Posting.find().skip(perPage * page).sort({"timePosted": -1}).limit(perPage).stream(); //less than or equal to in mongodb query
     postingStream.on("data", function(doc){
@@ -18,23 +18,24 @@ app.get("/allPostings/:page", sanitizeBody, function(req, res){ // retrieve the 
          res.json({"postings": postings});
     });
 });
-app.get("/categoryPostings/:category/:page", sanitizeBody, function(req, res){ //retrieve the most recent questions in a certain category, paginated
+app.post("/categoryPostings", sanitizeBody, function(req, res){ //retrieve the most recent questions in a certain category, paginated
     let postings = [];
-    let postCategory = req.params.category;
-    let page = Number(req.params.page) - 1;
+    let postCategory = req.body.category;
+    let page = Number(req.body.page) - 1;
     let postingStream = Posting.find({"category": postCategory})
     .skip(perPage * page).sort({"timePosted": -1}).limit(perPage).stream();
     postingStream.on("data", function(doc){
             postings.push(doc);
     });
     postingStream.on("end", function(){
+        console.log(postings);
          res.json({"postings": postings});
     });
 });
-app.get("/searchPostings/:searchQuery/:page", sanitizeBody, function(req, res){ //retrieve the most relevant questions to a user search query, paginated
+app.post("/searchPostings", sanitizeBody, function(req, res){ //retrieve the most relevant questions to a user search query, paginated
     let postings = [];
-    let searchQuery = req.params.searchQuery;
-    let page = req.params.page - 1;
+    let searchQuery = req.body.searchQuery;
+    let page = req.body.page - 1;
     var postingStream = Posting.find({$text: {$search: searchQuery}}, {score: {$meta: "textScore"}})
     .sort({score: {$meta: "textScore"}, "timePosted": -1}).skip(perPage * page)
     .limit(perPage).stream();
@@ -45,8 +46,8 @@ app.get("/searchPostings/:searchQuery/:page", sanitizeBody, function(req, res){ 
          res.json({"postings": postings});
     });
 });
-app.get("/questionData/:id", sanitizeBody, function(req, res){ // retrieve a question and it's comments
-  let postID = ObjectId(req.params.id);
+app.post("/questionData", sanitizeBody, function(req, res){ // retrieve a question and it's comments
+  let postID = ObjectId(req.body.id);
   var postingStream = Posting.findOne({_id: postID}, {comments: 0}).stream();
   postingStream.on("data", function(doc){
      res.json({"postData": doc});

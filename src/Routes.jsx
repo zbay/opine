@@ -1,7 +1,7 @@
 var React = require('react');
 var ReactRouter = require('react-router');
 var IndexRoute = require('react-router').IndexRoute;
-var HashHistory = require('react-router/lib/hashHistory');
+var BrowserHistory = require('react-router/lib/browserHistory');
 var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
 
@@ -43,7 +43,7 @@ var QuestionWrapper = React.createClass({
 
 
 module.exports = (
-  <Router history={HashHistory}>
+  <Router history={BrowserHistory}>
     <Route path="/" component={Main}>
       <IndexRoute component={About} />
       <Route path="all/:page" component={AllWrapper}/>

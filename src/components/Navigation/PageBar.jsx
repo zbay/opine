@@ -1,5 +1,5 @@
 var React = require('react');
-var HashHistory = require('react-router/lib/hashHistory');
+var BrowserHistory = require('react-router/lib/browserHistory');
 
 module.exports = React.createClass({
     propTypes: {
@@ -42,9 +42,9 @@ module.exports = React.createClass({
         </div>);
     },
     prevPage: function(){
-        HashHistory.push("/" + this.props.criteria + "/" + this.props.addendum + (Number(this.props.page)-1));
+        BrowserHistory.push("/" + this.props.criteria + "/" + this.props.addendum + (Number(this.props.page)-1));
     },
     nextPage: function(){
-        HashHistory.push("/" + this.props.criteria + "/" + this.props.addendum + (Number(this.props.page)+1));
+        BrowserHistory.push("/" + this.props.criteria + "/" + this.props.addendum + (Number(this.props.page)+1));
     }
     });
