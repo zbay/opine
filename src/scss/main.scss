@@ -81,6 +81,8 @@ footer{
     border: 5px solid #FFDAB9;
     padding-bottom: $standard_space;
     border-radius:$standard_space;
+    max-width:90%;
+    margin-bottom: $standard_space;
     
     input{
          min-width: 75%;
@@ -141,5 +143,8 @@ footer{
     font-weight: bold;
 }
 #pageBar{
-    max-width:90%;
+    max-width:85%;
+}
+#loginColumn a{
+    color:$ear_peach;
 }
