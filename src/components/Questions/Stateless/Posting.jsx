@@ -1,7 +1,7 @@
 var React = require('react');
 var ReactRouter = require('react-router');
 var Link = ReactRouter.Link;
-var localStorage = window.localStorage;
+var localStorage = localStorage || window.localStorage;
 
 module.exports = React.createClass({
     propTypes: {
@@ -11,7 +11,7 @@ module.exports = React.createClass({
         var isFavorite = false;
         if(localStorage){
         var currentFavorites = JSON.parse(localStorage.getItem("favorites"));
-        if(currentFavorites){
+        if(currentFavorites && currentFavorites.length){
             for(let i = 0; i < currentFavorites.length; i++){
             if(currentFavorites[i] == this.props.postingData._id){
                 isFavorite = true;
@@ -41,7 +41,7 @@ module.exports = React.createClass({
     addFavorite: function(){
         if(localStorage){
             var currentFavorites = JSON.parse(localStorage.getItem("favorites"));
-            if(currentFavorites.length && currentFavorites.length >= 100){
+            if(currentFavorites && currentFavorites.length >= 100){
                 currentFavorites.shift();
             }
             if(currentFavorites === null || currentFavorites === undefined){
