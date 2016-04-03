@@ -4,6 +4,7 @@ var axios = require('axios');
 var CommentsList = require("../Comments/CommentsList");
 var NewCommentForm = require("../Comments/NewCommentForm");
 var ActionBar = require("../Navigation/ActionBar");
+var localStorage = localStorage;
 
 module.exports = React.createClass({
     propTypes: {
@@ -11,11 +12,13 @@ module.exports = React.createClass({
     },
     getInitialState: function(){
         var isFavorite = false;
+        if(localStorage){
         var currentFavorites = JSON.parse(localStorage.getItem("favorites"));
         if(currentFavorites){
             for(let i = 0; i < currentFavorites.length; i++){
             if(currentFavorites[i] == this.props.questionID){
                 isFavorite = true;
+            }
             }
         }   
         }
@@ -74,7 +77,8 @@ module.exports = React.createClass({
     },
     retrieveQuestion: function(){
         let that = this;
-        axios.get("/questionData/" + that.props.questionID)
+        let questionData = {id: that.props.questionID};
+        axios.post("/questionData", questionData)
         .then(function(response){
             console.log((response));
             that.setState({question: response.data.postData});
@@ -83,7 +87,7 @@ module.exports = React.createClass({
     retrieveComments: function(){
          let that = this;
          let idData = {"id": this.props.questionID}
-        axios.get("/comments", idData)
+        axios.post("/comments", idData)
         .then(function(response){
             that.setState({comments: response.data.postData});
         });       
@@ -97,6 +101,7 @@ module.exports = React.createClass({
         }
     },
     addFavorite: function(){
+        if(localStorage){
         var currentFavorites = JSON.parse(localStorage.getItem("favorites"));
         if(currentFavorites.length >= 100){
             currentFavorites.shift();
@@ -107,5 +112,6 @@ module.exports = React.createClass({
         currentFavorites.push(this.props.questionID);
         localStorage.setItem("favorites", JSON.stringify(currentFavorites));
         this.setState({favorited: true});
+    }
     }
 });
