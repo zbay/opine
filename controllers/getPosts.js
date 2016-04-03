@@ -56,6 +56,7 @@ app.post("/favoritePostings", sanitizeBody, function(req, res){ //retrieve list 
     let postings = [];
     let iterateCount = 0;
     let favorites = req.body.favorites;
+    console.log(favorites);
     for(let i = favorites.length-1; i >= 0; i--){
         Posting.findOne({_id: ObjectId(favorites[i])}, function(err, question){
              if(err){

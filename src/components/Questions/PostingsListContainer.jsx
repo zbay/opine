@@ -4,7 +4,7 @@ var BrowserHistory = require('react-router/lib/browserHistory');
 var PostingsList = require("./Stateless/PostingsList");
 var ActionBar = require("../Navigation/ActionBar");
 var PageBar = require("../Navigation/PageBar");
-var localStorage = localStorage;
+var localStorage = window.localStorage;
 
 module.exports = React.createClass({
     propTypes: {
@@ -103,7 +103,7 @@ module.exports = React.createClass({
     if(localStorage){
         let that = this;
           let questions = {"favorites": JSON.parse(localStorage.getItem("favorites"))};
-        if(questions && questions.length){
+        if(questions && JSON.stringify(questions).length){
             axios.post("/favoritePostings", questions)
             .then(function(response){
             if(!response.data.error){

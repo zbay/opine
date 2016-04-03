@@ -6,8 +6,9 @@ module.exports = React.createClass({
       return {visibleForm: false};  
     },
     render: function(){
-        return (<div id="about">
+        return (<div>
        <ActionBar visibleForm={this.state.visibleForm}/>
+       <div id="about">
        <h2>Getting Started</h2>
        <p>Opine is a simple platform for soliciting opinions, and finding people who want to hear your opinions. Do you want people to call in to your
        radio show, comment on your blog, or offer anonymous personal opinions on something? Then Opine is for you!</p>
@@ -26,6 +27,7 @@ module.exports = React.createClass({
         
         <h3>Sample question 2 (standalone version)</h3>
        <img src="./img/jetsqb.png" className="img-responsive"/>
+       </div>
         </div>);
     }
 });

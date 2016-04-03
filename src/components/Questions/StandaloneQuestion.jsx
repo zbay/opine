@@ -4,7 +4,7 @@ var axios = require('axios');
 var CommentsList = require("../Comments/CommentsList");
 var NewCommentForm = require("../Comments/NewCommentForm");
 var ActionBar = require("../Navigation/ActionBar");
-var localStorage = localStorage;
+var localStorage = window.localStorage;
 
 module.exports = React.createClass({
     propTypes: {

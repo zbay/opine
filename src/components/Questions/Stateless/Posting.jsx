@@ -1,7 +1,7 @@
 var React = require('react');
 var ReactRouter = require('react-router');
 var Link = ReactRouter.Link;
-var localStorage = localStorage;
+var localStorage = window.localStorage;
 
 module.exports = React.createClass({
     propTypes: {

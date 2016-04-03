@@ -138,3 +138,7 @@ footer {
 .commentNumber {
   color: #339966;
   font-weight: bold; }
+
+#about {
+  margin-left: 10%;
+  margin-right: 10%; }
