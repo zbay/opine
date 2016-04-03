@@ -1,3 +1,4 @@
+"use strict";
 var React = require('react');
 var BrowserHistory = require('react-router/lib/browserHistory');
 
