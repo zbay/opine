@@ -93,7 +93,7 @@ module.exports = React.createClass({
     },
     retrieveSearch: function(searchQuery, page){ // get search results from the server
         let that = this;
-          let queryData = {"category": searchQuery, "page": page};
+          let queryData = {"searchQuery": searchQuery, "page": page};
         axios.post("/searchPostings", queryData)
         .then(function(response){
             that.setState({postings: response.data.postings});
