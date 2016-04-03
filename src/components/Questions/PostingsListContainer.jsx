@@ -100,8 +100,9 @@ module.exports = React.createClass({
         });
     },
     retrieveFavorites: function(page){ //if "favorites" cookie exists, use their IDs to fetch the rest of their data
+    if(localStorage){
         let that = this;
-        let questions = {"favorites": JSON.parse(localStorage.getItem("favorites"))};
+          let questions = {"favorites": JSON.parse(localStorage.getItem("favorites"))};
         if(questions && questions.length){
             axios.post("/favoritePostings", questions)
             .then(function(response){
@@ -112,7 +113,8 @@ module.exports = React.createClass({
                 console.log(response.data.error);
             }
         });         
-        }
+        }     
+    }
     },
     render: function(){
         return (

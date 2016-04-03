@@ -66,6 +66,7 @@ footer {
   border-radius: 10px;
   background: url("/img/questionbackground.png") repeat;
   font-weight: bold;
+  max-width: 90%;
   margin-left: auto;
   margin-right: auto;
   text-align: center; }
@@ -76,7 +77,9 @@ footer {
   text-align: center;
   border: 5px solid #FFDAB9;
   padding-bottom: 10px;
-  border-radius: 10px; }
+  border-radius: 10px;
+  max-width: 90%;
+  margin-bottom: 10px; }
   #newPostForm input {
     min-width: 75%; }
 
@@ -134,3 +137,6 @@ footer {
 .commentNumber {
   color: #339966;
   font-weight: bold; }
+
+#pageBar {
+  max-width: 90%; }
