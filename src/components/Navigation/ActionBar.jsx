@@ -2,6 +2,9 @@ var React = require('react');
 var BrowserHistory = require('react-router/lib/browserHistory');
 var CategorySelector = require("./CategorySelector");
 var NewPostForm = require("../Questions/NewPostForm");
+var ReactRouter = require('react-router');
+var Link = ReactRouter.Link;
+
 module.exports = React.createClass({
     propTypes: {
       newPostsRender: React.PropTypes.func
@@ -17,18 +20,21 @@ module.exports = React.createClass({
         <div>
         <div id="actionBar" className="container">
         <div className="row">
-        <div className="col-sm-3" id="toggleColumn">
+        <div className="col-sm-2" id="toggleColumn">
         <button id="toggleForm" onClick={this.toggleForm}>{this.state.visibleForm ? "Hide Question Form" : "Ask Something"}</button>
         </div>
         <div className="col-sm-4" id="categoryColumn">
         <label>Browse by category: </label>&nbsp;
         <CategorySelector />
         </div>
-        <div className="col-sm-5" id="searchColumn">
+        <div className="col-sm-4" id="searchColumn">
         <form onSubmit={this.submitSearch}>
         <label>Search: </label>&nbsp;<input name="search" value={this.state.search} onChange={this.onChange}/>
         <button type="submit">Go</button>
         </form>
+        </div>
+        <div className="col-sm-2" id="loginColumn">
+        <button><Link to={"/login"}>Log In</Link></button>
         </div>
         </div>
         </div>

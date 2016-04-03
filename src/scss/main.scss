@@ -68,6 +68,7 @@ footer{
 }
 .posting{
     border: 1px solid black;
+    max-width:90%;
     margin-bottom: $standard_space;
     padding-bottom:$standard_space;
     border-radius: $standard_space;
@@ -141,7 +142,4 @@ footer{
 .commentNumber{
     color: $tree_green;
     font-weight: bold;
-}
-#pageBar{
-    max-width:90%;
 }

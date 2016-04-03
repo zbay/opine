@@ -28,7 +28,6 @@ app.post("/categoryPostings", sanitizeBody, function(req, res){ //retrieve the m
             postings.push(doc);
     });
     postingStream.on("end", function(){
-        console.log(postings);
          res.json({"postings": postings});
     });
 });
@@ -74,8 +73,8 @@ app.post("/favoritePostings", sanitizeBody, function(req, res){ //retrieve list 
         });
     }
 });
-app.get("/comments/:id", sanitizeBody, function(req, res){ // retrieve a post's comments, on refresh only
-  let postID = ObjectId(req.params.id);
+app.post("/comments", sanitizeBody, function(req, res){ // retrieve a post's comments, on refresh only
+  let postID = ObjectId(req.body.id);
   var postingStream = Posting.findOne({_id: postID}).stream();
   postingStream.on("data", function(doc){
      res.json({"postData": doc.comments});

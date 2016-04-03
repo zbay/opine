@@ -82,7 +82,8 @@ module.exports = React.createClass({
     },
     retrieveComments: function(){
          let that = this;
-        axios.get("/comments/" + that.props.questionID)
+         let idData = {"id": this.props.questionID}
+        axios.get("/comments", idData)
         .then(function(response){
             that.setState({comments: response.data.postData});
         });       
