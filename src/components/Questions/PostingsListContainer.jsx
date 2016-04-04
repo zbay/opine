@@ -121,7 +121,7 @@ module.exports = React.createClass({
         <div id="postListContainer">
         <ActionBar newPostsRender={this.newPostsRender}/>
         <PostingsList postings={this.state.postings} page={this.props.page} />
-        {this.props.criteria === "favorites" ? (<span></span>): (<PageBar page={this.props.page} criteria={this.props.criteria} hasNext={this.state.postings} addendum={this.state.addendum}/>)}
+        {this.props.criteria === "favorites" ? (<span></span>): (<PageBar page={this.props.page} criteria={this.props.criteria} hasNext={this.state.postings.length > 0} addendum={this.state.addendum}/>)}
         </div>);
     },
 newPostsRender: function(redirectCategory){

@@ -42,7 +42,7 @@ module.exports = React.createClass({
         if(this.state.question !== null){
         return (<div>
         <ActionBar />
-        <div className="posting">
+        <div className="posting container-fluid">
         <div className="postQuestion">
         <h3>Question</h3>
         {this.state.question.question}</div>

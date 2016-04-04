@@ -1,4 +1,3 @@
-"use strict";
 var React = require('react');
 var ReactRouter = require('react-router');
 var Link = ReactRouter.Link;
@@ -23,7 +22,7 @@ module.exports = React.createClass({
         return {favorited: isFavorite};
     },
     render: function(){
-        return (<div className="posting">
+        return (<div className="posting container-fluid">
         <div className="postQuestion">
         <h3><Link to={"/question/" + this.props.postingData._id}>Question</Link></h3>
         {this.props.postingData.question}</div>

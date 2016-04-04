@@ -17,7 +17,7 @@ module.exports = React.createClass({
         var showPrev = false;
         var showNext = true;
         let that = this;
-        if(this.props.page > 1){
+        if(Number(this.props.page) > 1){
             showPrev = true;
         }
         if(!this.props.hasNext){

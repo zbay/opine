@@ -7,7 +7,7 @@ module.exports = React.createClass({
       return {visibleForm: false};  
     },
     render: function(){
-        return (<div>
+        return (<div className="container-fluid">
        <ActionBar visibleForm={this.state.visibleForm}/>
        <div id="about">
        <h2>Getting Started</h2>

@@ -19,7 +19,7 @@ module.exports = React.createClass({
     render: function(){
         return (
         <div>
-        <div id="actionBar" className="container">
+        <div id="actionBar">
         <div className="row">
         <div className="col-sm-2 col-md-2 col-lg-4" id="toggleColumn">
         <button id="toggleForm" onClick={this.toggleForm}>{this.state.visibleForm ? "Hide Question Form" : "Ask Something"}</button>
@@ -30,7 +30,7 @@ module.exports = React.createClass({
         </div>
         <div className="col-sm-5 col-md-5 col-lg-4" id="searchColumn">
         <form onSubmit={this.submitSearch}>
-        <label>Search: </label>&nbsp;<input name="search" value={this.state.search} onChange={this.onChange}/>
+        <input name="search" placeholder="Search" value={this.state.search} onChange={this.onChange}/>
         <button type="submit">Go</button>
         </form>
         </div>

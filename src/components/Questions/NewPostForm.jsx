@@ -29,21 +29,21 @@ module.exports = React.createClass({
     },
     render: function(){
     if(this.props.visible){
-        return (<form id="newPostForm" onSubmit={this.newPost}>
-        <div id="formAlert">
+        return (<form id="newPostForm" className="container-fluid" onSubmit={this.newPost}>
+        <div className="row" id="formAlert">
         {this.state.successMessage ? (<div id="formSuccess">{this.state.successMessage}</div>): (<span></span>)}
         {this.state.errorMessage ? ( <div id="formError">{this.state.errorMessage}</div>): (<span></span>)}
         </div><br />
-        <label>Question:</label><br />
-        <input placeholder="What do you want to hear opinions about?" name="question" value={this.state.question} onChange={this.onChange}/><br /><br />
-        <label>Asker:</label><br />
-        <input placeholder="Who's asking?" name="asker" value={this.state.asker} onChange={this.onChange}/><br /><br />
-         <label>How to contact:</label><br />
-         <input placeholder="URL, email, phone, etc." name="contact" value={this.state.contact} onChange={this.onChange}/><br /><br />
-         <label>Deadline:</label><br />
-         <input placeholder="Format: YYYY/MM/DD" type="date" name="deadline" value={this.state.deadline} onChange={this.onChange}/><br /><br />
-         <label>Category:</label><br />
-         <select name="category" value={this.state.category} onChange={this.onChange}>
+        <div className="row"><label>Question:</label></div>
+         <div className="row"><input placeholder="What are you asking?" name="question" value={this.state.question} onChange={this.onChange}/></div><br />
+         <div className="row"><label>Asker:</label></div>
+         <div className="row"><input placeholder="Who's asking?" name="asker" value={this.state.asker} onChange={this.onChange}/></div><br />
+         <div className="row"><label>How to contact:</label></div>
+         <div className="row"><input placeholder="URL, email, phone, etc." name="contact" value={this.state.contact} onChange={this.onChange}/></div><br />
+         <div className="row"><label>Deadline:</label></div>
+         <div className="row"><input placeholder="Format: YYYY/MM/DD" type="date" name="deadline" value={this.state.deadline} onChange={this.onChange}/></div><br />
+         <div className="row"> <label>Category:</label></div>
+         <div className="row"> <select name="category" value={this.state.category} onChange={this.onChange}>
             <option>---</option>
             <option value="Politics">Politics</option>
             <option value="Sports">Sports</option>
@@ -51,8 +51,8 @@ module.exports = React.createClass({
             <option value="Feedback">Feedback/Comment</option>
             <option value="Technical">Technical</option>
             <option value="Miscellaneous">Other</option>
-         </select><br /><br />
-         <button type="submit">Post New Question</button>
+         </select></div><br />
+         <div className="row"><button type="submit">Post New Question</button></div>
     </form>);
     }
     else{

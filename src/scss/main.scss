@@ -147,3 +147,11 @@ footer{
     margin-left:10%;
     margin-right:10%;
 }
+#pageBar{
+    max-width:80%;
+}
+@media (max-width: 500px) {
+    #newPostForm, #actionBar, h3 {
+       font-size:200%;
+    }
+}
