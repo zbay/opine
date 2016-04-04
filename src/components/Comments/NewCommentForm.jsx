@@ -1,6 +1,6 @@
-"use strict";
 var React = require('react');
 var axios = require('axios');
+var FormAlert = require("../Alerts/FormAlert");
 
 module.exports = React.createClass({
     propTypes: {
@@ -18,10 +18,8 @@ module.exports = React.createClass({
     },
     render: function(){
         return (<div id="newCommentForm">
-        <div id="formAlert">
-        {this.state.successMessage ? (<div id="formSuccess">{this.state.successMessage}</div>): (<span></span>)}
-        {this.state.errorMessage ? ( <span id="formError">{this.state.errorMessage}</span>): (<span></span>)}
-        </div><br />
+        <FormAlert successMessage={this.state.successMessage} errorMessage={this.state.errorMessage}/>
+        <br />
         <button onClick={this.toggleVisible}>{this.state.visible ? "Hide Comment Form": "Write Comment"}</button>
         {this.state.visible ? 
         (<form id="commentForm" onSubmit={this.postComment}>
@@ -40,7 +38,7 @@ module.exports = React.createClass({
         this.setState({visible: !isVisible});
     },
     onChange: function(e){
-        var state = {};
+        let state = {};
         state[e.target.name] =  e.target.value;
         this.setState(state);
     },
@@ -48,7 +46,7 @@ module.exports = React.createClass({
          e.preventDefault(); // so that only React handles the form data
          let that = this;
          if(this.state.comment.length > 0 && this.props.questionID){
-             var commentData = {"questionID": that.props.questionID, "commentText": that.state.comment, "IP": this.state.IP};
+             let commentData = {"questionID": that.props.questionID, "commentText": that.state.comment, "IP": this.state.IP};
              axios.post("/addComment", commentData).then(function(response){
                  console.log(JSON.stringify(response));
                  if(response.data.success){

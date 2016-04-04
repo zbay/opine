@@ -1,4 +1,3 @@
-"use strict";
 var React = require('react');
 var Jumbotron = require("./StatelessUI/Jumbotron");
 var Footer = require("./StatelessUI/Footer");

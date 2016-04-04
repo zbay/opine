@@ -147,6 +147,10 @@ footer {
 #newPostForm, #actionBar {
   font-size: 150%; }
 
+@media print {
+  #newPostForm, #actionBar {
+    font-size: 100%; } }
+
 .vertCenter {
   position: relative;
   top: 50%;

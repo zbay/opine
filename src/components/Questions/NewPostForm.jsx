@@ -1,7 +1,7 @@
-"use strict";
 var React = require('react');
 var axios = require('axios');
 var DateJS = require('datejs');
+var FormAlert = require("../Alerts/FormAlert");
 var dateRegex =/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;
 const dailySeconds = 86400;
 const maxYear = 2120;
@@ -30,10 +30,8 @@ module.exports = React.createClass({
     render: function(){
     if(this.props.visible){
         return (<form id="newPostForm" className="container-fluid" onSubmit={this.newPost}>
-        <div className="row" id="formAlert">
-        {this.state.successMessage ? (<div id="formSuccess">{this.state.successMessage}</div>): (<span></span>)}
-        {this.state.errorMessage ? ( <div id="formError">{this.state.errorMessage}</div>): (<span></span>)}
-        </div><br />
+        <FormAlert successMessage={this.state.successMessage} errorMessage={this.state.errorMessage}/>
+        <br />
         <div className="row"><label>Question:</label></div>
          <div className="row"><input placeholder="What are you asking?" name="question" value={this.state.question} onChange={this.onChange}/></div><br />
          <div className="row"><label>Asker:</label></div>
@@ -60,13 +58,13 @@ module.exports = React.createClass({
     }
     },
     onChange: function(e){
-        var state = {};
+        let state = {};
         state[e.target.name] =  e.target.value;
         this.setState(state);
     },
     newPost: function(e){
         e.preventDefault();
-        let fixedDeadline = this.state.deadline.replace(/\//g, "-");
+        let fixedDeadline = this.state.deadline ? this.state.deadline.replace(/\//g, "-"): "";
         let that = this;
         if(fixedDeadline.match(dateRegex) !== null && Number(fixedDeadline.slice(0, 4) < maxYear)){ //if the deadline meets the MM/DD/YYYY format and year isn't huge
         if(that.state.question !== null && that.state.asker !== null && that.state.contact !== null && 
@@ -82,6 +80,7 @@ module.exports = React.createClass({
         };
         console.log(postData);
         axios.post("/addPosting", postData).then(function(response){
+            console.log(JSON.stringify(response));
             if(response.data.success){
                 that.setState({successMessage: "Question successfully posted!", 
                     question: null,
