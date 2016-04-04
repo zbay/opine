@@ -3,8 +3,6 @@ var React = require('react');
 var BrowserHistory = require('react-router/lib/browserHistory');
 var CategorySelector = require("./CategorySelector");
 var NewPostForm = require("../Questions/NewPostForm");
-var ReactRouter = require('react-router');
-var Link = ReactRouter.Link;
 
 module.exports = React.createClass({
     propTypes: {
@@ -21,19 +19,19 @@ module.exports = React.createClass({
         <div>
         <div id="actionBar">
         <div className="row">
-        <div className="col-sm-2 col-md-2 col-lg-4" id="toggleColumn">
-        <button id="toggleForm" onClick={this.toggleForm}>{this.state.visibleForm ? "Hide Question Form" : "Ask Something"}</button>
-        </div>
-        <div className="col-sm-5 col-md-5 col-lg-4" id="categoryColumn">
+        <div className="col-sm-6 col-md-6 col-lg-6 vertCenter">
         <label>Browse by category: </label>&nbsp;
         <CategorySelector />
         </div>
-        <div className="col-sm-5 col-md-5 col-lg-4" id="searchColumn">
+        <div className="col-sm-6 col-md-6 col-lg-6 vertCenter">
         <form onSubmit={this.submitSearch}>
         <input name="search" placeholder="Search" value={this.state.search} onChange={this.onChange}/>
-        <button type="submit">Go</button>
+         <button type="submit" id="goButton">Go</button>
         </form>
         </div>
+        </div>
+        <div className="row" id="toggleColumn">
+        <button id="toggleForm" onClick={this.toggleForm}>{this.state.visibleForm ? "Hide Question Form" : "Ask Something"}</button>
         </div>
         </div>
         <br />

@@ -22,6 +22,7 @@ $standard_space: 10px;
     font-family: verdana;
     background-color: $header_footer_background;
     width: 100%;
+    background-size:cover;
 }
 select{
     color:  $header_footer_font;
@@ -63,18 +64,14 @@ footer{
     margin-bottom: $standard_space;
     text-align:center;
 }
-#categoryColumn{
-    padding:$standard_space;
-}
 .posting{
     border: 1px solid black;
-    max-width:90%;
+    max-width: 90%;
     margin-bottom: $standard_space;
     padding-bottom:$standard_space;
     border-radius: $standard_space;
     background: url("/img/questionbackground.png") repeat;
     font-weight: bold;
-    max-width: 90%;
     @include fullCentered();
 }
 #newPostForm{
@@ -138,6 +135,7 @@ label, #commentHeader{
 }
 footer{
    min-width:100%;
+   margin-top:$standard_space;
 }
 .commentNumber{
     color: $tree_green;
@@ -150,8 +148,14 @@ footer{
 #pageBar{
     max-width:80%;
 }
-@media (max-width: 500px) {
-    #newPostForm, #actionBar, h3 {
-       font-size:200%;
-    }
+#newPostForm, #actionBar {
+       font-size:150%;
+}
+.vertCenter{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  padding-top:$standard_space;  
 }
