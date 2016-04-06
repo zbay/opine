@@ -2,23 +2,22 @@
 2. Heroku
 3. Should be able to add to favorite from the individual question
 4. Periodic deletion of expired questions
-5.
+5. Redux
 6. Sort by expiring and by most commented
-7. React Router server-side?
+7. React Router full server-side
 8. Test your sanitization
-9.
+9. More responsive with alternative stylesheets http://stackoverflow.com/questions/18470350/css-media-queries-not-working-anywhere
 10. Commenting code
 11. 
 12. Mongo queries: exclude fields you won't retrieve
 13. 
 14. Local storage: automatically add posts that you make to local storage favorites
 15.
+16.
 17. No page arrow if the number of posts is less than perPage (add perPage in)
 18.
-19. Regularly delete posts with absurd expiration dates
+19.
 
-DRY: error/success spans in a div. Merge Posting and Question into one. Make AddFavorite an exporting helper method
+DRY: Merge Posting and Question into one. Make AddFavorite an exporting helper method
 
-16. About: examples and styling
-Put error in the same box as success, just with red text
 Clearly mark "My Favorites"

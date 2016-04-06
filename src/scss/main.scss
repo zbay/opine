@@ -60,7 +60,6 @@ footer{
 }
 #formSuccess, #formError, #errorMessage, #fourohfour{
     font-weight:bold;
-    font-size:175%;
     margin-bottom: $standard_space;
     text-align:center;
 }
@@ -146,7 +145,7 @@ footer{
     margin-right:10%;
 }
 #pageBar{
-    max-width:80%;
+    max-width:70%;
 }
 #newPostForm, #actionBar {
        font-size:150%;
@@ -163,4 +162,13 @@ footer{
   -ms-transform: translateY(-50%);
   -webkit-transform: translateY(-50%);
   padding-top:$standard_space;  
+}
+#searchField{
+    margin-left:5px;
+}
+.sampleBlock{
+    @include fullCentered();
+    img{
+        @include marginCentered();
+    }
 }

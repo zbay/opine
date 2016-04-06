@@ -4,7 +4,7 @@ module.exports = React.createClass({
         return (<div className="jumbotron container-fluid">
         <img src="/img/opinelogo2.png" width="200"/>
         <h1>Opine</h1>
-        <h2>Helping opinionated loudmouths find a friendly ear</h2>
+        <h2>Giving opinionated loudmouths a friendly ear</h2>
         </div>);
     }
 });

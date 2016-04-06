@@ -11,7 +11,6 @@ module.exports = function(app) {
     }
     Banning.findOne({"IP": req.body.IP}, function(err, doc){
         if(doc === null){
-            console.log("Adding post on server!");
             var newPost = new Posting({"question": req.body.question, "asker": req.body.asker, "howToContact": req.body.contact,
             "deadline": req.body.deadline, "category": req.body.category, "IP": req.body.IP});
             newPost.save(function(err, msg){

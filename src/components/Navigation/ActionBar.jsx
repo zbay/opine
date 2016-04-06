@@ -1,4 +1,3 @@
-"use strict";
 var React = require('react');
 var BrowserHistory = require('react-router/lib/browserHistory');
 var CategorySelector = require("./CategorySelector");
@@ -25,7 +24,7 @@ module.exports = React.createClass({
         </div>
         <div className="col-sm-6 col-md-6 col-lg-6 vertCenter">
         <form onSubmit={this.submitSearch}>
-        <input name="search" placeholder="Search" value={this.state.search} onChange={this.onChange}/>
+        <input name="search" placeholder="Search" id="searchField" value={this.state.search} onChange={this.onChange}/>
          <button type="submit" id="goButton">Go</button>
         </form>
         </div>
