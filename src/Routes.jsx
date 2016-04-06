@@ -4,6 +4,9 @@ var IndexRoute = require('react-router').IndexRoute;
 var BrowserHistory = require('react-router/lib/browserHistory');
 var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+var Store = require("./store");
 
 var Main = require("./components/Main");
 var About = require("./components/StatelessContent/About");
@@ -45,12 +48,14 @@ var QuestionWrapper = React.createClass({
 
 
 module.exports = (
+  <Provider store={Store}>
   <Router history={BrowserHistory}>
     <Route path="/" component={Main}>
       <IndexRoute component={About} />
       <Route path="all/:page" component={AllWrapper}/>
       <Route path="all" component={AllWrapper}/>
       <Route path="login" component={Login}/>
+      <Route path="signup" component={Signup}/>
       <Route path="category/:category/:page" component={CategoryWrapper} />
       <Route path="category/:category" component={CategoryWrapper}/>
       <Route path="search/:search/:page" component={SearchWrapper} />
@@ -60,4 +65,5 @@ module.exports = (
       <Route path="*" status={404} component={BadLink}/>
     </Route>
   </Router>
+  </Provider>
 );

@@ -5,13 +5,15 @@ var PostingsList = require("./Stateless/PostingsList");
 var ActionBar = require("../Navigation/ActionBar");
 var PageBar = require("../Navigation/PageBar");
 var localStorage = localStorage || window.localStorage;
+var ReactRedux = require("react-redux");
 
-module.exports = React.createClass({
+var PostingsListContainer = React.createClass({
     propTypes: {
       criteria: React.PropTypes.string.isRequired,
       category: React.PropTypes.string,
       search: React.PropTypes.string,
-      page: React.PropTypes.string.isRequired
+      page: React.PropTypes.string.isRequired,
+      loggedIn: React.PropTypes.bool.isRequired
     },
     getInitialState: function(){
       return {
@@ -117,6 +119,7 @@ module.exports = React.createClass({
     }
     },
     render: function(){
+        console.log("loggedIn:" + this.props.loggedIn);
         return (
         <div id="postListContainer">
         <ActionBar newPostsRender={this.newPostsRender}/>
@@ -135,3 +138,10 @@ if(this.props.criteria !== "favorites"){
 }
 }
 });
+
+var mapStateToProps = function(state){
+    // This component will have access to `appstate.heroes` through `this.props.heroes`
+    return {loggedIn:state.loggedIn};
+};
+module.exports = ReactRedux.connect(mapStateToProps)(PostingsListContainer);
+
