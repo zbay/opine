@@ -14,7 +14,5 @@ The app has been deployed with Heroku and runs a cron job daily to remove old po
 
 **Current to-do list:**
 
-1. Refactor to use ReactRouter at the server, using browserHistory instead of hashHistory. hashHistory is the reason that the URLs are janky.
-
-2. Refactor to use the Flux pattern for managing application state. Redux seems like the trendy choice.
+1. Refactor to use the Flux pattern for managing application state. Redux seems like the trendy choice.
 
