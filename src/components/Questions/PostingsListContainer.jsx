@@ -1,11 +1,8 @@
 var React = require('react');
 var axios = require('axios');
-var BrowserHistory = require('react-router/lib/browserHistory');
 var PostingsList = require("./Stateless/PostingsList");
-var ActionBar = require("../Navigation/ActionBar");
 var PageBar = require("../Navigation/PageBar");
 var localStorage = localStorage || window.localStorage;
-var ReactRedux = require("react-redux");
 
 var PostingsListContainer = React.createClass({
     propTypes: {
@@ -13,7 +10,6 @@ var PostingsListContainer = React.createClass({
       category: React.PropTypes.string,
       search: React.PropTypes.string,
       page: React.PropTypes.string.isRequired,
-      loggedIn: React.PropTypes.bool.isRequired
     },
     getInitialState: function(){
       return {
@@ -119,29 +115,13 @@ var PostingsListContainer = React.createClass({
     }
     },
     render: function(){
-        console.log("loggedIn:" + this.props.loggedIn);
         return (
         <div id="postListContainer">
-        <ActionBar newPostsRender={this.newPostsRender}/>
         <PostingsList postings={this.state.postings} page={this.props.page} />
         {this.props.criteria === "favorites" ? (<span></span>): (<PageBar page={this.props.page} criteria={this.props.criteria} hasNext={this.state.postings.length > 0} addendum={this.state.addendum}/>)}
         </div>);
-    },
-newPostsRender: function(redirectCategory){
-    if(this.props.criteria === "category"){
-        BrowserHistory.push("/category/" + redirectCategory + "/1");   
     }
-    else{
-if(this.props.criteria !== "favorites"){
- BrowserHistory.push("/" + this.props.criteria + "/" + this.state.addendum + "1");   
-}
-}
-}
 });
 
-var mapStateToProps = function(state){
-    // This component will have access to `appstate.heroes` through `this.props.heroes`
-    return {loggedIn:state.loggedIn};
-};
-module.exports = ReactRedux.connect(mapStateToProps)(PostingsListContainer);
+module.exports = PostingsListContainer;
 

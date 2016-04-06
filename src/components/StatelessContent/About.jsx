@@ -1,13 +1,8 @@
 var React = require('react');
-var ActionBar = require("../Navigation/ActionBar");
 
 module.exports = React.createClass({
-    getInitialState: function(){
-      return {visibleForm: false};  
-    },
     render: function(){
         return (<div>
-       <ActionBar visibleForm={this.state.visibleForm}/>
        <div id="about" className="container-fluid">
        <h2>Getting Started</h2>
        <p>Opine is a simple platform for soliciting opinions, and finding people who want to hear your opinions. Do you want people to call in to your

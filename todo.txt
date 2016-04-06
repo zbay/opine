@@ -8,11 +8,11 @@
 8. Test your sanitization
 9. More responsive with alternative stylesheets http://stackoverflow.com/questions/18470350/css-media-queries-not-working-anywhere
 10. Commenting code
-11. 
+11. Send user directly to the standalone question page, after posting new question
 12. Mongo queries: exclude fields you won't retrieve
 13. 
 14. Local storage: automatically add posts that you make to local storage favorites
-15.
+15. Refactor ActionBar as a conventional nav bar
 16.
 17. No page arrow if the number of posts is less than perPage (add perPage in)
 18.

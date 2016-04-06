@@ -3,7 +3,6 @@ var axios = require('axios');
 
 var CommentsList = require("../Comments/CommentsList");
 var NewCommentForm = require("../Comments/NewCommentForm");
-var ActionBar = require("../Navigation/ActionBar");
 var localStorage = localStorage || window.localStorage;
 
 module.exports = React.createClass({
@@ -40,7 +39,6 @@ module.exports = React.createClass({
     render: function(){
         if(this.state.question !== null){
         return (<div>
-        <ActionBar />
         <div className="posting container-fluid">
         <div className="postQuestion">
         <h3>Question</h3>

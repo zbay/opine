@@ -1,6 +1,5 @@
 var React = require('react');
-var ReactRouter = require('react-router');
-var Link = ReactRouter.Link;
+var Link = require('react-router').Link;
 var localStorage = localStorage || window.localStorage;
 
 module.exports = React.createClass({

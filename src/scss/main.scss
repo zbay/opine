@@ -161,7 +161,7 @@ footer{
   transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   -webkit-transform: translateY(-50%);
-  padding-top:$standard_space;  
+  margin-top:$standard_space * 3;  
 }
 #searchField{
     margin-left:5px;
@@ -170,5 +170,10 @@ footer{
     @include fullCentered();
     img{
         @include marginCentered();
+    }
+}
+#actionBar{
+    a{
+        color: $ear_peach;
     }
 }
