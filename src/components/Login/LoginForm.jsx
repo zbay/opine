@@ -1,10 +1,16 @@
 var React = require('react');
 var ReactRouter = require('react-router');
+var ReactRedux = require('react-redux');
 var BrowserHistory = require('react-router/lib/browserHistory');
 var Link = ReactRouter.Link;
+var actions = require("../../actions");
 var axios = require('axios');
+var FormAlert = require("../Alerts/FormAlert");
 
 var LoginForm = React.createClass({
+    propTypes: {
+         reduxLogin: React.PropTypes.func.isRequired
+    },
     getInitialState: function(){
       return {
           email: null,
@@ -18,6 +24,7 @@ var LoginForm = React.createClass({
         <div id="signupNotice">Don't have an account?&nbsp;
         <Link to="/signup">Sign up here.</Link>
         </div>
+        <FormAlert successMessage={this.state.successMessage} errorMessage={this.state.errorMessage}/><br />
         <label>Email:</label><br />
         <input name="email" value={this.state.email} onChange={this.onChange}/><br /><br />
         <label>Password:</label><br />
@@ -29,6 +36,7 @@ var LoginForm = React.createClass({
          e.preventDefault();
          let that = this;
           // load loggedIn from the appropriate Redux store
+         if(!that.props.loggedIn){
          if(that.state.email && that.state.password){
             let loginData = {
              email: that.state.email,
@@ -36,17 +44,22 @@ var LoginForm = React.createClass({
              loggedIn: that.props.loggedIn
          };   
          axios.post("/login", loginData).then(function(response){
+             console.log("login response");
                   if(!response.data.error){
-                    this.props.login();
+                    that.props.reduxLogin();
                     BrowserHistory.push("/all/1");
               }
               else{
-                 this.setState({"errorMessage": response.data.error});
+                 that.setState({"errorMessage": response.data.error});
               }
          });
          }
          else{
-             this.setState({"errorMessage": "Please fill out both the username and the password!"});
+             that.setState({"errorMessage": "Please fill out both the username and the password!"});
+         }
+         }
+         else{
+              that.setState({"errorMessage": "You're already logged in! Log out, first, if you want to sign in with a different account."});
          }
     },
     onChange: function(e){
@@ -56,4 +69,14 @@ var LoginForm = React.createClass({
     }
 });
 
-module.exports = LoginForm;
+var mapStateToProps = function(state){
+    return {loggedIn:state.loggedIn.loggedIn};
+};
+
+var mapDispatchToProps = function(dispatch){
+    return {
+        reduxLogin: function(){ dispatch(actions.login()); }
+    }
+};
+
+module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(LoginForm);

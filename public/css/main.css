@@ -171,3 +171,11 @@ footer {
 
 #actionBar a {
   color: #FFDAB9; }
+
+#loginForm, #signupForm {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center; }
+
+body {
+  overflow-x: hidden; }

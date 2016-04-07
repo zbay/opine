@@ -177,3 +177,9 @@ footer{
         color: $ear_peach;
     }
 }
+#loginForm, #signupForm{
+    @include fullCentered();
+}
+body{
+    overflow-x:hidden;
+}

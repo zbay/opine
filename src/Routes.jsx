@@ -15,6 +15,7 @@ var PostingsListContainer = require("./components/Questions/PostingsListContaine
 var BadLink = require("./components/StatelessContent/BadLink");
 var Login = require("./components/Login/LoginForm");
 var Signup = require("./components/Login/SignupForm");
+var Logout = require("./components/Login/Logout");
 
 var AllWrapper = React.createClass({
     render: function(){
@@ -55,6 +56,7 @@ module.exports = (
       <Route path="all/:page" component={AllWrapper}/>
       <Route path="all" component={AllWrapper}/>
       <Route path="login" component={Login}/>
+      <Route path="logout" component={Logout}/>
       <Route path="signup" component={Signup}/>
       <Route path="category/:category/:page" component={CategoryWrapper} />
       <Route path="category/:category" component={CategoryWrapper}/>

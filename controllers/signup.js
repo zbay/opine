@@ -19,7 +19,7 @@ else{
    newUser.save(function(err, message){
    	if(!err)
    	{
-        res.json({"success": message});
+        res.json({"success": "New account created!"});
    	}
    	else{
    		res.json({"error": "An account already exists with this email address! Use another one."});

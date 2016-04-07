@@ -4,8 +4,12 @@ var BrowserHistory = require('react-router/lib/browserHistory');
 var Link = ReactRouter.Link;
 var axios = require('axios');
 var ReactRedux = require("react-redux");
+var FormAlert = require("../Alerts/FormAlert");
 
 var SignupForm = React.createClass({
+    propTypes: {
+         loggedIn: React.PropTypes.bool.isRequired 
+    },
     getInitialState: function(){
       return {
           email: null,
@@ -17,13 +21,10 @@ var SignupForm = React.createClass({
     },
     render: function(){
         return (<div><form id="signupForm" onSubmit={this.signup}>
-        <div id="formAlert">
-        {this.state.successMessage ? (<div id="formSuccess">{this.state.successMessage}</div>): (<span></span>)}
-        {this.state.errorMessage ? ( <div id="formError">{this.state.errorMessage}</div>): (<span></span>)}
-        </div><br />
-        <div id="loginNotice">Have an account? 
+        <div id="loginNotice">Have an account?&nbsp;
         <Link to="login">Log in here.</Link>
         </div>
+        <FormAlert successMessage={this.state.successMessage} errorMessage={this.state.errorMessage}/><br />
         <label>Name:</label><br />
         <input name="name" value={this.state.name} onChange={this.onChange}/><br /><br />
         <label>Email:</label><br />
@@ -32,12 +33,12 @@ var SignupForm = React.createClass({
         <input name="password" type="password" value={this.state.password} onChange={this.onChange}/><br /><br />
         <button type="submit">Sign Up</button>
         </form>
-        <div><h3>Why register with us?</h3>
+        <div><h3>Why register with Opine?</h3>
         <ol>
-            <li>You can edit your posts</li>
-            <li>You can delete your posts</li>
-            <li>You can still post on the site, even if an anonymous user on your IP address has been banned</li>
-            <li>You can save your list of favorites directly to our database, instead of as a browser cookie</li>
+            <li>You'll be able to edit your posts</li>
+            <li>You'll be able to delete your posts</li>
+            <li>You'll still be able to post on the site, even if an anonymous user on your IP address has been banned</li>
+            <li>You'll save your list of favorites directly to our database, instead of as a browser cookie</li>
         </ol>
         </div>
         </div>);
@@ -45,6 +46,7 @@ var SignupForm = React.createClass({
     signup: function(e){
          e.preventDefault();
          let that = this;
+         if(!this.props.loggedIn){
          if(that.state.email && that.state.password && that.state.name){
             let signupData = {
              email: that.state.email,
@@ -66,6 +68,10 @@ var SignupForm = React.createClass({
          else{
              this.setState({"errorMessage": "Please fill out your name, email, and a password!"});
          }
+         }
+         else{
+            this.setState({"errorMessage": "You're already logged in! Log out, first, if you want to make a new account."});
+         }
     },
     onChange: function(e){
         var state = {};
@@ -73,5 +79,8 @@ var SignupForm = React.createClass({
         this.setState(state);
     }
 });
+var mapStateToProps = function(state){
+    return {loggedIn:state.loggedIn};
+};
 
-module.exports = SignupForm;
+module.exports = ReactRedux.connect(mapStateToProps)(SignupForm);

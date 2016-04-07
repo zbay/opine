@@ -3,10 +3,9 @@ var BrowserHistory = require('react-router/lib/browserHistory');
 var CategorySelector = require("./CategorySelector");
 var NewPostForm = require("../Questions/NewPostForm");
 var Link = require('react-router').Link;
+var ReactRedux = require('react-redux');
 
-module.exports = React.createClass({
-    propTypes: {
-    },
+var ActionBar = React.createClass({
     getInitialState: function(){
         return {
             search: "",
@@ -14,21 +13,22 @@ module.exports = React.createClass({
         }
     },
     render: function(){
+        console.log("loggedIn: " + JSON.stringify(this.props.loggedIn));
         return (
         <div>
         <div id="actionBar">
         <div className="row">
-        <div className="col-sm-3 col-md-3 col-lg-3 vertCenter" id="toggleColumn">
-            <button>{!this.props.loggedIn ? (<Link to="/login">Log In</Link>) : (<Link to="/logout">Log Out</Link>)}</button>
+        <div className="col-sm-2 col-md-2 col-lg-2 vertCenter" id="toggleColumn">
+            <button>{this.props.loggedIn ?  (<Link to="/logout">Log Out</Link>) : (<Link to="/login">Log In</Link>)}</button>
         </div>
-        <div className="col-sm-3 col-md-3 col-lg-3 vertCenter">
+        <div className="col-sm-2 col-md-2 col-lg-2 vertCenter">
             <button id="toggleForm" onClick={this.toggleForm}>{this.state.visibleForm ? "Hide Question Form" : "Ask Something"}</button>
         </div>
-        <div className="col-sm-3 col-md-3 col-lg-3 vertCenter">
+        <div className="col-sm-4 col-md-4 col-lg-4 vertCenter">
         <label>Browse by category: </label>&nbsp;
         <CategorySelector />
         </div>
-        <div className="col-sm-3 col-md-3 col-lg-3 vertCenter">
+        <div className="col-sm-4 col-md-4 col-lg-4 vertCenter">
         <form onSubmit={this.submitSearch}>
         <input name="search" placeholder="Search" id="searchField" value={this.state.search} onChange={this.onChange}/>
          <button type="submit" id="goButton">Go</button>
@@ -61,3 +61,7 @@ module.exports = React.createClass({
         }
     },
     });
+var mapStateToProps = function(state){
+    return {loggedIn:state.loggedIn.loggedIn};
+};
+module.exports = ReactRedux.connect(mapStateToProps)(ActionBar);
