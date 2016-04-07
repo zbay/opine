@@ -1,8 +1,9 @@
 var React = require('react');
 var axios = require('axios');
 var FormAlert = require("../Alerts/FormAlert");
+var ReactRedux = require('react-redux');
 
-module.exports = React.createClass({
+var NewCommentForm = React.createClass({
     propTypes: {
       questionID: React.PropTypes.string.isRequired,
       refreshComments: React.PropTypes.func.isRequired
@@ -46,7 +47,7 @@ module.exports = React.createClass({
          e.preventDefault(); // so that only React handles the form data
          let that = this;
          if(this.state.comment.length > 0 && this.props.questionID){
-             let commentData = {"questionID": that.props.questionID, "commentText": that.state.comment, "IP": this.state.IP};
+             let commentData = {"questionID": that.props.questionID, "commentText": that.state.comment, "IP": that.state.IP, "loggedIn": that.props.loggedIn};
              axios.post("/addComment", commentData).then(function(response){
                  console.log(JSON.stringify(response));
                  if(response.data.success){
@@ -63,3 +64,8 @@ module.exports = React.createClass({
          }
     }
 });
+var mapStateToProps = function(state){
+    return {loggedIn:state.loggedIn.loggedIn};
+};
+
+module.exports = ReactRedux.connect(mapStateToProps)(NewCommentForm);

@@ -3,10 +3,11 @@ var axios = require('axios');
 var DateJS = require('datejs');
 var FormAlert = require("../Alerts/FormAlert");
 var dateRegex =/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;
+var ReactRedux = require('react-redux');
 const dailySeconds = 86400;
 const maxYear = 2120;
 
-module.exports = React.createClass({
+var NewPostForm = React.createClass({
     propTypes: {
       visible: React.PropTypes.bool
     },
@@ -76,7 +77,8 @@ module.exports = React.createClass({
             contact: that.state.contact,
             deadline: fixedDeadline,
             category: that.state.category,
-            IP: that.state.IP
+            IP: that.state.IP,
+            email: that.props.email
         };
         console.log(postData);
         axios.post("/addPosting", postData).then(function(response){
@@ -110,6 +112,10 @@ module.exports = React.createClass({
                 successMessage: null
             });        
         }
-
     }
 });
+var mapStateToProps = function(state){
+    return {email:state.loggedIn.email};
+};
+
+module.exports = ReactRedux.connect(mapStateToProps)(NewPostForm);

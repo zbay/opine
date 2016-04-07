@@ -172,7 +172,7 @@ footer {
 #actionBar a {
   color: #FFDAB9; }
 
-#loginForm, #signupForm {
+#loginForm, #signupForm, #loggedOut {
   margin-left: auto;
   margin-right: auto;
   text-align: center; }

@@ -4,5 +4,6 @@ module.exports = {
     LOGOUT: "LOGOUT",
 
     // STATUSES
-    LOGGEDIN: "loggedIn"
+    LOGGEDIN: "loggedIn",
+    EMAIL: "email"
 };

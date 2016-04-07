@@ -1,9 +1,10 @@
 module.exports = function(app) {
     var bcrypt = require("bcrypt");
     var mongoose = require('mongoose');
+    var sanitizeBody = require("./helpers/sanitizeBody");
     var User = require("../dbmodels/user.js"); User = mongoose.model("User");
 
-app.post('/login', function(req, res){ //submit new account info
+app.post('/login', sanitizeBody, function(req, res){ //submit new account info
 	if(req.body.loggedIn){
 		res.json({"error": "You are already logged in!"});
 	}

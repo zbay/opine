@@ -26,7 +26,7 @@ var ActionBar = React.createClass({
         </div>
         <div className="col-sm-4 col-md-4 col-lg-4 vertCenter">
         <label>Browse by category: </label>&nbsp;
-        <CategorySelector />
+        <CategorySelector loggedIn={this.props.loggedIn}/>
         </div>
         <div className="col-sm-4 col-md-4 col-lg-4 vertCenter">
         <form onSubmit={this.submitSearch}>
@@ -62,6 +62,6 @@ var ActionBar = React.createClass({
     },
     });
 var mapStateToProps = function(state){
-    return {loggedIn:state.loggedIn.loggedIn};
+    return {loggedIn:state.loggedIn.loggedIn, email:state.loggedIn.email};
 };
 module.exports = ReactRedux.connect(mapStateToProps)(ActionBar);

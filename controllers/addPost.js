@@ -10,9 +10,9 @@ module.exports = function(app) {
         res.json({"error": "Please fill out the entire form."});
     }
     Banning.findOne({"IP": req.body.IP}, function(err, doc){
-        if(doc === null){
+        if(doc === null || req.body.email){
             var newPost = new Posting({"question": req.body.question, "asker": req.body.asker, "howToContact": req.body.contact,
-            "deadline": req.body.deadline, "category": req.body.category, "IP": req.body.IP});
+            "deadline": req.body.deadline, "category": req.body.category, "IP": req.body.IP, "email": req.body.email});
             newPost.save(function(err, msg){
                 if(err){
                     res.json({"error": msg});

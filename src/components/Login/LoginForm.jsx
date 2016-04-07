@@ -46,7 +46,7 @@ var LoginForm = React.createClass({
          axios.post("/login", loginData).then(function(response){
              console.log("login response");
                   if(!response.data.error){
-                    that.props.reduxLogin();
+                    that.props.reduxLogin(that.state.email);
                     BrowserHistory.push("/all/1");
               }
               else{
@@ -75,7 +75,7 @@ var mapStateToProps = function(state){
 
 var mapDispatchToProps = function(dispatch){
     return {
-        reduxLogin: function(){ dispatch(actions.login()); }
+        reduxLogin: function(email){ dispatch(actions.login(email)); }
     }
 };
 

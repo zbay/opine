@@ -14,6 +14,7 @@ var SignupForm = React.createClass({
       return {
           email: null,
           password: null,
+          confirmPassword: null,
           name: null,
           successMessage: null,
           errorMessage: null
@@ -31,14 +32,16 @@ var SignupForm = React.createClass({
         <input name="email" value={this.state.email} onChange={this.onChange}/><br /><br />
         <label>Password:</label><br />
         <input name="password" type="password" value={this.state.password} onChange={this.onChange}/><br /><br />
+        <label>Confirm Password:</label><br />
+        <input name="confirmPassword" type="password" value={this.state.confirmPassword} onChange={this.onChange}/><br /><br />
         <button type="submit">Sign Up</button>
         </form>
         <div><h3>Why register with Opine?</h3>
         <ol>
-            <li>You'll be able to edit your posts</li>
-            <li>You'll be able to delete your posts</li>
+            <li>You'll be able to edit your posts and comments</li>
+            <li>You'll be able to delete your posts and comments</li>
             <li>You'll still be able to post on the site, even if an anonymous user on your IP address has been banned</li>
-            <li>You'll save your list of favorites directly to our database, instead of as a browser cookie</li>
+            <li>You'll be able to make a list of "favorite" posts that you can track in one place</li>
         </ol>
         </div>
         </div>);
@@ -47,7 +50,8 @@ var SignupForm = React.createClass({
          e.preventDefault();
          let that = this;
          if(!this.props.loggedIn){
-         if(that.state.email && that.state.password && that.state.name){
+         if(that.state.password === that.state.confirmPassword){
+         if(that.state.email && that.state.password && that.state.confirmPassword && that.state.name){
             let signupData = {
              email: that.state.email,
              password: that.state.password,
@@ -61,16 +65,20 @@ var SignupForm = React.createClass({
                   //remember to add a way to indicate successful account creation at the login page. Redux state, preferably.
               }
               else{
-                  this.setState({"errorMessage": response.data.error});
+                  that.setState({"errorMessage": response.data.error});
               }
          });
          }
-         else{
-             this.setState({"errorMessage": "Please fill out your name, email, and a password!"});
+         else{ // if email, passwords, and name are not all filled out
+             that.setState({"errorMessage": "Please fill out your name, email, and a password!"});
          }
          }
-         else{
-            this.setState({"errorMessage": "You're already logged in! Log out, first, if you want to make a new account."});
+         else{ //if password !== confirmPassword
+             that.setState({"errorMessage": "Your passwords do not match! Try again."});
+         }
+         }
+         else{ //if already logged in
+            that.setState({"errorMessage": "You're already logged in! Log out, first, if you want to make a new account."});
          }
     },
     onChange: function(e){

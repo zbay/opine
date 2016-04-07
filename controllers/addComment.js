@@ -12,7 +12,7 @@ module.exports = function(app) {
     }
     else{
        Banning.findOne({"IP": req.body.IP}, function(err, doc){
-       if(doc === null){
+       if(doc === null || req.body.loggedIn){
        Posting.update({_id: ObjectId(req.body.questionID)}, {$addToSet: {comments: {text: req.body.commentText, IP: req.body.IP}}}).lean().exec(function(err, msg){
            if(err){
               res.json({"error": err});  

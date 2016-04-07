@@ -12,7 +12,13 @@ app.post("/allPostings", sanitizeBody, function(req, res){ // retrieve the most 
     let postings = [];
     let postingStream = Posting.find().skip(perPage * page).sort({"timePosted": -1}).limit(perPage).stream(); //less than or equal to in mongodb query
     postingStream.on("data", function(doc){
+            if(doc.email && req.body.email && (doc.email === req.body.email)){
+                doc.editable = true;
+                postings.push(doc);
+            }
+            else{
             postings.push(doc);
+            }
     });
     postingStream.on("end", function(){
          res.json({"postings": postings});
@@ -25,7 +31,13 @@ app.post("/categoryPostings", sanitizeBody, function(req, res){ //retrieve the m
     let postingStream = Posting.find({"category": postCategory})
     .skip(perPage * page).sort({"timePosted": -1}).limit(perPage).stream();
     postingStream.on("data", function(doc){
+             if(doc.email && req.body.email && (doc.email === req.body.email)){
+                doc["editable"] = true;
+                postings.push(doc);
+            }
+            else{
             postings.push(doc);
+            }
     });
     postingStream.on("end", function(){
          res.json({"postings": postings});
@@ -39,16 +51,39 @@ app.post("/searchPostings", sanitizeBody, function(req, res){ //retrieve the mos
     .sort({score: {$meta: "textScore"}, "timePosted": -1}).skip(perPage * page)
     .limit(perPage).stream();
     postingStream.on("data", function(doc){
-            postings.push(doc);
+             if(doc.email && req.body.email && (doc.email === req.body.email)){
+                doc["editable"] = true;
+                postings.push(doc);
+            }
+            else{
+                postings.push(doc);
+            }
     });
     postingStream.on("end", function(){
          res.json({"postings": postings});
     });
 });
-app.post("/questionData", sanitizeBody, function(req, res){ // retrieve a question and it's comments
+app.post("/myPostings", sanitizeBody, function(req, res){
+  let postings = [];  
+  let userEmail = req.body.email;
+  let page = req.body.page - 1;
+  let postingStream = Posting.find({email: userEmail}).sort({"timePosted": -1}).skip(perPage * page).limit(perPage).stream();
+  postingStream.on("data", function(doc){
+            doc["editable"] = true;
+            postings.push(doc);
+    });
+    postingStream.on("end", function(){
+      res.json({"postings": postings});    
+    });
+});
+app.post("/questionData", sanitizeBody, function(req, res){ // retrieve a question and its comments
   let postID = ObjectId(req.body.id);
   var postingStream = Posting.findOne({_id: postID}, {comments: 0}).stream();
   postingStream.on("data", function(doc){
+             if(doc.email && req.body.email && (doc.email === req.body.email)){
+                doc["editable"] = true;
+            }
+
      res.json({"postData": doc});
   });
 });
@@ -56,7 +91,6 @@ app.post("/favoritePostings", sanitizeBody, function(req, res){ //retrieve list 
     let postings = [];
     let iterateCount = 0;
     let favorites = req.body.favorites;
-    console.log(favorites);
     for(let i = favorites.length-1; i >= 0; i--){
         Posting.findOne({_id: ObjectId(favorites[i])}, function(err, question){
              if(err){
@@ -64,6 +98,9 @@ app.post("/favoritePostings", sanitizeBody, function(req, res){ //retrieve list 
             }
             else{
                 if(question !== null){
+                    if(question.email && req.body.email && (question.email === req.body.email)){
+                        question.editable = true;
+                    }
                  postings.push(question);   
                 }
                 iterateCount++;

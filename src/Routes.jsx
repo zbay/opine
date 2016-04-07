@@ -41,6 +41,12 @@ var FavoriteWrapper = React.createClass({
     }
 });
 
+var MyPostWrapper = React.createClass({
+    render: function(){
+        return(<PostingsListContainer criteria="myPosts" page={"1"} search={null} category={null}/>);
+    }
+});
+
 var QuestionWrapper = React.createClass({
     render: function(){
         return (<Question questionID={this.props.routeParams.id} />);
@@ -62,6 +68,8 @@ module.exports = (
       <Route path="category/:category" component={CategoryWrapper}/>
       <Route path="search/:search/:page" component={SearchWrapper} />
       <Route path="search/:search" component={SearchWrapper} />
+      <Route path="myPosts/:page" component={MyPostWrapper} />
+      <Route path="myPosts" component={MyPostWrapper} />
       <Route path="question/:id" component={QuestionWrapper}/>
       <Route path="favorites" component={FavoriteWrapper}/>
       <Route path="*" status={404} component={BadLink}/>

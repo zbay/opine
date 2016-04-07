@@ -2,6 +2,7 @@
 
 module.exports = function(){
     return {
-        loggedIn: false
+        loggedIn: false,
+        email: null
     };
 };
