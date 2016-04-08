@@ -75,7 +75,7 @@ footer{
 }
 #newPostForm{
     @include fullCentered();
-    border: 5px solid #FFDAB9;
+    border: 5px solid $ear_peach;
     padding-bottom: $standard_space;
     border-radius:$standard_space;
     max-width:90%;
@@ -177,7 +177,7 @@ footer{
         color: $ear_peach;
     }
 }
-#loginForm, #signupForm, #loggedOut{
+#loginForm, #signupForm, #loggedOut, #signupBlurb{
     @include fullCentered();
 }
 body{

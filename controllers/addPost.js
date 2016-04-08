@@ -9,6 +9,7 @@ module.exports = function(app) {
     if(!req.body.question || !req.body.asker || !req.body.contact || !req.body.deadline || !req.body.category){
         res.json({"error": "Please fill out the entire form."});
     }
+    else{
     Banning.findOne({"IP": req.body.IP}, function(err, doc){
         if(doc === null || req.body.email){
             var newPost = new Posting({"question": req.body.question, "asker": req.body.asker, "howToContact": req.body.contact,
@@ -26,5 +27,6 @@ module.exports = function(app) {
             res.json({"error": "You must have been a little naughty. Posting is currently banned from this IP address."});
         }
     });
+    }
 });
 }

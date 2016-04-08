@@ -36,7 +36,7 @@ var SignupForm = React.createClass({
         <input name="confirmPassword" type="password" value={this.state.confirmPassword} onChange={this.onChange}/><br /><br />
         <button type="submit">Sign Up</button>
         </form>
-        <div><h3>Why register with Opine?</h3>
+        <div id="signupBlurb"><h3>Why register with Opine?</h3>
         <ol>
             <li>You'll be able to edit your posts and comments</li>
             <li>You'll be able to delete your posts and comments</li>
