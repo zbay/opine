@@ -98,7 +98,6 @@ let numTraversed = 0;
         else{
         if(usr.favorites){
         for(let i = 0; i < usr.favorites.length; i++){
-            console.log("favs: " + usr.favorites);
             Posting.findOne({"_id": usr.favorites[i]}, function(err, doc){
                 numTraversed++;
                 if(doc){

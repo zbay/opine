@@ -28,8 +28,6 @@ module.exports = function(app) {
     }
 });
 app.post("/addFavorite", sanitizeBody, function(req, res){
-    console.log("ID: " + req.body.postID);
-    console.log("email: " + req.body.email);
     User.findOneAndUpdate({"email": req.body.email}, {$addToSet: {"favorites": req.body.postID}}, function(err, msg){
         if(err){
             res.json({"error": err});

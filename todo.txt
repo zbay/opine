@@ -23,7 +23,10 @@ DRY: Merge Posting and Question into one
 Clearly mark "My Favorites"
 Enable favorite deleting
 Enable editing and deletion of comments
-If not logged in at certain links, redirect the user to all
+If not logged in at certain links, redirect the user to login
+Check if favorite, and pass it down
+Make invisible favorite button take less space
+
 
 Use LocalStorage to preserve login state despite reload. Test on one component before useing the same approach everywhere
 http://stackoverflow.com/questions/34038726/redux-router-how-to-replay-state-after-refresh

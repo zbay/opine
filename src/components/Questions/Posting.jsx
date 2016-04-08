@@ -30,10 +30,10 @@ var Posting = React.createClass({
         {this.state.displayData.howToContact}</div>
         <div className="postCategory">
         <h3>Filed Under:</h3>
-        {this.state.displayData.category}</div><br />
-        {(this.state.favorited || !this.props.loggedIn) ? (<span></span>): <button onClick={this.addFavorite}>Add To My Favorites</button>}<br /><br />
+        {this.state.displayData.category}</div>
+        {(this.state.favorited || !this.props.loggedIn) ? (<span></span>): <div><br /><button onClick={this.addFavorite}>Add To My Favorites</button><br /></div>}
         {this.state.displayData.editable ? 
-            (<div>{!this.state.editing ? 
+            (<div><br />{!this.state.editing ? 
                 (<button onClick={this.editify}>Edit Post</button>): (<button onClick={this.saveEdit}>Save Edit</button>)}&nbsp;
             <button onClick={this.deletePost}>Delete Post</button></div>): (<span></span>)}
         </div>);     
