@@ -13,11 +13,18 @@
 13. 
 14. Local storage: automatically add posts that you make to local storage favorites
 15. Refactor ActionBar as a conventional nav bar
-16.
+16. 
 17. No page arrow if the number of posts is less than perPage (add perPage in)
 18.
-19.
+19. Use localStorage to maintain state (like loggedIn!) on reload for redux
 
-DRY: Merge Posting and Question into one. Make AddFavorite an exporting helper method
+DRY: Merge Posting and Question into one
 
 Clearly mark "My Favorites"
+Enable favorite deleting
+Use React Router and an "auth" URL version of login to show successful account creation message
+Fix baffling signup bug
+Enable editing and deletion of comments
+
+Use LocalStorage to preserve login state despite reload. Test on one component before useing the same approach everywhere
+http://stackoverflow.com/questions/34038726/redux-router-how-to-replay-state-after-refresh

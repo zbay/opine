@@ -22,7 +22,6 @@ module.exports = React.createClass({
         return (<select id="catBrowse" onChange={this.onChange}>
             <option value="None">---</option>
             <option value="All">All</option>
-            <option value="Favorites">My Favorites</option>
             <option value="Politics">Politics</option>
             <option value="Sports">Sports</option>
             <option value="Culture">Culture</option>

@@ -2,6 +2,7 @@
 var mongoose = require('mongoose');
 var ObjectId = mongoose.Types.ObjectId;
 var Posting = require(process.cwd() + "/dbmodels/posting.js"); Posting = mongoose.model("Posting");
+var User = require(process.cwd() + "/dbmodels/posting.js"); User = mongoose.model("Posting");
 var sanitizeBody = require("./helpers/sanitizeBody");
 const perPage = 20;
 
@@ -87,29 +88,35 @@ app.post("/questionData", sanitizeBody, function(req, res){ // retrieve a questi
      res.json({"postData": doc});
   });
 });
-app.post("/favoritePostings", sanitizeBody, function(req, res){ //retrieve list of user favorites (as saved in LocalStorage)
-    let postings = [];
-    let iterateCount = 0;
-    let favorites = req.body.favorites;
-    for(let i = favorites.length-1; i >= 0; i--){
-        Posting.findOne({_id: ObjectId(favorites[i])}, function(err, question){
-             if(err){
-                res.json({error: err});
-            }
-            else{
-                if(question !== null){
-                    if(question.email && req.body.email && (question.email === req.body.email)){
-                        question.editable = true;
-                    }
-                 postings.push(question);   
+app.post("/favoritePostings", sanitizeBody, function(req, res){ //retrieve list of user favorites
+let favesArray = [];
+let numTraversed = 0;
+    User.find({"email": req.body.email}, function(err, usr){
+        if(err){
+            res.json({"error": err});
+        }
+        else{
+        if(usr.favorites){
+        for(let i = 0; i < usr.favorites.length; i++){
+            Posting.find({"_id": usr.favorites[i]}, function(err, doc){
+                if(doc){
+                 favesArray.push(doc);
+                 numTraversed++;
+                 if(numTraversed === usr.favorites.length-1 || favesArray.length === 100){
+                     res.json({"postData": favesArray});
+                 }
                 }
-                iterateCount++;
-                if(iterateCount == req.body.favorites.length){
-                    res.json({"postings": postings});
-                }
-            }           
-        });
-    }
+            });
+        }
+        }
+        else{
+            res.json({"postData": []});
+        }
+        }
+    });
+});
+app.post("/testIfFavorite", sanitizeBody, function(req, res){
+    
 });
 app.post("/comments", sanitizeBody, function(req, res){ // retrieve a post's comments, on refresh only
   let postID = ObjectId(req.body.id);

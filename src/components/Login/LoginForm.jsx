@@ -21,9 +21,8 @@ var LoginForm = React.createClass({
     },
     render: function(){
         return (<form id="loginForm" onSubmit={this.login}>
-        <div id="signupNotice">Don't have an account?&nbsp;
-        <Link to="/signup">Sign up here.</Link>
-        </div>
+        {this.props.justSignedUp ? (<div id="signupNotice">Account successfully created!</div>): (<div id="signupNotice">Don't have an account?&nbsp;
+        <Link to="/signup">Sign up here.</Link></div>)}
         <FormAlert successMessage={this.state.successMessage} errorMessage={this.state.errorMessage}/><br />
         <label>Email:</label><br />
         <input name="email" value={this.state.email} onChange={this.onChange}/><br /><br />

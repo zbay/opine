@@ -53,6 +53,12 @@ var QuestionWrapper = React.createClass({
     }
 });
 
+var LoginAuthWrapper = React.createClass({
+    render: function(){
+        return(<Login justSignedUp={true}/>);
+    }
+});
+
 
 module.exports = (
   <Provider store={Store}>
@@ -62,6 +68,7 @@ module.exports = (
       <Route path="all/:page" component={AllWrapper}/>
       <Route path="all" component={AllWrapper}/>
       <Route path="login" component={Login}/>
+      <Route path="login/signedUp" component={LoginAuthWrapper}/>
       <Route path="logout" component={Logout}/>
       <Route path="signup" component={Signup}/>
       <Route path="category/:category/:page" component={CategoryWrapper} />

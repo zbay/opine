@@ -47,7 +47,8 @@ var EditPostForm = React.createClass({
             <option value="Miscellaneous">Other</option>
          </select>
         </div><br />
-            <button onClick={this.props.cancelEdit}>Cancel Edit</button>&nbsp;<button onClick={this.saveEdit}>Save Edit</button>
+            <button onClick={this.saveEdit}>Save Edit</button>&nbsp;
+            <button onClick={this.props.cancelEdit}>Cancel Edit</button>
         </div>);    
     },
     onChange: function(e){

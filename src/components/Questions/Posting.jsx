@@ -12,16 +12,7 @@ var Posting = React.createClass({
     getInitialState: function(){
         let that = this;
         var isFavorite = false;
-        if(localStorage){
-        var currentFavorites = JSON.parse(localStorage.getItem("favorites"));
-        if(currentFavorites && currentFavorites.length){
-            for(let i = 0; i < currentFavorites.length; i++){
-            if(currentFavorites[i] == that.props.postingData._id){
-                isFavorite = true;
-            }
-        }   
-        }      
-        }
+        //get favorites from server with axios!!!!
         return {favorited: isFavorite, editing: false, deleted: false, displayData: that.props.postingData};
     },
     render: function(){
@@ -40,7 +31,7 @@ var Posting = React.createClass({
         <div className="postCategory">
         <h3>Filed Under:</h3>
         {this.state.displayData.category}</div><br />
-        {this.state.favorited ? (<span></span>): <button onClick={this.addFavorite}>Add To My Favorites</button>}<br /><br />
+        {(this.state.favorited || !this.props.loggedIn) ? (<span></span>): <button onClick={this.addFavorite}>Add To My Favorites</button>}<br /><br />
         {this.state.displayData.editable ? 
             (<div>{!this.state.editing ? 
                 (<button onClick={this.editify}>Edit Post</button>): (<button onClick={this.saveEdit}>Save Edit</button>)}&nbsp;
@@ -56,18 +47,11 @@ var Posting = React.createClass({
         }
     },
     addFavorite: function(){
-        if(localStorage){
-            var currentFavorites = JSON.parse(localStorage.getItem("favorites"));
-            if(currentFavorites && currentFavorites.length >= 100){
-                currentFavorites.shift();
-            }
-            if(currentFavorites === null || currentFavorites === undefined){
-                currentFavorites = [];
-            }
-            currentFavorites.push(this.props.postingData._id);
-            localStorage.setItem("favorites", JSON.stringify(currentFavorites));
-            this.setState({favorited: true});   
-        }
+        let that = this;
+        let faveData = {"postID": this.props.postingData._id, "email": that.props.email};
+        axios.post("/addFavorite", faveData).then(function(response){
+            that.setState({favorited: true});
+        });
     },
     editify: function(){
       this.setState({editing: true});  

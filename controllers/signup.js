@@ -22,7 +22,8 @@ else{
         res.json({"success": "New account created!"});
    	}
    	else{
-   		res.json({"error": "An account already exists with this email address! Use another one."});
+   	//	res.json({"error": "An account already exists with this email address! Use another one."});
+   		res.json({"error": err});
    	}
    });
 

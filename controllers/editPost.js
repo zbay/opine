@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 var Posting = require(process.cwd() + "/dbmodels/posting.js"); Posting = mongoose.model("Posting");
+var User = require(process.cwd() + "/dbmodels/posting.js"); User = mongoose.model("Posting");
+
 var sanitizeBody = require("./helpers/sanitizeBody");
 
 module.exports = function(app) {
@@ -24,5 +26,16 @@ module.exports = function(app) {
             res.json({"error": "You are not signed in. You must be signed in to edit a post."});
         }
     }
+});
+app.post("/addFavorite", sanitizeBody, function(req, res){
+    console.log(req.body.postID);
+    User.update({"email": req.body.email}, {$addToSet: {"favorites": req.body.postID}}, function(err, msg){
+        if(err){
+            res.json({"error": err});
+        }
+        else{
+            res.json({"success": msg});
+        }
+    });
 });
 }

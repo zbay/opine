@@ -7,9 +7,6 @@ var ReactRedux = require("react-redux");
 var FormAlert = require("../Alerts/FormAlert");
 
 var SignupForm = React.createClass({
-    propTypes: {
-         loggedIn: React.PropTypes.bool.isRequired 
-    },
     getInitialState: function(){
       return {
           email: null,
@@ -61,11 +58,11 @@ var SignupForm = React.createClass({
          axios.post("/signup", signupData).then(function(response){
              // set state with redux
               if(!response.data.error){
-                  BrowserHistory.push("/login");
+                  BrowserHistory.push("/login/signedUp");
                   //remember to add a way to indicate successful account creation at the login page. Redux state, preferably.
               }
               else{
-                  that.setState({"errorMessage": response.data.error});
+                  that.setState({"errorMessage": JSON.stringify(response.data.error)});
               }
          });
          }
@@ -88,7 +85,7 @@ var SignupForm = React.createClass({
     }
 });
 var mapStateToProps = function(state){
-    return {loggedIn:state.loggedIn};
+    return {loggedIn:state.loggedIn.loggedIn};
 };
 
 module.exports = ReactRedux.connect(mapStateToProps)(SignupForm);

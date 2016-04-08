@@ -2,7 +2,6 @@ var React = require('react');
 var axios = require('axios');
 var PostingsList = require("./Stateless/PostingsList");
 var PageBar = require("../Navigation/PageBar");
-var localStorage = localStorage || window.localStorage;
 var ReactRedux = require('react-redux');
 
 var PostingsListContainer = React.createClass({
@@ -115,12 +114,10 @@ var PostingsListContainer = React.createClass({
             that.setState({postings: response.data.postings});
         });
     },
-    retrieveFavorites: function(page){ //if "favorites" cookie exists, use their IDs to fetch the rest of their data
-    if(localStorage){
+    retrieveFavorites: function(page){ // retrieve user's favorites
         let that = this;
-          let questions = {"favorites": JSON.parse(localStorage.getItem("favorites")), "email": that.props.email};
-        if(questions && JSON.stringify(questions).length){
-            axios.post("/favoritePostings", questions)
+        let userData = {"email": that.props.email};
+            axios.post("/favoritePostings", userData)
             .then(function(response){
             if(!response.data.error){
               that.setState({postings: response.data.postings});   
@@ -129,8 +126,6 @@ var PostingsListContainer = React.createClass({
                 console.log(response.data.error);
             }
         });         
-        }     
-    }
     },
     render: function(){
         return (
