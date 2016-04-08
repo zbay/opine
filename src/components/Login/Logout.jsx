@@ -13,7 +13,7 @@ var Logout = React.createClass({
         return (<div>
         <div id="loggedOut">
         {this.props.loggedIn ? ("Logging out. Please wait!"): ("You have been logged out. Come back soon!")}
-        </div></div>);
+        </div><br /></div>);
     }
 });
 

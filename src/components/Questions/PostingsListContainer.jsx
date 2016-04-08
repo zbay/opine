@@ -1,4 +1,5 @@
 var React = require('react');
+var BrowserHistory = require('react-router/lib/browserHistory');
 var axios = require('axios');
 var PostingsList = require("./Stateless/PostingsList");
 var PageBar = require("../Navigation/PageBar");
@@ -42,7 +43,12 @@ var PostingsListContainer = React.createClass({
                 that.retrieveSearch(that.props.search, Number(that.props.page));
                 break;
             case "myPosts":
+                if(!that.props.loggedIn){
+                    BrowserHistory.push("/login");
+                }
+                else{
                 that.retrieveMine(Number(that.props.page));
+                }
                 break;
             case "favorites":
                 that.retrieveFavorites();
@@ -97,6 +103,9 @@ var PostingsListContainer = React.createClass({
              that.setState({postings: response.data.postings});
          });   
         }
+        else{
+            BrowserHistory.push("/login");
+        }
     },
     retrieveCategory: function(category, page){ //get all questions in a category, from the server
         let that = this;
@@ -115,6 +124,7 @@ var PostingsListContainer = React.createClass({
         });
     },
     retrieveFavorites: function(){ // retrieve user's favorites
+     if(this.props.loggedIn){
         let that = this;
         let userData = {"email": that.props.email};
             axios.post("/favoritePostings", userData)
@@ -126,6 +136,10 @@ var PostingsListContainer = React.createClass({
                 console.log(response.data.error);
             }
         });         
+     }
+     else{
+         BrowserHistory.push("/login");
+     }
     },
     render: function(){
         return (
