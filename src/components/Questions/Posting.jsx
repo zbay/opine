@@ -2,6 +2,7 @@ var React = require('react');
 var Link = require('react-router').Link;
 var axios = require('axios');
 var EditPostForm = require("./EditPostForm");
+var FaveButton = require("./Stateless/FaveButton");
 var ReactRedux = require('react-redux');
 var localStorage = localStorage || window.localStorage;
 
@@ -42,7 +43,7 @@ var Posting = React.createClass({
         <div className="postCategory">
         <h3>Filed Under:</h3>
         {this.state.displayData.category}</div>
-        {(this.state.favorited || !this.props.loggedIn) ? (<span></span>): <div><br /><button onClick={this.addFavorite}>Add To My Favorites</button><br /></div>}
+        {!this.props.loggedIn ? (<span></span>): <div><br /><FaveButton toggleFavorite={this.toggleFavorite} favorited={this.state.favorited}/><br /></div>}
         {this.state.displayData.editable ? 
             (<div><br />{!this.state.editing ? 
                 (<button onClick={this.editify}>Edit Post</button>): (<button onClick={this.saveEdit}>Save Edit</button>)}&nbsp;
@@ -57,12 +58,19 @@ var Posting = React.createClass({
             return (<span></span>);
         }
     },
-    addFavorite: function(){
+    toggleFavorite: function(){
         let that = this;
-        let faveData = {"postID": this.props.postingData._id, "email": that.props.email};
+        let faveData = {"postID": that.props.postingData._id, "email": that.props.email};
+        if(that.state.favorited){
+        axios.post("/removeFavorite", faveData).then(function(response){
+            that.setState({favorited: false});
+        });   
+        }
+        else{
         axios.post("/addFavorite", faveData).then(function(response){
             that.setState({favorited: true});
-        });
+        });   
+        }
     },
     editify: function(){
       this.setState({editing: true});  

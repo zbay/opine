@@ -20,10 +20,12 @@
 
 DRY: Merge Posting and Question into one
 
-Clearly mark "My Favorites"
+Clearly mark "My Favorites", and send error if more than 100 active are in the array. Explain the limitation
+Add to purge old: remove the ID from User's favorites
 Enable favorite deleting
 Enable editing and deletion of user's comments
 Check if favorite, and pass it down
+Show number of comments
 
 
 Use LocalStorage to preserve login state despite reload. Test on one component before useing the same approach everywhere

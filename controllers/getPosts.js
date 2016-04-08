@@ -117,7 +117,6 @@ let numTraversed = 0;
 });
 app.post("/testIfFavorite", sanitizeBody, function(req, res){
     User.findOne({"email": req.body.email}, function(err, usr){
-        console.log(JSON.stringify(usr.favorites));
         if(err || !usr){
             res.json({"isFavorite": false});
         }
