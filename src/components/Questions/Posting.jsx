@@ -50,6 +50,7 @@ var Posting = React.createClass({
         let that = this;
         let faveData = {"postID": this.props.postingData._id, "email": that.props.email};
         axios.post("/addFavorite", faveData).then(function(response){
+            console.log("response: " + JSON.stringify(response));
             that.setState({favorited: true});
         });
     },

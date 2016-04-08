@@ -25,6 +25,7 @@ module.exports = React.createClass({
          this.setState({isLoading: false}); 
     },
     renderPostings: function(){
+        console.log("postings: " + JSON.stringify(this.props.postings));
         if(this.props.postings.length > 0){
           return (this.props.postings.map(function(posting){
             return (<Posting key={posting._id} postingData={posting} />)

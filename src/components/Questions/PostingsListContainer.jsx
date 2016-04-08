@@ -45,7 +45,7 @@ var PostingsListContainer = React.createClass({
                 that.retrieveMine(Number(that.props.page));
                 break;
             case "favorites":
-                that.retrieveFavorites(Number(that.props.page));
+                that.retrieveFavorites();
             default:
         }
     },
@@ -75,7 +75,7 @@ var PostingsListContainer = React.createClass({
                 that.retrieveMine(Number(that.props.page));
                 break;
             case "favorites":
-                that.retrieveFavorites(Number(nextProps.page));
+                that.retrieveFavorites();
             default:
         }       
     },
@@ -114,7 +114,7 @@ var PostingsListContainer = React.createClass({
             that.setState({postings: response.data.postings});
         });
     },
-    retrieveFavorites: function(page){ // retrieve user's favorites
+    retrieveFavorites: function(){ // retrieve user's favorites
         let that = this;
         let userData = {"email": that.props.email};
             axios.post("/favoritePostings", userData)

@@ -22,9 +22,8 @@ DRY: Merge Posting and Question into one
 
 Clearly mark "My Favorites"
 Enable favorite deleting
-Use React Router and an "auth" URL version of login to show successful account creation message
-Fix baffling signup bug
 Enable editing and deletion of comments
+If not logged in at certain links, redirect the user to all
 
 Use LocalStorage to preserve login state despite reload. Test on one component before useing the same approach everywhere
 http://stackoverflow.com/questions/34038726/redux-router-how-to-replay-state-after-refresh

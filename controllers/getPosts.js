@@ -2,7 +2,7 @@
 var mongoose = require('mongoose');
 var ObjectId = mongoose.Types.ObjectId;
 var Posting = require(process.cwd() + "/dbmodels/posting.js"); Posting = mongoose.model("Posting");
-var User = require(process.cwd() + "/dbmodels/posting.js"); User = mongoose.model("Posting");
+var User = require(process.cwd() + "/dbmodels/user.js"); User = mongoose.model("User");
 var sanitizeBody = require("./helpers/sanitizeBody");
 const perPage = 20;
 
@@ -91,26 +91,27 @@ app.post("/questionData", sanitizeBody, function(req, res){ // retrieve a questi
 app.post("/favoritePostings", sanitizeBody, function(req, res){ //retrieve list of user favorites
 let favesArray = [];
 let numTraversed = 0;
-    User.find({"email": req.body.email}, function(err, usr){
-        if(err){
+    User.findOne({"email": req.body.email}, function(err, usr){
+        if(err || !usr){
             res.json({"error": err});
         }
         else{
         if(usr.favorites){
         for(let i = 0; i < usr.favorites.length; i++){
-            Posting.find({"_id": usr.favorites[i]}, function(err, doc){
+            console.log("favs: " + usr.favorites);
+            Posting.findOne({"_id": usr.favorites[i]}, function(err, doc){
+                numTraversed++;
                 if(doc){
                  favesArray.push(doc);
-                 numTraversed++;
-                 if(numTraversed === usr.favorites.length-1 || favesArray.length === 100){
-                     res.json({"postData": favesArray});
-                 }
                 }
+                if(numTraversed >= usr.favorites.length || favesArray.length === 100){
+                     res.json({"postings": favesArray});
+                 }
             });
         }
         }
         else{
-            res.json({"postData": []});
+            res.json({"postings": []});
         }
         }
     });

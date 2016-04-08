@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Posting = require(process.cwd() + "/dbmodels/posting.js"); Posting = mongoose.model("Posting");
-var User = require(process.cwd() + "/dbmodels/posting.js"); User = mongoose.model("Posting");
+var User = require(process.cwd() + "/dbmodels/user.js"); User = mongoose.model("User");
 
 var sanitizeBody = require("./helpers/sanitizeBody");
 
@@ -28,8 +28,9 @@ module.exports = function(app) {
     }
 });
 app.post("/addFavorite", sanitizeBody, function(req, res){
-    console.log(req.body.postID);
-    User.update({"email": req.body.email}, {$addToSet: {"favorites": req.body.postID}}, function(err, msg){
+    console.log("ID: " + req.body.postID);
+    console.log("email: " + req.body.email);
+    User.findOneAndUpdate({"email": req.body.email}, {$addToSet: {"favorites": req.body.postID}}, function(err, msg){
         if(err){
             res.json({"error": err});
         }
