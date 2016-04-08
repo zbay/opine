@@ -11,9 +11,20 @@ var Posting = React.createClass({
     },
     getInitialState: function(){
         let that = this;
-        var isFavorite = false;
-        //get favorites from server with axios!!!!
-        return {favorited: isFavorite, editing: false, deleted: false, displayData: that.props.postingData};
+        return {favorited: false, editing: false, deleted: false, displayData: that.props.postingData};
+    },
+    componentDidMount: function(){
+        let that = this;
+        let isFavorite = false;
+        if(that.props.email){
+            axios.post("/testIfFavorite", {postID: that.props.postingData._id, email: that.props.email}).then(function(response){
+                console.log("response: " + JSON.stringify(response));
+                isFavorite = response.data.isFavorite;
+                if(isFavorite){
+                    that.setState({favorited: true});
+                }
+            });   
+        }
     },
     render: function(){
         if(!this.state.deleted){
@@ -50,7 +61,6 @@ var Posting = React.createClass({
         let that = this;
         let faveData = {"postID": this.props.postingData._id, "email": that.props.email};
         axios.post("/addFavorite", faveData).then(function(response){
-            console.log("response: " + JSON.stringify(response));
             that.setState({favorited: true});
         });
     },

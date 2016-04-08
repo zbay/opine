@@ -116,7 +116,20 @@ let numTraversed = 0;
     });
 });
 app.post("/testIfFavorite", sanitizeBody, function(req, res){
-    
+    User.findOne({"email": req.body.email}, function(err, usr){
+        console.log(JSON.stringify(usr.favorites));
+        if(err || !usr){
+            res.json({"isFavorite": false});
+        }
+        else{
+            if(usr.favorites.indexOf(req.body.postID) > -1){
+                res.json({"isFavorite": true});
+            }
+            else{
+                res.json({"isFavorite": false});
+            }
+        }
+    });
 });
 app.post("/comments", sanitizeBody, function(req, res){ // retrieve a post's comments, on refresh only
   let postID = ObjectId(req.body.id);
