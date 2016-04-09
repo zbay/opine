@@ -19,7 +19,6 @@ var Posting = React.createClass({
         let isFavorite = false;
         if(that.props.email){
             axios.post("/testIfFavorite", {postID: that.props.postingData._id, email: that.props.email}).then(function(response){
-                console.log("response: " + JSON.stringify(response));
                 isFavorite = response.data.isFavorite;
                 if(isFavorite){
                     that.setState({favorited: true});

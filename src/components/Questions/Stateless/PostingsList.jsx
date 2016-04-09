@@ -25,7 +25,6 @@ module.exports = React.createClass({
          this.setState({isLoading: false}); 
     },
     renderPostings: function(){
-        console.log("postings: " + JSON.stringify(this.props.postings));
         if(this.props.postings.length > 0){
           return (this.props.postings.map(function(posting){
             return (<Posting key={posting._id} postingData={posting} />)
@@ -35,10 +34,10 @@ module.exports = React.createClass({
         if(!this.state.isLoading){
             if(Number(this.props.page) <= 1)
             {
-            return(<div id="errorMessage">There are no open questions here! Go ahead and post one, to get us started.</div>);    
+            return(<div id="errorMessage">There are no open questions here! Maybe you should post one, to get us started.<br /></div>);    
             }
             else{ //if this is not the first page of results, but there are none to return
-                return(<div id="errorMessage">There are no more questions to browse, here! Please go back.</div>);
+                return(<div id="errorMessage">There are no more questions to browse, here! Please go back.<br /></div>);
             }
         }
         else{

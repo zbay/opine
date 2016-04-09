@@ -130,11 +130,11 @@ app.post("/testIfFavorite", sanitizeBody, function(req, res){
         }
     });
 });
-app.post("/comments", sanitizeBody, function(req, res){ // retrieve a post's comments, on refresh only
+app.post("/comments", sanitizeBody, function(req, res){ // retrieve a post's comments
   let postID = ObjectId(req.body.id);
   var postingStream = Posting.findOne({_id: postID}).stream();
   postingStream.on("data", function(doc){
-     res.json({"postData": doc.comments});
+          res.json({"postData": doc.comments});  
   });
 });
 }

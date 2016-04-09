@@ -39,7 +39,6 @@ app.post("/addFavorite", sanitizeBody, function(req, res){
 });
 app.post("/removeFavorite", sanitizeBody, function(req, res){
     User.findOneAndUpdate({"email": req.body.email}, {$pull: {"favorites": req.body.postID}}, function(err, msg){
-        console.log("Removed???" + msg);
         if(err){
             res.json({"error": err});
         }
@@ -47,5 +46,20 @@ app.post("/removeFavorite", sanitizeBody, function(req, res){
             res.json({"success": msg});
         }
     });    
+});
+app.post("/editComment", sanitizeBody, function(req, res){
+    if(!req.body.text){
+        res.json({"error": "Please fill out the comment field"});
+    }
+    else{
+        Posting.findOneAndUpdate({_id: req.body.postID, "comments._id": req.body.commentID}, {$set: {"comments.$.text": req.body.text}}, function(err, msg){
+        if(err){
+            res.json({"error": err});
+        }
+        else{
+            res.json({"success": msg});
+        }   
+        });
+    }
 });
 }

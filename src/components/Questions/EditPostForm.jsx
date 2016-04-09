@@ -63,7 +63,6 @@ var EditPostForm = React.createClass({
         if(fixedDeadline.match(dateRegex) !== null && Number(fixedDeadline.slice(0, 4) < maxYear)){ //if the deadline meets the MM/DD/YYYY format and year isn't huge
         if(that.state.question !== null && that.state.asker !== null && that.state.howToContact !== null && 
         Date.parse(fixedDeadline).getTime()/1000 > (Math.floor(Date.now() / 1000) - (dailySeconds)) ){
-            let redirectCategory = that.state.category;
          let postData = {
             id: that.props.postingData._id,
             question: that.state.question,
@@ -75,7 +74,6 @@ var EditPostForm = React.createClass({
         };
         axios.post("/editPosting", postData).then(function(response){
             postData.editable = true;
-            console.log(JSON.stringify(response));
             if(response.data.success){
                 that.props.saveEditRender(postData);
             }

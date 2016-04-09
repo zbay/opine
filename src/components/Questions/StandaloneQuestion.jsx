@@ -1,27 +1,17 @@
 var React = require('react');
+var ReactRedux = require('react-redux');
 var axios = require('axios');
 
 var CommentsList = require("../Comments/CommentsList");
 var NewCommentForm = require("../Comments/NewCommentForm");
 var localStorage = localStorage || window.localStorage;
 
-module.exports = React.createClass({
+var StandaloneQuestion = React.createClass({
     propTypes: {
         questionID: React.PropTypes.string.isRequired
     },
     getInitialState: function(){
-        var isFavorite = false;
-        if(localStorage){
-        var currentFavorites = JSON.parse(localStorage.getItem("favorites"));
-        if(currentFavorites && currentFavorites.length){
-            for(let i = 0; i < currentFavorites.length; i++){
-            if(currentFavorites[i] == this.props.questionID){
-                isFavorite = true;
-            }
-            }
-        }   
-        }
-      return {question: null, comments: [], isLoading: true, favorited: isFavorite}  
+      return {question: null, comments: [], isLoading: true, favorited: false}  
     },
     componentDidMount: function(){
         setTimeout(this.showError, 2000);
@@ -56,11 +46,10 @@ module.exports = React.createClass({
         {this.state.question.timePosted.substring(0,10)}
         <h3>Deadline: </h3>
         {this.state.question.deadline.substring(0,10)}<br /><br />
-        {this.state.favorited? (<span></span>): <button onClick={this.addFavorite}>Add To My Favorites</button>}
         </div>
         <NewCommentForm questionID={this.props.questionID} refreshComments={this.retrieveComments}/>
         <br />
-        <CommentsList comments={this.state.comments} />
+        <CommentsList comments={this.state.comments} postID={this.props.questionID} refreshComments={this.retrieveComments} />
         </div>
         );            
         }
@@ -78,16 +67,38 @@ module.exports = React.createClass({
         let questionData = {id: that.props.questionID};
         axios.post("/questionData", questionData)
         .then(function(response){
-            console.log((response));
             that.setState({question: response.data.postData});
         });
     },
     retrieveComments: function(){
          let that = this;
-         let idData = {"id": this.props.questionID}
+         console.log("retrieving comments");
+         let idData = {"id": that.props.questionID, "email": that.props.email}
         axios.post("/comments", idData)
         .then(function(response){
-            that.setState({comments: response.data.postData});
+            console.log(response.data.postData);
+            if(response.data.postData.length <= 0){
+                that.setState({comments: response.data.postData}); 
+            }
+            else{
+        let iteratedOver = 0;
+         for(let i = 0; i < response.data.postData.length; i++){
+           iteratedOver++;
+          if(that.props.email && response.data.postData[i].email && response.data.postData[i].email === that.props.email){
+              response.data.postData[i]["editable"] = true;
+              console.log(response.data.postData[i]);
+          if(iteratedOver >= response.data.postData.length){
+                that.setState({"comments": response.data.postData});   
+          }
+          }
+          else{
+            if(iteratedOver >= response.data.postData.length){
+                that.setState({"comments": response.data.postData});   
+          }
+          }
+
+      }   
+            }
         });       
     },
     toggleForm: function(){
@@ -97,19 +108,11 @@ module.exports = React.createClass({
         else{
             this.setState({visibleForm: false});
         }
-    },
-    addFavorite: function(){
-        if(localStorage){
-        var currentFavorites = JSON.parse(localStorage.getItem("favorites"));
-        if(currentFavorites && currentFavorites.length >= 100){
-            currentFavorites.shift();
-        }
-        if(currentFavorites === null || currentFavorites === undefined){
-            currentFavorites = [];
-        }
-        currentFavorites.push(this.props.questionID);
-        localStorage.setItem("favorites", JSON.stringify(currentFavorites));
-        this.setState({favorited: true});
-    }
     }
 });
+
+var mapStateToProps = function(state){
+    return {loggedIn:state.loggedIn.loggedIn, email:state.loggedIn.email};
+};
+
+module.exports = ReactRedux.connect(mapStateToProps)(StandaloneQuestion);

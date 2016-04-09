@@ -47,9 +47,10 @@ var NewCommentForm = React.createClass({
          e.preventDefault(); // so that only React handles the form data
          let that = this;
          if(this.state.comment.length > 0 && this.props.questionID){
-             let commentData = {"questionID": that.props.questionID, "commentText": that.state.comment, "IP": that.state.IP, "loggedIn": that.props.loggedIn};
+             let commentData = {"questionID": that.props.questionID, "commentText": that.state.comment, "IP": that.state.IP, "loggedIn": that.props.loggedIn,
+                 email: that.props.email
+             };
              axios.post("/addComment", commentData).then(function(response){
-                 console.log(JSON.stringify(response));
                  if(response.data.success){
                      that.setState({successMessage: "Comment successfully posted!", errorMessage: null, comment: ""});
                      that.props.refreshComments(); // sends call up to show all the post's comments, including the new one
@@ -65,7 +66,7 @@ var NewCommentForm = React.createClass({
     }
 });
 var mapStateToProps = function(state){
-    return {loggedIn:state.loggedIn.loggedIn};
+    return {loggedIn:state.loggedIn.loggedIn, email:state.loggedIn.email};
 };
 
 module.exports = ReactRedux.connect(mapStateToProps)(NewCommentForm);

@@ -13,7 +13,7 @@
 13. 
 14. Local storage: automatically add posts that you make to local storage favorites
 15. Refactor ActionBar as a conventional nav bar
-16. 
+16. On page change, reset action bar's category
 17. No page arrow if the number of posts is less than perPage (add perPage in)
 18.
 19. Use localStorage to maintain state (like loggedIn!) on reload for redux
@@ -22,10 +22,12 @@ DRY: Merge Posting and Question into one
 
 Clearly mark "My Favorites", and send error if more than 100 active are in the array. Explain the limitation
 Add to purge old: remove the ID from User's favorites
-Enable favorite deleting
 Enable editing and deletion of user's comments
 Check if favorite, and pass it down
 Show number of comments
+Make standalone question editable, by refactoring to use Posting with more data
+Convert inputs to textfields where desirable
+DELETE AND EDIT COMMENTS
 
 
 Use LocalStorage to preserve login state despite reload. Test on one component before useing the same approach everywhere
