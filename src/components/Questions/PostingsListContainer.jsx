@@ -151,7 +151,6 @@ var PostingsListContainer = React.createClass({
 });
 
 var mapStateToProps = function(state){
-    console.log("State: " + JSON.stringify(state));
     return {loggedIn:state.loggedIn.loggedIn, email: state.loggedIn.email};
 };
 

@@ -3,6 +3,7 @@
 var mongoose = require('mongoose');
 var ObjectId = mongoose.Types.ObjectId;
 var Posting = require(process.cwd() + "/dbmodels/posting.js"); Posting = mongoose.model("Posting");
+var User = require("../dbmodels/user.js"); User = mongoose.model("User");
 var dailySeconds = 86400;
 
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost:27017/opine', function (err, db)
@@ -24,9 +25,12 @@ Posting.find({}, function(error, docs){
         Posting.remove({_id: ObjectId(docs[i]._id)}, function(err, msg){
             console.log("err: " + err);
             console.log("msg: " + msg);
+            iterated++;
+            if(msg && !err){
+               User.update({"favorites":  ObjectId(docs[i]._id)}, {$pull: {"favorites": ObjectId(docs[i]._id)}}); //remove post from individual users' favorites lists 
+            }
             });
         }
-        iterated++;
       if(iterated == docs.length-1){
           process.exit();
       }  

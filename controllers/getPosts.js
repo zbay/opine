@@ -92,6 +92,7 @@ app.post("/favoritePostings", sanitizeBody, function(req, res){ //retrieve list 
 let favesArray = [];
 let numTraversed = 0;
     User.findOne({"email": req.body.email}, function(err, usr){
+        console.log(JSON.stringify(usr));
         if(err || !usr){
             res.json({"error": err});
         }
@@ -104,6 +105,7 @@ let numTraversed = 0;
                  favesArray.push(doc);
                 }
                 if(numTraversed >= usr.favorites.length || favesArray.length === 100){
+                    console.log(favesArray);
                      res.json({"postings": favesArray});
                  }
             });

@@ -16,10 +16,10 @@ module.exports = React.createClass({
         return {isLoading: true}
     },
     componentDidMount: function(){
-        setTimeout(this.showError, 2000);
+        setTimeout(this.showError, 3000);
     },
     componentWillReceiveProps: function(){
-      this.showError();
+     // this.showError();
     },
     showError: function(){
          this.setState({isLoading: false}); 
