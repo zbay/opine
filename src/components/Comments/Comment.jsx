@@ -30,8 +30,8 @@ var Comment = React.createClass({
         let commentData = {postID: that.props.postID, commentID: that.state.commentData._id};
         axios.post("/deleteComment", commentData).then(function(response){
             if(!response.data.error){
-                //that.setState({deleted: true});
-                that.props.refreshComments();
+                that.setState({deleted: true});
+                //that.props.refreshComments();
             }
         });   
         } 

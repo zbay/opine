@@ -20,7 +20,7 @@ module.exports = React.createClass({
         }
         else{
           return (that.props.comments.map(function(comment, index){
-            return (<Comment key={index} index={index} postID={that.props.postID} commentData={comment} refreshComments={that.props.refreshComments}></Comment>)
+            return (<Comment key={comment._id} index={index} postID={that.props.postID} commentData={comment} refreshComments={that.props.refreshComments}></Comment>)
         }));   
         }
     }
