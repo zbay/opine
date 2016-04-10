@@ -72,6 +72,10 @@ footer{
     background: url("/img/questionbackground.png") repeat;
     font-weight: bold;
     @include fullCentered();
+    textarea{
+        min-width:75%;
+        max-width:100%;
+    }
 }
 #newPostForm{
     @include fullCentered();
@@ -81,8 +85,9 @@ footer{
     max-width:90%;
     margin-bottom: $standard_space;
     
-    input{
+    textarea{
          min-width: 75%;
+         max-width: 100%;
     }
 }
 #commentInput{
@@ -131,6 +136,11 @@ label, #commentHeader{
     margin-bottom: $standard_space;
     padding: $standard_space;
     border-radius: $standard_space;
+    
+    textarea{
+        min-width:100%;
+        max-width:100%;
+    }
 }
 footer{
    min-width:100%;

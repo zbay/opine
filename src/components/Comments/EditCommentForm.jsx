@@ -10,7 +10,7 @@ module.exports = React.createClass({
           return (<div className="comment">
           <FormAlert successMessage={this.state.successMessage} errorMessage={this.state.errorMessage}/>
           <span className="commentNumber">{this.props.index+1}.&nbsp;&nbsp;</span>
-          <input name="text" value={this.state.text} onChange={this.onChange}/>
+          <textarea name="text" rows="3" value={this.state.text} onChange={this.onChange}></textarea>
           <br />
           <div><br /><button onClick={this.saveEdit}>Save Edit</button>&nbsp;<button onClick={this.props.cancelEdit}>Cancel Edit</button></div>
           </div>);      

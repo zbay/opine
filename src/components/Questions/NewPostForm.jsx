@@ -34,11 +34,11 @@ var NewPostForm = React.createClass({
         <FormAlert successMessage={this.state.successMessage} errorMessage={this.state.errorMessage}/>
         <br />
         <div className="row"><label>Question:</label></div>
-         <div className="row"><input placeholder="What are you asking?" name="question" value={this.state.question} onChange={this.onChange}/></div><br />
+         <div className="row"><textarea rows="1" placeholder="What are you asking?" name="question" value={this.state.question} onChange={this.onChange}></textarea></div><br />
          <div className="row"><label>Asker:</label></div>
-         <div className="row"><input placeholder="Who's asking?" name="asker" value={this.state.asker} onChange={this.onChange}/></div><br />
+         <div className="row"><textarea rows="1" placeholder="Who's asking?" name="asker" value={this.state.asker} onChange={this.onChange}></textarea></div><br />
          <div className="row"><label>How to contact:</label></div>
-         <div className="row"><input placeholder="URL, email, phone, etc." name="contact" value={this.state.contact} onChange={this.onChange}/></div><br />
+         <div className="row"><textarea rows="1" placeholder="URL, email, phone, etc." name="contact" value={this.state.contact} onChange={this.onChange}></textarea></div><br />
          <div className="row"><label>Deadline:</label></div>
          <div className="row"><input placeholder="Format: YYYY/MM/DD" type="date" name="deadline" value={this.state.deadline} onChange={this.onChange}/></div><br />
          <div className="row"> <label>Category:</label></div>

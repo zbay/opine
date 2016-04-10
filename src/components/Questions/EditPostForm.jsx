@@ -25,14 +25,14 @@ var EditPostForm = React.createClass({
         <FormAlert successMessage={this.state.successMessage} errorMessage={this.state.errorMessage}/>
         <div className="postQuestion">
         <h3>Question</h3>
-        <input name="question" value={this.state.question} onChange={this.onChange}/><br /></div>
+        <textarea rows="1" name="question" value={this.state.question} onChange={this.onChange}></textarea><br /></div>
         <div className="postAsker">
         <h3>Who's asking?</h3>
-        <input name="asker" value={this.state.asker} onChange={this.onChange} />
+        <textarea rows="1" name="asker" value={this.state.asker} onChange={this.onChange}></textarea>
         </div>
         <div className="postContact">
         <h3>How can I opine?</h3>
-        <input name="howToContact" value={this.state.howToContact} onChange={this.onChange}/></div>
+        <textarea rows="1" name="howToContact" value={this.state.howToContact} onChange={this.onChange}></textarea></div>
         <h3>Deadline</h3>
         <input type="date" name="deadline" value={this.state.deadline} onChange={this.onChange}/><br />
         <div className="postCategory">

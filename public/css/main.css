@@ -67,6 +67,9 @@ footer {
   margin-left: auto;
   margin-right: auto;
   text-align: center; }
+  .posting textarea {
+    min-width: 75%;
+    max-width: 100%; }
 
 #newPostForm {
   margin-left: auto;
@@ -77,8 +80,9 @@ footer {
   border-radius: 10px;
   max-width: 90%;
   margin-bottom: 10px; }
-  #newPostForm input {
-    min-width: 75%; }
+  #newPostForm textarea {
+    min-width: 75%;
+    max-width: 100%; }
 
 #commentInput {
   min-width: 75%;
@@ -127,6 +131,9 @@ label, #commentHeader {
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 10px; }
+  .comment textarea {
+    min-width: 100%;
+    max-width: 100%; }
 
 footer {
   min-width: 100%;
