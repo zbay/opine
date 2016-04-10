@@ -78,11 +78,10 @@ var NewPostForm = React.createClass({
             deadline: fixedDeadline,
             category: that.state.category,
             IP: that.state.IP,
-            email: that.props.email
+            userID: that.props.userID
         };
         console.log(postData);
         axios.post("/addPosting", postData).then(function(response){
-            console.log(JSON.stringify(response));
             if(response.data.success){
                 that.setState({successMessage: "Question successfully posted!", 
                     question: null,
@@ -115,7 +114,7 @@ var NewPostForm = React.createClass({
     }
 });
 var mapStateToProps = function(state){
-    return {email:state.loggedIn.email};
+    return {userID:state.loggedIn.userID};
 };
 
 module.exports = ReactRedux.connect(mapStateToProps)(NewPostForm);

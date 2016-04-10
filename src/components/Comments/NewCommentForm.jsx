@@ -48,7 +48,7 @@ var NewCommentForm = React.createClass({
          let that = this;
          if(this.state.comment.length > 0 && this.props.questionID){
              let commentData = {"questionID": that.props.questionID, "commentText": that.state.comment, "IP": that.state.IP, "loggedIn": that.props.loggedIn,
-                 email: that.props.email
+                 userID: that.props.userID
              };
              axios.post("/addComment", commentData).then(function(response){
                  if(response.data.success){
@@ -66,7 +66,7 @@ var NewCommentForm = React.createClass({
     }
 });
 var mapStateToProps = function(state){
-    return {loggedIn:state.loggedIn.loggedIn, email:state.loggedIn.email};
+    return {loggedIn:state.loggedIn.loggedIn, userID:state.loggedIn.userID};
 };
 
 module.exports = ReactRedux.connect(mapStateToProps)(NewCommentForm);

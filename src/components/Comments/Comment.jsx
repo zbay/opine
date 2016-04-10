@@ -48,7 +48,7 @@ var Comment = React.createClass({
 });
 
 var mapStateToProps = function(state){
-    return {loggedIn:state.loggedIn.loggedIn, email:state.loggedIn.email};
+    return {loggedIn:state.loggedIn.loggedIn, userID:state.loggedIn.userID};
 };
 
 module.exports = ReactRedux.connect(mapStateToProps)(Comment);

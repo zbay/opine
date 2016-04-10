@@ -15,7 +15,7 @@ else{
   	if(!err && doc != null){
   		var hashedPassword = doc.password;
   		if(bcrypt.compareSync(password, hashedPassword)){
-            res.json({"success": "Successfully logged in!"});
+            res.json({"userID": doc._id});
   		}
   		else{
             res.json({"error": "Wrong password!"});

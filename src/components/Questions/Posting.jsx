@@ -17,8 +17,8 @@ var Posting = React.createClass({
     componentDidMount: function(){
         let that = this;
         let isFavorite = false;
-        if(that.props.email){
-            axios.post("/testIfFavorite", {postID: that.props.postingData._id, email: that.props.email}).then(function(response){
+        if(that.props.userID){
+            axios.post("/testIfFavorite", {postID: that.props.postingData._id, userID: that.props.userID}).then(function(response){
                 isFavorite = response.data.isFavorite;
                 if(isFavorite){
                     that.setState({favorited: true});
@@ -59,7 +59,7 @@ var Posting = React.createClass({
     },
     toggleFavorite: function(){
         let that = this;
-        let faveData = {"postID": that.props.postingData._id, "email": that.props.email};
+        let faveData = {"postID": that.props.postingData._id, "userID": that.props.userID};
         if(that.state.favorited){
         axios.post("/removeFavorite", faveData).then(function(response){
             that.setState({favorited: false});
@@ -93,7 +93,7 @@ var Posting = React.createClass({
     }
 });
 var mapStateToProps = function(state){
-    return {loggedIn:state.loggedIn.loggedIn, email: state.loggedIn.email};
+    return {loggedIn:state.loggedIn.loggedIn, userID: state.loggedIn.userID};
 };
 
 module.exports = ReactRedux.connect(mapStateToProps)(Posting);

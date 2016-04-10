@@ -2,6 +2,6 @@
 
 module.exports = function(){
     return {
-        loggedIn: {loggedIn: false, email: null}
+        loggedIn: {loggedIn: false, userID: null}
     };
 };

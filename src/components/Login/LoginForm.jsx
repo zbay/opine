@@ -6,6 +6,7 @@ var Link = ReactRouter.Link;
 var actions = require("../../actions");
 var axios = require('axios');
 var FormAlert = require("../Alerts/FormAlert");
+var localStorage = localStorage || window.localStorage;
 
 var LoginForm = React.createClass({
     propTypes: {
@@ -34,7 +35,6 @@ var LoginForm = React.createClass({
     login: function(e){
          e.preventDefault();
          let that = this;
-          // load loggedIn from the appropriate Redux store
          if(!that.props.loggedIn){
          if(that.state.email && that.state.password){
             let loginData = {
@@ -43,9 +43,13 @@ var LoginForm = React.createClass({
              loggedIn: that.props.loggedIn
          };   
          axios.post("/login", loginData).then(function(response){
-             console.log("login response");
                   if(!response.data.error){
-                    that.props.reduxLogin(that.state.email);
+                      console.log("login response: " + JSON.stringify(response.data));
+                    if(localStorage){
+                        localStorage.setItem("loggedIn", JSON.stringify({userID: response.data.userID}));
+                    }
+                    console.log(response.data.userID);
+                    that.props.reduxLogin(response.data.userID);
                     BrowserHistory.push("/all/1");
               }
               else{
@@ -74,7 +78,8 @@ var mapStateToProps = function(state){
 
 var mapDispatchToProps = function(dispatch){
     return {
-        reduxLogin: function(email){ dispatch(actions.login(email)); }
+        reduxLogin: function(userID){ 
+            dispatch(actions.login(userID)); }
     }
 };
 

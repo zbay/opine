@@ -5,5 +5,5 @@ module.exports = {
 
     // STATUSES
     LOGGEDIN: "loggedIn",
-    EMAIL: "email"
+    USER_ID: "userID"
 };

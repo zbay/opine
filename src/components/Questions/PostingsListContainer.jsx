@@ -87,7 +87,7 @@ var PostingsListContainer = React.createClass({
     },
     retrieveAll: function(page){ //get all questions, from the server
         let that = this;
-        let pageData = {"page": page, "email": that.props.email};
+        let pageData = {"page": page, "userID": that.props.userID};
         axios.post("/allPostings", pageData)
         .then(function(response){
             that.setState({postings: response.data.postings});
@@ -96,8 +96,7 @@ var PostingsListContainer = React.createClass({
     retrieveMine: function(page){
         if(this.props.loggedIn){
          let that = this;
-        console.log("state email: " + that.props.email);
-         let meData = {"page": page, "email": that.props.email};
+         let meData = {"page": page, "userID": that.props.userID};
          axios.post("/myPostings", meData)
          .then(function(response){
              that.setState({postings: response.data.postings});
@@ -109,7 +108,7 @@ var PostingsListContainer = React.createClass({
     },
     retrieveCategory: function(category, page){ //get all questions in a category, from the server
         let that = this;
-          let queryData = {"category": category, "page": page, "email": that.props.email};
+          let queryData = {"category": category, "page": page, "userID": that.props.userID};
         axios.post("/categoryPostings", queryData)
         .then(function(response){
             that.setState({postings: response.data.postings});
@@ -117,7 +116,7 @@ var PostingsListContainer = React.createClass({
     },
     retrieveSearch: function(searchQuery, page){ // get search results from the server
         let that = this;
-          let queryData = {"searchQuery": searchQuery, "page": page, "email": that.props.email};
+          let queryData = {"searchQuery": searchQuery, "page": page, "userID": that.props.userID};
         axios.post("/searchPostings", queryData)
         .then(function(response){
             that.setState({postings: response.data.postings});
@@ -126,7 +125,7 @@ var PostingsListContainer = React.createClass({
     retrieveFavorites: function(){ // retrieve user's favorites
      if(this.props.loggedIn){
         let that = this;
-        let userData = {"email": that.props.email};
+        let userData = {"userID": that.props.userID};
             axios.post("/favoritePostings", userData)
             .then(function(response){
             if(!response.data.error){
@@ -151,7 +150,8 @@ var PostingsListContainer = React.createClass({
 });
 
 var mapStateToProps = function(state){
-    return {loggedIn:state.loggedIn.loggedIn, email: state.loggedIn.email};
+    console.log("state: " + JSON.stringify(state));
+    return {loggedIn:state.loggedIn.loggedIn, userID: state.loggedIn.userID};
 };
 
 module.exports = ReactRedux.connect(mapStateToProps)(PostingsListContainer);

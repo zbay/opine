@@ -70,7 +70,7 @@ var EditPostForm = React.createClass({
             howToContact: that.state.howToContact,
             deadline: fixedDeadline,
             category: that.state.category,
-            email: that.props.postingData.email
+            userID: that.props.postingData.userID
         };
         axios.post("/editPosting", postData).then(function(response){
             postData.editable = true;

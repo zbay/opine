@@ -13,7 +13,7 @@ app.post("/allPostings", sanitizeBody, function(req, res){ // retrieve the most 
     let postings = [];
     let postingStream = Posting.find().skip(perPage * page).sort({"timePosted": -1}).limit(perPage).stream(); //less than or equal to in mongodb query
     postingStream.on("data", function(doc){
-            if(doc.email && req.body.email && (doc.email === req.body.email)){
+            if(doc.userID && req.body.userID && (doc.userID === req.body.userID)){
                 doc.editable = true;
                 postings.push(doc);
             }
@@ -32,7 +32,7 @@ app.post("/categoryPostings", sanitizeBody, function(req, res){ //retrieve the m
     let postingStream = Posting.find({"category": postCategory})
     .skip(perPage * page).sort({"timePosted": -1}).limit(perPage).stream();
     postingStream.on("data", function(doc){
-             if(doc.email && req.body.email && (doc.email === req.body.email)){
+             if(doc.userID && req.body.userID && (doc.userID === req.body.userID)){
                 doc["editable"] = true;
                 postings.push(doc);
             }
@@ -52,7 +52,7 @@ app.post("/searchPostings", sanitizeBody, function(req, res){ //retrieve the mos
     .sort({score: {$meta: "textScore"}, "timePosted": -1}).skip(perPage * page)
     .limit(perPage).stream();
     postingStream.on("data", function(doc){
-             if(doc.email && req.body.email && (doc.email === req.body.email)){
+             if(doc.userID && req.body.userID && (doc.userID === req.body.userID)){
                 doc["editable"] = true;
                 postings.push(doc);
             }
@@ -66,9 +66,8 @@ app.post("/searchPostings", sanitizeBody, function(req, res){ //retrieve the mos
 });
 app.post("/myPostings", sanitizeBody, function(req, res){
   let postings = [];  
-  let userEmail = req.body.email;
   let page = req.body.page - 1;
-  let postingStream = Posting.find({email: userEmail}).sort({"timePosted": -1}).skip(perPage * page).limit(perPage).stream();
+  let postingStream = Posting.find({"userID": ObjectId(req.body.userID)}).sort({"timePosted": -1}).skip(perPage * page).limit(perPage).stream();
   postingStream.on("data", function(doc){
             doc["editable"] = true;
             postings.push(doc);
@@ -81,7 +80,7 @@ app.post("/questionData", sanitizeBody, function(req, res){ // retrieve a questi
   let postID = ObjectId(req.body.id);
   var postingStream = Posting.findOne({_id: postID}, {comments: 0}).stream();
   postingStream.on("data", function(doc){
-             if(doc.email && req.body.email && (doc.email === req.body.email)){
+             if(doc.userID && req.body.userID && (doc.userID === req.body.userID)){
                 doc["editable"] = true;
             }
 
@@ -91,8 +90,7 @@ app.post("/questionData", sanitizeBody, function(req, res){ // retrieve a questi
 app.post("/favoritePostings", sanitizeBody, function(req, res){ //retrieve list of user favorites
 let favesArray = [];
 let numTraversed = 0;
-    User.findOne({"email": req.body.email}, function(err, usr){
-        console.log(JSON.stringify(usr));
+    User.findOne({"_id": req.body.userID}, function(err, usr){
         if(err || !usr){
             res.json({"error": err});
         }
@@ -105,7 +103,6 @@ let numTraversed = 0;
                  favesArray.push(doc);
                 }
                 if(numTraversed >= usr.favorites.length || favesArray.length === 100){
-                    console.log(favesArray);
                      res.json({"postings": favesArray});
                  }
             });
@@ -118,7 +115,7 @@ let numTraversed = 0;
     });
 });
 app.post("/testIfFavorite", sanitizeBody, function(req, res){
-    User.findOne({"email": req.body.email}, function(err, usr){
+    User.findOne({"_id": req.body.userID}, function(err, usr){
         if(err || !usr){
             res.json({"isFavorite": false});
         }

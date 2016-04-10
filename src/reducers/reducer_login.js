@@ -5,12 +5,12 @@ module.exports = function(state, action){
     var newState = Object.assign({},state); // sloppily copying the old state
     switch(action.type){
         case C.LOGIN:
-            newState[C.LOGGEDIN] = true;
-            newState[C.EMAIL] = action.email;
+            newState["loggedIn"] = true;
+            newState["userID"] = action.userID;
             return newState;
         case C.LOGOUT:
-            newState[C.LOGGEDIN] = false;
-            newState[C.EMAIL] = null;
+            newState["loggedIn"] = false;
+            newState["userID"] = null;
             return newState;
         default: return state || initialState().loggedIn;
     }

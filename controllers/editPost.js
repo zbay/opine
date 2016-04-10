@@ -11,7 +11,7 @@ module.exports = function(app) {
         res.json({"error": "Please fill out the entire form."});
     }
     else{
-        if(req.body.email){
+        if(req.body.userID){
             Posting.update({_id: req.body.id}, {$set: {question: req.body.question, asker: req.body.asker, howToContact: req.body.howToContact, 
             deadline: req.body.deadline, category: req.body.category, timePosted: Date.now()}}, function(err, msg){
                 if(err){
@@ -28,7 +28,7 @@ module.exports = function(app) {
     }
 });
 app.post("/addFavorite", sanitizeBody, function(req, res){
-    User.findOneAndUpdate({"email": req.body.email}, {$addToSet: {"favorites": req.body.postID}}, function(err, msg){
+    User.findOneAndUpdate({"_id": req.body.userID}, {$addToSet: {"favorites": req.body.postID}}, function(err, msg){
         if(err){
             res.json({"error": err});
         }
@@ -38,7 +38,7 @@ app.post("/addFavorite", sanitizeBody, function(req, res){
     });
 });
 app.post("/removeFavorite", sanitizeBody, function(req, res){
-    User.findOneAndUpdate({"email": req.body.email}, {$pull: {"favorites": req.body.postID}}, function(err, msg){
+    User.findOneAndUpdate({"_id": req.body.userID}, {$pull: {"favorites": req.body.postID}}, function(err, msg){
         if(err){
             res.json({"error": err});
         }

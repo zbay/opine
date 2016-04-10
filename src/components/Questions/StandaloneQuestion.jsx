@@ -73,7 +73,7 @@ var StandaloneQuestion = React.createClass({
     retrieveComments: function(){
          let that = this;
          console.log("retrieving comments");
-         let idData = {"id": that.props.questionID, "email": that.props.email}
+         let idData = {"id": that.props.questionID, "userID": that.props.userID}
         axios.post("/comments", idData)
         .then(function(response){
             console.log(response.data.postData);
@@ -84,7 +84,7 @@ var StandaloneQuestion = React.createClass({
         let iteratedOver = 0;
          for(let i = 0; i < response.data.postData.length; i++){
            iteratedOver++;
-          if(that.props.email && response.data.postData[i].email && response.data.postData[i].email === that.props.email){
+          if(that.props.userID && response.data.postData[i].userID && response.data.postData[i].userID === that.props.userID){
               response.data.postData[i]["editable"] = true;
               console.log(response.data.postData[i]);
           if(iteratedOver >= response.data.postData.length){
@@ -112,7 +112,7 @@ var StandaloneQuestion = React.createClass({
 });
 
 var mapStateToProps = function(state){
-    return {loggedIn:state.loggedIn.loggedIn, email:state.loggedIn.email};
+    return {loggedIn:state.loggedIn.loggedIn, userID:state.loggedIn.userID};
 };
 
 module.exports = ReactRedux.connect(mapStateToProps)(StandaloneQuestion);

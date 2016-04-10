@@ -1,12 +1,14 @@
 var React = require('react');
 var ReactRedux = require('react-redux');
 var actions = require("../../actions");
+var localStorage = localStorage || window.localStorage;
+
 var Logout = React.createClass({
     propTypes: {
         logout: React.PropTypes.func.isRequired 
     },
     componentWillMount: function(){
-        console.log("logging out?");
+         localStorage.removeItem("loggedIn");
          this.props.logout();
     },
     render: function(){

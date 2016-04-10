@@ -1,12 +1,12 @@
 1. Better error handling at the server
-2. Heroku
+2. 
 3. Should be able to add to favorite from the individual question
 4. Periodic deletion of expired questions
 5. Redux
 6. Sort by expiring and by most commented
 7. React Router full server-side
 8. Test your sanitization
-9. More responsive with alternative stylesheets http://stackoverflow.com/questions/18470350/css-media-queries-not-working-anywhere
+9. 
 10. Commenting code
 11. Send user directly to the standalone question page, after posting new question
 12. Mongo queries: exclude fields you won't retrieve
@@ -26,6 +26,7 @@ Show number of comments
 Make standalone question editable, by refactoring to use Posting with more data
 Convert inputs to textfields where desirable
 Comment chains (reply directly to comments)
+Sanitize all inputs
 
 
 Use LocalStorage to preserve login state despite reload. Test on one component before useing the same approach everywhere
