@@ -23,11 +23,8 @@ DRY: Merge Posting and Question into one
 Clearly mark "My Favorites", and send error if more than 100 active are in the array. Explain the limitation
 Add to purge old: remove the ID from User's favorites
 Show number of comments
-Make standalone question editable, by refactoring to use Posting with more data
-Convert inputs to textfields where desirable
 Comment chains (reply directly to comments)
 Sanitize all inputs
 
-
-Use LocalStorage to preserve login state despite reload. Test on one component before useing the same approach everywhere
-http://stackoverflow.com/questions/34038726/redux-router-how-to-replay-state-after-refresh
+Redirect to new post page on post create
+Make standalone question editable, by refactoring to use Posting with more data

@@ -39,13 +39,16 @@ var Posting = React.createClass({
         <div className="postContact">
         <h3>How can I opine?</h3>
         {this.state.displayData.howToContact}</div>
-        <div className="postCategory">
-        <h3>Filed Under:</h3>
-        {this.state.displayData.category}</div>
+        {this.props.standalone ? (<div className="postCategory">
+            <h3>Filed Under:</h3>
+            {this.state.displayData.category}</div>): (<span></span>)}
+        <h3>Posted On: </h3>
+        {this.props.postingData.timePosted.substring(0,10)}
+        <h3>Deadline: </h3>
+        {this.props.postingData.deadline.substring(0,10)}
         {!this.props.loggedIn ? (<span></span>): <div><br /><FaveButton toggleFavorite={this.toggleFavorite} favorited={this.state.favorited}/><br /></div>}
         {this.state.displayData.editable ? 
-            (<div><br />{!this.state.editing ? 
-                (<button onClick={this.editify}>Edit Post</button>): (<button onClick={this.saveEdit}>Save Edit</button>)}&nbsp;
+            (<div><br /><button onClick={this.editify}>Edit Post</button>&nbsp;
             <button onClick={this.deletePost}>Delete Post</button></div>): (<span></span>)}
         </div>);     
         }

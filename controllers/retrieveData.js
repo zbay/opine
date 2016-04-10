@@ -13,7 +13,7 @@ app.post("/allPostings", sanitizeBody, function(req, res){ // retrieve the most 
     let postings = [];
     let postingStream = Posting.find().skip(perPage * page).sort({"timePosted": -1}).limit(perPage).stream(); //less than or equal to in mongodb query
     postingStream.on("data", function(doc){
-            if(doc.userID && req.body.userID && (doc.userID === req.body.userID)){
+            if(doc.userID && req.body.userID && (doc.userID == req.body.userID)){
                 doc.editable = true;
                 postings.push(doc);
             }
@@ -32,7 +32,7 @@ app.post("/categoryPostings", sanitizeBody, function(req, res){ //retrieve the m
     let postingStream = Posting.find({"category": postCategory})
     .skip(perPage * page).sort({"timePosted": -1}).limit(perPage).stream();
     postingStream.on("data", function(doc){
-             if(doc.userID && req.body.userID && (doc.userID === req.body.userID)){
+             if(doc.userID && req.body.userID && (doc.userID == req.body.userID)){
                 doc["editable"] = true;
                 postings.push(doc);
             }
@@ -52,7 +52,7 @@ app.post("/searchPostings", sanitizeBody, function(req, res){ //retrieve the mos
     .sort({score: {$meta: "textScore"}, "timePosted": -1}).skip(perPage * page)
     .limit(perPage).stream();
     postingStream.on("data", function(doc){
-             if(doc.userID && req.body.userID && (doc.userID === req.body.userID)){
+             if(doc.userID && req.body.userID && (doc.userID == req.body.userID)){
                 doc["editable"] = true;
                 postings.push(doc);
             }
@@ -80,11 +80,16 @@ app.post("/questionData", sanitizeBody, function(req, res){ // retrieve a questi
   let postID = ObjectId(req.body.id);
   var postingStream = Posting.findOne({_id: postID}, {comments: 0}).stream();
   postingStream.on("data", function(doc){
-             if(doc.userID && req.body.userID && (doc.userID === req.body.userID)){
+        console.log("question ID: " + doc.userID);
+        console.log("req ID: " + req.body.userID);
+             if(doc.userID && req.body.userID && (doc.userID == req.body.userID)){
                 doc["editable"] = true;
+                console.log("question data: " + JSON.stringify(doc));
+                res.json({"postData": doc});
             }
-
-     res.json({"postData": doc});
+            else{
+                res.json({"postData": doc}); 
+            }
   });
 });
 app.post("/favoritePostings", sanitizeBody, function(req, res){ //retrieve list of user favorites

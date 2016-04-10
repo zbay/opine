@@ -190,6 +190,9 @@ footer{
 #loginForm, #signupForm, #loggedOut, #signupBlurb{
     @include fullCentered();
 }
+#signupBlurb{
+    list-style-position:inside;
+}
 body{
     overflow-x:hidden;
 }

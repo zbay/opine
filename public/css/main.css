@@ -184,5 +184,8 @@ footer {
   margin-right: auto;
   text-align: center; }
 
+#signupBlurb {
+  list-style-position: inside; }
+
 body {
   overflow-x: hidden; }
