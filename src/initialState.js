@@ -2,6 +2,7 @@
 
 module.exports = function(){
     return {
-        loggedIn: {loggedIn: false, userID: null}
+        loggedIn: {loggedIn: false, userID: null},
+        navigation: {nonCategoryChange: false, justChanged: false}
     };
 };

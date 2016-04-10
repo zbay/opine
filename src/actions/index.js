@@ -7,5 +7,11 @@ module.exports = {
     },
     logout: function(){
         return {type:constants.LOGOUT}
+    },
+    navigate: function(nonCategoryChange){
+        return {type:constants.NAVIGATE, nonCategoryChange:nonCategoryChange}
+    },
+    endNavigate: function(){
+      return {type:constants.END_NAVIGATE};  
     }
 };

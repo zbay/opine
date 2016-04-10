@@ -27,4 +27,3 @@ Comment chains (reply directly to comments)
 Sanitize all inputs
 
 Redirect to new post page on post create
-Make standalone question editable, by refactoring to use Posting with more data

@@ -1,6 +1,7 @@
 var React = require('react');
 var ReactRedux = require('react-redux');
 var axios = require('axios');
+var actions = require("../../actions");
 
 var CommentsList = require("../Comments/CommentsList");
 var NewCommentForm = require("../Comments/NewCommentForm");
@@ -16,6 +17,7 @@ var StandaloneQuestion = React.createClass({
     },
     componentDidMount: function(){
         setTimeout(this.showError, 2000);
+        this.props.navigate();
     },
     componentWillReceiveProps: function(){
       this.showError();
@@ -95,8 +97,14 @@ var StandaloneQuestion = React.createClass({
     }
 });
 
+var mapDispatchToProps = function(dispatch){
+    return {
+        navigate: function(){ 
+            dispatch(actions.navigate(true)); }
+    }
+};
 var mapStateToProps = function(state){
-    return {loggedIn:state.loggedIn.loggedIn, userID:state.loggedIn.userID};
+    return {loggedIn:state.loggedIn.loggedIn, userID:state.loggedIn.userID, justChanged: state.navigation.justChanged};
 };
 
-module.exports = ReactRedux.connect(mapStateToProps)(StandaloneQuestion);
+module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(StandaloneQuestion);

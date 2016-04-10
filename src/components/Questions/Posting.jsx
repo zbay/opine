@@ -31,7 +31,7 @@ var Posting = React.createClass({
         if(!this.state.editing){
         return (<div className="posting container-fluid">
         <div className="postQuestion">
-        <h3><Link to={"/question/" + this.props.postingData._id}>Question</Link></h3>
+        <h3>{this.props.standalone ? (<span>Question</span>): (<Link to={"/question/" + this.props.postingData._id}>Question</Link>)}</h3>
         {this.state.displayData.question}</div>
         <div className="postAsker">
         <h3>Who's asking?</h3>

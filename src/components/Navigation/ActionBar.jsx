@@ -2,7 +2,7 @@ var React = require('react');
 var BrowserHistory = require('react-router/lib/browserHistory');
 var CategorySelector = require("./CategorySelector");
 var NewPostForm = require("../Questions/NewPostForm");
-var Link = require('react-router').Link;
+var actions = require("../../actions"); //Redux actions
 var ReactRedux = require('react-redux');
 
 var ActionBar = React.createClass({
@@ -12,14 +12,20 @@ var ActionBar = React.createClass({
             visibleForm: false
         }
     },
+    componentWillReceiveProps: function(nextProps){
+        let that = this;
+        if(nextProps.justChanged){
+            that.setState({visibleForm: false});
+            that.props.endNavigate();
+        }
+    },
     render: function(){
-        console.log("loggedIn: " + JSON.stringify(this.props.loggedIn));
         return (
         <div>
         <div id="actionBar">
         <div className="row">
         <div className="col-sm-2 col-md-2 col-lg-2 vertCenter" id="toggleColumn">
-            <button>{this.props.loggedIn ?  (<Link to="/logout">Log Out</Link>) : (<Link to="/login">Log In</Link>)}</button>
+        {this.props.loggedIn ? (<button onClick={this.logout}>Log Out</button>): (<button onClick={this.login}>Log In</button>)}
         </div>
         <div className="col-sm-2 col-md-2 col-lg-2 vertCenter">
             <button id="toggleForm" onClick={this.toggleForm}>{this.state.visibleForm ? "Hide Question Form" : "Ask Something"}</button>
@@ -49,6 +55,7 @@ var ActionBar = React.createClass({
         e.preventDefault();
         let that = this;
         if(that.state.search.length > 0){
+           that.props.navigate();
            BrowserHistory.push("/search/" + that.state.search + "/1");   
         }
     },
@@ -60,9 +67,26 @@ var ActionBar = React.createClass({
             this.setState({visibleForm: false});
         }
     },
+    login: function(){
+        this.props.navigate();
+        BrowserHistory.push("/login");  
+    },
+    logout: function(){
+        this.props.navigate();
+        BrowserHistory.push("/logout");  
+    }
     });
 var mapStateToProps = function(state){
-    return {loggedIn:state.loggedIn.loggedIn, userID:state.loggedIn.userID};
+    return {loggedIn:state.loggedIn.loggedIn, userID:state.loggedIn.userID, justChanged: state.navigation.justChanged};
+};
+var mapDispatchToProps = function(dispatch){
+    return {
+        navigate: function(){ 
+            dispatch(actions.navigate(true)); },
+        endNavigate: function(){
+            dispatch(actions.endNavigate());
+        }
+    }
 };
 
-module.exports = ReactRedux.connect(mapStateToProps)(ActionBar);
+module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(ActionBar);
