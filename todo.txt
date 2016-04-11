@@ -1,8 +1,8 @@
 1. Better error handling at the server
 2. 
-3. Should be able to add to favorite from the individual question
-4. Periodic deletion of expired questions
-5. Redux
+3.
+4.
+5.
 6. Sort by expiring and by most commented
 7. React Router full server-side
 8. Test your sanitization
@@ -11,17 +11,16 @@
 11. Send user directly to the standalone question page, after posting new question
 12. Mongo queries: exclude fields you won't retrieve
 13. 
-14. Local storage: automatically add posts that you make to local storage favorites
+14.
 15. Refactor ActionBar as a conventional nav bar
-16. On page change, reset action bar's category
+16.
 17. No page arrow if the number of posts is less than perPage (add perPage in)
 18.
-19. Use localStorage to maintain state (like loggedIn!) on reload for redux
+19.
 
 DRY: Merge Posting and Question into one
 
 Clearly mark "My Favorites", and send error if more than 100 active are in the array. Explain the limitation
-Add to purge old: remove the ID from User's favorites
 Show number of comments
 Comment chains (reply directly to comments)
 Sanitize all inputs

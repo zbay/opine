@@ -15,12 +15,17 @@ module.exports = React.createClass({
         <img src="./img/react.png" className="img-responsive"/>
         </div>
        
-       <h2>Notes for Frequent Users</h2>
-       <p>Note that all posts will be automatically deleted from the website, two or three days after their deadline has passed.</p>
-       <p>You can keep track of up to 100 interesting posts by adding them to your "favorites" list. Please do not delete cookies from this site, if you want to keep your favorites list.</p>
-       <p>There are no plans to add user accounts to this site. Feel free to identify yourself in your question contact info, 
-       but the site will remain an officially anonymous platform.
-       We do save your IP address, and will ban it from posting if you spam the site or otherwise cross a line of decency.</p><br />
+       <h2>For Frequent Users</h2>
+       <p>Although this site is anonymous in the sense that no name or email address is necessarily displayed with any post, feel free to identify yourself. You also have the option to make a free account and gain some features: 
+       <ol>
+            <li>You'll be able to edit your posts and comments.</li>
+            <li>You'll be able to delete your posts and comments.</li>
+            <li>You'll be able to make a list of up to 100 "My Favorite" posts that you can track in one place. Posts that you, yourself, have made can be tracked separately in a "My Posts" lists.</li>
+            <li>You'll still be able to post on the site, even in the event that an anonymous user on your IP address has been banned.</li>
+            <li>You will also maintain outward anonymity, just like any other poster or commenter on the site.</li>
+       </ol>
+       </p>
+      <br />
        
        <div className="sampleBlock">
        <h3>Sample question 2 (standalone version)</h3>

@@ -34,12 +34,6 @@ var SignupForm = React.createClass({
         <button type="submit">Sign Up</button>
         </form>
         <div id="signupBlurb"><h3>Why register with Opine?</h3>
-        <ul>
-            <li>You'll be able to edit your posts and comments</li>
-            <li>You'll be able to delete your posts and comments</li>
-            <li>You'll still be able to post on the site, even if an anonymous user on your IP address has been banned</li>
-            <li>You'll be able to make a list of "favorite" posts that you can track in one place</li>
-        </ul>
         </div>
         </div>);
     },
