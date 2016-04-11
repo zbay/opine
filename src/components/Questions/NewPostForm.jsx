@@ -91,8 +91,8 @@ var NewPostForm = React.createClass({
                     deadline: "",
                     category: "Miscellaneous",
                     errorMessage: null,
-                    // newPostURL: "https://opine-io.herokuapp.com/question/" + response.data.success
-                    newPostURL: "https://opine-zbay-1.c9users.io/question/" + response.data.success //change this for Heroku
+                    newPostURL: "https://opine-io.herokuapp.com/question/" + response.data.success
+                    //newPostURL: "https://opine-zbay-1.c9users.io/question/" + response.data.success //change this for Heroku
                 });
             }
             else{ //if the posting was unsuccessful
