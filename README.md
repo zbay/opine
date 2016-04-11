@@ -2,6 +2,8 @@
 
 Opine is my first 100% original full-stack project (not done as part of a course or tutorial). It was built with the MERN (MongoDB, Express.js, ReactJS, and Node.js) stack. It is a proof-of-concept deal, and not a production project.
 
+I have used Redux to handle trickier parts of the application state, and React-Router to serve content client-side. All MongoDB data is retrieved by AJAX requests to the server, handled in Express and passed along in JSON format.
+
 Users can do one of two things on Opine: 
 
 1. Solicit opinions. Do you have a radio show, a blog, a YouTube video, or even a personal question that you'd like to receive some comment on? Post your opinion request on Opine for the world to see.
@@ -14,5 +16,6 @@ The app has been deployed with Heroku and runs a cron job daily to remove old po
 
 **Current to-do list:**
 
-1. Refactor to use the Flux pattern for managing application state. Redux seems like the trendy choice.
+1. Add web socket functionality to load new questions and comments without having to refresh
+2. Enable nested comment threads
 

@@ -10,8 +10,8 @@ module.exports = function(app) {
         res.json({"error": "Please fill out the entire form."});
     }
     else{
-    Banning.findOne({"IP": req.body.IP}, function(err, doc){
-        if(doc === null || req.body.email){
+    Banning.findOne({"IP": req.body.IP}, function(err, doc){ 
+        if(doc === null || req.body.email){ // prevent posting if the user is not logged in and the IP address is banned
             var newPost = new Posting({"question": req.body.question, "asker": req.body.asker, "howToContact": req.body.contact,
             "deadline": req.body.deadline, "category": req.body.category, "IP": req.body.IP, "userID": req.body.userID});
             newPost.save(function(err, msg){
@@ -19,7 +19,7 @@ module.exports = function(app) {
                     res.json({"error": msg});
                 }
                 else{
-                  res.json({"success": msg});    
+                  res.json({"success": msg._id});    //supplies the new post's ID, to offer the post's URL to the user after it is made
                 }
     });    
         }

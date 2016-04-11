@@ -80,11 +80,8 @@ app.post("/questionData", sanitizeBody, function(req, res){ // retrieve a questi
   let postID = ObjectId(req.body.id);
   var postingStream = Posting.findOne({_id: postID}, {comments: 0}).stream();
   postingStream.on("data", function(doc){
-        console.log("question ID: " + doc.userID);
-        console.log("req ID: " + req.body.userID);
              if(doc.userID && req.body.userID && (doc.userID == req.body.userID)){
                 doc["editable"] = true;
-                console.log("question data: " + JSON.stringify(doc));
                 res.json({"postData": doc});
             }
             else{

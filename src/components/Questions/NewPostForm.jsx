@@ -20,6 +20,7 @@ var NewPostForm = React.createClass({
          category: "Miscellaneous",
          successMessage: null,
          errorMessage: null,
+         newPostURL: null
      };
     },
     componentDidMount: function(){
@@ -31,10 +32,10 @@ var NewPostForm = React.createClass({
     render: function(){
     if(this.props.visible){
         return (<form id="newPostForm" className="container-fluid" onSubmit={this.newPost}>
-        <FormAlert successMessage={this.state.successMessage} errorMessage={this.state.errorMessage}/>
+        <FormAlert successMessage={this.state.successMessage} newPostURL={this.state.newPostURL} errorMessage={this.state.errorMessage}/>
         <br />
         <div className="row"><label>Question:</label></div>
-         <div className="row"><textarea rows="1" placeholder="What are you asking?" name="question" value={this.state.question} onChange={this.onChange}></textarea></div><br />
+         <div className="row"><textarea rows="1" placeholder="What are you asking?" name="question" id="" value={this.state.question} onChange={this.onChange}></textarea></div><br />
          <div className="row"><label>Asker:</label></div>
          <div className="row"><textarea rows="1" placeholder="Who's asking?" name="asker" value={this.state.asker} onChange={this.onChange}></textarea></div><br />
          <div className="row"><label>How to contact:</label></div>
@@ -68,9 +69,9 @@ var NewPostForm = React.createClass({
         let fixedDeadline = this.state.deadline ? this.state.deadline.replace(/\//g, "-"): "";
         let that = this;
         if(fixedDeadline.match(dateRegex) !== null && Number(fixedDeadline.slice(0, 4) < maxYear)){ //if the deadline meets the MM/DD/YYYY format and year isn't huge
-        if(that.state.question !== null && that.state.asker !== null && that.state.contact !== null && 
+        if(that.state.question !== null && that.state.question.length > 0 && that.state.asker !== null && that.state.asker.length > 0
+        && that.state.contact !== null && that.state.contact.length > 0 &&
         Date.parse(fixedDeadline).getTime()/1000 > (Math.floor(Date.now() / 1000) - (dailySeconds)) ){
-            let redirectCategory = that.state.category;
          let postData = {
             question: that.state.question,
             asker: that.state.asker,
@@ -84,15 +85,17 @@ var NewPostForm = React.createClass({
         axios.post("/addPosting", postData).then(function(response){
             if(response.data.success){
                 that.setState({successMessage: "Question successfully posted!", 
-                    question: null,
-                    asker: null,
-                    contact: null,
-                    deadline: null,
+                    question: "",
+                    asker: "",
+                    contact: "",
+                    deadline: "",
                     category: "Miscellaneous",
-                    errorMessage: null
+                    errorMessage: null,
+                    // newPostURL: "https://opine-io.herokuapp.com/question/" + response.data.success
+                    newPostURL: "https://opine-zbay-1.c9users.io/question/" + response.data.success //change this for Heroku
                 });
             }
-            else{ //if the posting was unsuccesful
+            else{ //if the posting was unsuccessful
                 console.log(response.data.error);
                 that.setState({errorMessage: response.data.error,
                     successMessage: null
