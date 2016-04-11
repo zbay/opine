@@ -3,6 +3,7 @@ var BrowserHistory = require('react-router/lib/browserHistory');
 var axios = require('axios');
 var PostingsList = require("./Stateless/PostingsList");
 var PageBar = require("../Navigation/PageBar");
+var Refresher = require("../Navigation/Refresher");
 var ReactRedux = require('react-redux');
 
 var PostingsListContainer = React.createClass({
@@ -20,70 +21,12 @@ var PostingsListContainer = React.createClass({
       };  
     },
     componentWillMount: function(){
-        let that = this;
-        var thisAddendum = "";
-        if(that.props.criteria != "all" && that.props.criteria != "myPosts" && that.props.criteria != "favorites"){
-            if(that.props.criteria == "category"){
-                thisAddendum = that.props.category + "/";
-                this.setState({addendum: thisAddendum});
-            }
-            if(that.props.criteria == "search"){
-                thisAddendum = that.props.search + "/";
-                this.setState({addendum: thisAddendum});
-            }
-        }
-        switch(that.props.criteria){
-            case "all":
-                 that.retrieveAll(Number(that.props.page));
-                break;
-            case "category":
-                that.retrieveCategory(that.props.category, Number(that.props.page));
-                break;
-            case "search":
-                that.retrieveSearch(that.props.search, Number(that.props.page));
-                break;
-            case "myPosts":
-                if(!that.props.loggedIn){
-                    BrowserHistory.push("/login");
-                }
-                else{
-                that.retrieveMine(Number(that.props.page));
-                }
-                break;
-            case "favorites":
-                that.retrieveFavorites();
-            default:
-        }
+        this.setAddendum(this.props.criteria, this.props.category, this.props.search);
+        this.loadData(this.props.criteria, this.props.page, this.props.category, this.props.search);
     },
     componentWillReceiveProps: function(nextProps){
-         let that = this;
-          var thisAddendum = "";
-        if(nextProps.criteria != "all"){
-            if(nextProps.criteria == "category"){
-                thisAddendum = nextProps.category + "/";
-            }
-            if(nextProps.criteria == "search"){
-                thisAddendum = nextProps.search + "/";
-            }
-            that.setState({addendum: thisAddendum});
-        }
-        switch(nextProps.criteria){
-            case "all":
-                 that.retrieveAll(Number(nextProps.page));
-                break;
-            case "category":
-                that.retrieveCategory(nextProps.category, Number(nextProps.page));
-                break;
-            case "search":
-                that.retrieveSearch(nextProps.search, Number(nextProps.page));
-                break;
-            case "myPosts":
-                that.retrieveMine(Number(that.props.page));
-                break;
-            case "favorites":
-                that.retrieveFavorites();
-            default:
-        }       
+        this.setAddendum(nextProps.criteria, nextProps.category, nextProps.search);
+        this.loadData(nextProps.criteria, nextProps.page, nextProps.category, nextProps.search);
     },
     retrieveAll: function(page){ //get all questions, from the server
         let that = this;
@@ -140,9 +83,52 @@ var PostingsListContainer = React.createClass({
          BrowserHistory.push("/login");
      }
     },
+    reload: function(){
+      this.loadData(this.props.criteria, this.props.page);  
+    },
+    loadData: function(criteria, page, category, search){
+        let that = this;
+        switch(criteria){
+            case "all":
+                 that.retrieveAll(Number(page));
+                break;
+            case "category":
+                that.retrieveCategory(category, Number(page));
+                break;
+            case "search":
+                that.retrieveSearch(search, Number(page));
+                break;
+            case "myPosts":
+                if(!that.props.loggedIn){
+                    BrowserHistory.push("/login");
+                }
+                else{
+                that.retrieveMine(Number(page));
+                }
+                break;
+            case "favorites":
+                that.retrieveFavorites();
+            default:
+        }   
+    },
+    setAddendum: function(criteria, category, search){
+        let that = this;
+        var thisAddendum = "";
+        if(criteria != "all" && criteria != "myPosts" && criteria != "favorites"){
+            if(criteria == "category"){
+                thisAddendum = category + "/";
+                this.setState({addendum: thisAddendum});
+            }
+            if(criteria == "search"){
+                thisAddendum = search + "/";
+                this.setState({addendum: thisAddendum});
+            }
+        }  
+    },
     render: function(){
         return (
         <div id="postListContainer">
+        <Refresher reload={this.reload} />
         <PostingsList postings={this.state.postings} page={this.props.page} />
         {this.props.criteria === "favorites" ? (<span></span>): (<PageBar page={this.props.page} criteria={this.props.criteria} hasNext={this.state.postings.length > 0} addendum={this.state.addendum}/>)}
         </div>);

@@ -183,11 +183,12 @@ footer{
     }
 }
 #actionBar{
+    margin-bottom:-40px;
     a{
         color: $ear_peach;
     }
 }
-#loginForm, #signupForm, #loggedOut, #signupBlurb{
+#loginForm, #signupForm, #loggedOut, #signupBlurb, #refresher{
     @include fullCentered();
 }
 #signupBlurb{
@@ -198,4 +199,10 @@ body{
 }
 #formAlert a{
     color: $ear_peach;
+}
+#searchField{
+    width:60%;
+}
+#searchButton{
+    width:20%;
 }

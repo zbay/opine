@@ -176,10 +176,12 @@ footer {
     margin-left: auto;
     margin-right: auto; }
 
-#actionBar a {
-  color: #FFDAB9; }
+#actionBar {
+  margin-bottom: -40px; }
+  #actionBar a {
+    color: #FFDAB9; }
 
-#loginForm, #signupForm, #loggedOut, #signupBlurb {
+#loginForm, #signupForm, #loggedOut, #signupBlurb, #refresher {
   margin-left: auto;
   margin-right: auto;
   text-align: center; }
@@ -192,3 +194,9 @@ body {
 
 #formAlert a {
   color: #FFDAB9; }
+
+#searchField {
+  width: 60%; }
+
+#searchButton {
+  width: 20%; }

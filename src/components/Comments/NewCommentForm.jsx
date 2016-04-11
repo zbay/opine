@@ -9,7 +9,7 @@ var NewCommentForm = React.createClass({
       refreshComments: React.PropTypes.func.isRequired
     },
     getInitialState: function(){
-      return {visible: false, comment: "", errorMessage: null, successMessage: null}  
+      return {visible: true, comment: "", errorMessage: null, successMessage: null}  
     },
     componentDidMount: function(){
     let that = this;

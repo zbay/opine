@@ -36,8 +36,8 @@ var ActionBar = React.createClass({
         </div>
         <div className="col-sm-4 col-md-4 col-lg-4 vertCenter">
         <form onSubmit={this.submitSearch}>
-        <input name="search" placeholder="Search" id="searchField" value={this.state.search} onChange={this.onChange}/>
-         <button type="submit" id="goButton">Go</button>
+        <input name="search" placeholder="Search" id="searchField" value={this.state.search} onChange={this.onChange}/>&nbsp;
+        <button type="submit" id="searchButton">Go</button>
         </form>
         </div>
         </div>

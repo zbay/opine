@@ -17,6 +17,7 @@ module.exports = React.createClass({
        
        <h2>For Frequent Users</h2>
        <p>Although this site is anonymous in the sense that no name or email address is necessarily displayed with any post, feel free to identify yourself. You also have the option to make a free account and gain some features: 
+       </p>
        <ol>
             <li>You'll be able to edit your posts and comments.</li>
             <li>You'll be able to delete your posts and comments.</li>
@@ -24,7 +25,6 @@ module.exports = React.createClass({
             <li>You'll still be able to post on the site, even in the event that an anonymous user on your IP address has been banned.</li>
             <li>You will also maintain outward anonymity, just like any other poster or commenter on the site.</li>
        </ol>
-       </p>
       <br />
        
        <div className="sampleBlock">

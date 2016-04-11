@@ -5,6 +5,7 @@ var actions = require("../../actions");
 
 var CommentsList = require("../Comments/CommentsList");
 var NewCommentForm = require("../Comments/NewCommentForm");
+var Refresher = require("../Navigation/Refresher");
 var Posting = require("./Posting");
 var localStorage = localStorage || window.localStorage;
 
@@ -35,7 +36,8 @@ var StandaloneQuestion = React.createClass({
         <Posting standalone={true} postingData={this.state.question}/>
         <NewCommentForm questionID={this.props.questionID} refreshComments={this.retrieveComments}/>
         <br />
-        <CommentsList comments={this.state.comments} postID={this.props.questionID} refreshComments={this.retrieveComments} />
+        <CommentsList comments={this.state.comments} postID={this.props.questionID} refreshComments={this.retrieveComments} /><br />
+        <Refresher reload={this.retrieveComments}/>
         </div>
         );            
         }
