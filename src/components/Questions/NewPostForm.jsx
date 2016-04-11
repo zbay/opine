@@ -1,6 +1,7 @@
 var React = require('react');
 var axios = require('axios');
 var DateJS = require('datejs');
+var dummy = 0;
 var FormAlert = require("../Alerts/FormAlert");
 var dateRegex =/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;
 var ReactRedux = require('react-redux');
