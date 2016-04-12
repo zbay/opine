@@ -4,6 +4,7 @@ module.exports = React.createClass({
     render: function(){
         return (<div>
        <div id="about" className="container-fluid">
+       <br />
        <h2>Getting Started</h2>
        <p>Opine is a simple platform for soliciting opinions, and finding people who want to hear your opinions. Do you want people to call in to your
        radio show, comment on your blog, or offer anonymous personal opinions on something? Then Opine is for you!</p>

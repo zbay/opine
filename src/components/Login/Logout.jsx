@@ -12,9 +12,11 @@ var Logout = React.createClass({
          this.props.logout();
     },
     render: function(){
-        return (<div>
-        <div id="loggedOut">
+        return (<div className="container">
+        <div id="loggedOut" className="row">
+        <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         {this.props.loggedIn ? ("Logging out. Please wait!"): ("You have been logged out. Come back soon!")}
+        </div>
         </div><br /></div>);
     }
 });

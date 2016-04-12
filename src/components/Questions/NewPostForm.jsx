@@ -73,9 +73,9 @@ var NewPostForm = React.createClass({
         && that.state.contact !== null && that.state.contact.length > 0 &&
         Date.parse(fixedDeadline).getTime()/1000 > (Math.floor(Date.now() / 1000) - (dailySeconds)) ){
          let postData = {
-            question: that.state.question,
-            asker: that.state.asker,
-            contact: that.state.contact,
+            question: that.state.question.trim().substr(0, 1000),
+            asker: that.state.asker.trim().substr(0, 500),
+            contact: that.state.contact.trim().substr(0, 500),
             deadline: fixedDeadline,
             category: that.state.category,
             IP: that.state.IP,
