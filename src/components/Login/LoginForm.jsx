@@ -20,13 +20,14 @@ var LoginForm = React.createClass({
           errorMessage: null
       };  
     },
+    // <div id="resetNotice"><Link to="/password_request">Forgot your password?</Link></div>
     render: function(){
         return (
         <div className="container">
         <div className="row">
         <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <form id="loginForm" onSubmit={this.login}>
-        {this.props.justSignedUp ? (<div id="signupNotice">Account successfully created!</div>): (<div id="signupNotice">Don't have an account?&nbsp;
+        {this.props.redirectMessage ? (<div id="signupNotice">{this.props.redirectMessage}</div>): (<div id="signupNotice">Don't have an account?&nbsp;
         <Link to="/signup">Sign up here.</Link></div>)}
         <FormAlert successMessage={this.state.successMessage} errorMessage={this.state.errorMessage}/><br />
         <label>Email:</label><br />
@@ -34,7 +35,8 @@ var LoginForm = React.createClass({
         <label>Password:</label><br />
         <input name="password" type="password" value={this.state.password} onChange={this.onChange}/><br /><br />
         <button type="submit">Log In</button><br /><br />
-        </form></div></div></div>);
+        </form>
+        </div></div></div>);
     },
     login: function(e){
          e.preventDefault();

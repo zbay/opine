@@ -33,8 +33,6 @@ var SignupForm = React.createClass({
         <input name="confirmPassword" type="password" value={this.state.confirmPassword} onChange={this.onChange}/><br /><br />
         <button type="submit">Sign Up</button>
         </form>
-        <div id="signupBlurb"><h3>Why register with Opine?</h3>
-        </div>
         </div>);
     },
     signup: function(e){

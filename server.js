@@ -13,7 +13,7 @@ var session = require('client-sessions');
 
 var dotenv = require('dotenv').load();
 
-mongoose.connect(/*process.env.MONGOLAB_URI*/ null || 'mongodb://localhost:27017/opine', function (err, db)
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost:27017/opine', function (err, db)
 {
  if (err) {
       throw new Error('Database failed to connect!');
