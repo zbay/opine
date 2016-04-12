@@ -18,7 +18,10 @@ var SignupForm = React.createClass({
       };  
     },
     render: function(){
-        return (<div><form id="signupForm" onSubmit={this.signup}>
+        return (<div className="container">
+        <div className="row">
+        <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <form id="signupForm" onSubmit={this.signup}>
         <div id="loginNotice">Have an account?&nbsp;
         <Link to="login">Log in here.</Link>
         </div>
@@ -33,7 +36,7 @@ var SignupForm = React.createClass({
         <input name="confirmPassword" type="password" value={this.state.confirmPassword} onChange={this.onChange}/><br /><br />
         <button type="submit">Sign Up</button>
         </form>
-        </div>);
+        </div></div></div>);
     },
     signup: function(e){
          e.preventDefault();

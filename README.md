@@ -4,7 +4,7 @@ Opine is my first 100% original full-stack project (not done as part of a course
 
 I have used Redux to handle trickier parts of the application state, and React-Router to serve content client-side. All MongoDB data is retrieved by AJAX requests to the server, handled in Express and passed along in JSON format.
 
-All passwords are stored securely with bcrypt, an old encryption method that remains very powerful. User operations are handled behind the scenes by user ID numbers, which are difficult to guess via brute-force. Security is not perfect, but it is sufficient for an application that lacks any sensitive data.
+All passwords are stored securely with bcrypt, an old encryption method that remains very powerful. Session is maintained securely with Mozilla's "client-sessions" encryption. Security is not perfect, but it is sufficient for an application that lacks any sensitive data.
 
 Users can do one of two things on Opine: 
 
@@ -20,7 +20,8 @@ I'll revisit this project, especially if my job hunt goes poorly, to better demo
 
 **Future to-do list:**
 
-1. Enable nested comment threads
+1. Enable password resetting via email
+2. Enable nested comment threads
 2. Add web socket functionality, integrated with Redux, to load new questions and comments without having to refresh
-3. Comprehensive security testing (sanitization, etc). Also encrypt cookies.
+3. Comprehensive security testing (sanitization, etc).
 
