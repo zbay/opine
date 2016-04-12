@@ -16,7 +16,7 @@ Internet commenters get a bad rap, but Opine provides an opportunity for them to
 
 The app has been deployed with Heroku and runs a cron job daily to remove old posts, defined as being more than 24 hours past their response deadline.
 
-I'll revisit this project, especially if my job hunt goes poorly, to demonstrate more skill.
+I'll revisit this project, especially if my job hunt goes poorly, to better demonstrate my skills.
 
 **Future to-do list:**
 

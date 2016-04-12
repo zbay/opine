@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactRedux = require('react-redux');
+var axios = require('axios');
 var actions = require("../../actions");
 var localStorage = localStorage || window.localStorage;
 
@@ -26,7 +27,9 @@ var mapStateToProps = function(state){
 };
 var mapDispatchToProps = function(dispatch){
     return {
-        logout: function(){ dispatch(actions.logout()); }
+        logout: function(){ 
+            axios.post("/logout", {});
+            dispatch(actions.logout()); }
     }
 };
 module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(Logout);

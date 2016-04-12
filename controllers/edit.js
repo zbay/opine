@@ -3,10 +3,11 @@ var Posting = require(process.cwd() + "/dbmodels/posting.js"); Posting = mongoos
 var User = require(process.cwd() + "/dbmodels/user.js"); User = mongoose.model("User");
 
 var sanitizeBody = require("./helpers/sanitizeBody");
+var requireLogin = require("./helpers/requireLogin");
 
 module.exports = function(app) {
     
-    app.post("/editPosting", sanitizeBody, function(req, res){
+    app.post("/editPosting", requireLogin, sanitizeBody, function(req, res){
     if(!req.body.question || !req.body.asker || !req.body.howToContact || !req.body.deadline || !req.body.category){
         res.json({"error": "Please fill out the entire form."});
     }
@@ -27,7 +28,7 @@ module.exports = function(app) {
         }
     }
 });
-app.post("/addFavorite", sanitizeBody, function(req, res){
+app.post("/addFavorite", requireLogin, sanitizeBody, function(req, res){
     User.findOneAndUpdate({"_id": req.body.userID}, {$addToSet: {"favorites": req.body.postID}}, function(err, msg){
         if(err){
             res.json({"error": err});
@@ -37,7 +38,7 @@ app.post("/addFavorite", sanitizeBody, function(req, res){
         }
     });
 });
-app.post("/removeFavorite", sanitizeBody, function(req, res){
+app.post("/removeFavorite", requireLogin, sanitizeBody, function(req, res){
     User.findOneAndUpdate({"_id": req.body.userID}, {$pull: {"favorites": req.body.postID}}, function(err, msg){
         if(err){
             res.json({"error": err});
@@ -47,7 +48,7 @@ app.post("/removeFavorite", sanitizeBody, function(req, res){
         }
     });    
 });
-app.post("/editComment", sanitizeBody, function(req, res){
+app.post("/editComment", requireLogin, sanitizeBody, function(req, res){
     if(!req.body.text){
         res.json({"error": "Please fill out the comment field"});
     }

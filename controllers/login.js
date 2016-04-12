@@ -5,7 +5,7 @@ module.exports = function(app) {
     var User = require("../dbmodels/user.js"); User = mongoose.model("User");
 
 app.post('/login', sanitizeBody, function(req, res){ //submit new account info
-	if(req.body.loggedIn){
+	if(req.body.loggedIn && req.session.sessionID){
 		res.json({"error": "You are already logged in!"});
 	}
 else{
@@ -15,6 +15,7 @@ else{
   	if(!err && doc != null){
   		var hashedPassword = doc.password;
   		if(bcrypt.compareSync(password, hashedPassword)){
+  		      req.session.sessionID = doc._id;
             res.json({"userID": doc._id});
   		}
   		else{
@@ -26,5 +27,10 @@ else{
     }
   });
 }
+});
+
+app.post('/logout', sanitizeBody, function(req, res){
+  req.session.reset();
+  res.json({success: "Logged out!"});
 });
 }
