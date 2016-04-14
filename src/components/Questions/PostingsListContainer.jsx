@@ -30,7 +30,7 @@ var PostingsListContainer = React.createClass({
     },
     retrieveAll: function(page){ //get all questions, from the server
         let that = this;
-        let pageData = {"page": page, "userID": that.props.userID};
+        let pageData = {"page": page};
         axios.post("/allPostings", pageData)
         .then(function(response){
             that.setState({postings: response.data.postings});
@@ -39,8 +39,8 @@ var PostingsListContainer = React.createClass({
     retrieveMine: function(page){
         if(this.props.loggedIn){
          let that = this;
-         let meData = {"page": page, "userID": that.props.userID};
-         axios.post("/myPostings", meData)
+         let pageData = {"page": page};
+         axios.post("/myPostings", pageData)
          .then(function(response){
              that.setState({postings: response.data.postings});
          });   
@@ -51,7 +51,7 @@ var PostingsListContainer = React.createClass({
     },
     retrieveCategory: function(category, page){ //get all questions in a category, from the server
         let that = this;
-          let queryData = {"category": category, "page": page, "userID": that.props.userID};
+          let queryData = {"category": category, "page": page};
         axios.post("/categoryPostings", queryData)
         .then(function(response){
             that.setState({postings: response.data.postings});
@@ -59,7 +59,7 @@ var PostingsListContainer = React.createClass({
     },
     retrieveSearch: function(searchQuery, page){ // get search results from the server
         let that = this;
-          let queryData = {"searchQuery": searchQuery, "page": page, "userID": that.props.userID};
+          let queryData = {"searchQuery": searchQuery, "page": page};
         axios.post("/searchPostings", queryData)
         .then(function(response){
             that.setState({postings: response.data.postings});
@@ -68,8 +68,7 @@ var PostingsListContainer = React.createClass({
     retrieveFavorites: function(){ // retrieve user's favorites
      if(this.props.loggedIn){
         let that = this;
-        let userData = {"userID": that.props.userID};
-            axios.post("/favoritePostings", userData)
+            axios.post("/favoritePostings")
             .then(function(response){
             if(!response.data.error){
               that.setState({postings: response.data.postings});   
@@ -137,7 +136,7 @@ var PostingsListContainer = React.createClass({
 
 var mapStateToProps = function(state){
     console.log("state: " + JSON.stringify(state));
-    return {loggedIn:state.loggedIn.loggedIn, userID: state.loggedIn.userID};
+    return {loggedIn:state.loggedIn.loggedIn};
 };
 
 module.exports = ReactRedux.connect(mapStateToProps)(PostingsListContainer);

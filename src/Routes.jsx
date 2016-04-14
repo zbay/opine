@@ -16,8 +16,8 @@ var BadLink = require("./components/StatelessContent/BadLink");
 var Login = require("./components/Login/LoginForm");
 var Signup = require("./components/Login/SignupForm");
 var Logout = require("./components/Login/Logout");
-var PasswordRequest = require('./components/Login/PasswordRequest');
-var ResetPassword = require('./components/Login/ResetPassword');
+var SuccessfulReset = require('./components/StatelessContent/SuccessfulReset');
+var ResetPassword = require('./components/Login/ChangePassword');
 
 var AllWrapper = React.createClass({
     render: function(){
@@ -60,14 +60,9 @@ var LoginAuthWrapper = React.createClass({
         return(<Login redirectMessage="Account successfully created!"/>);
     }
 });
-var LoginResetWrapper = React.createClass({
-    render: function(){
-        return(<Login redirectMessage="Password successfully reset!"/>);
-    }
-});
 
 /*      <Route path="password_request" component={PasswordRequest}/>
-      <Route path="reset_password" component={ResetPassword}/>*/
+     */
 
 module.exports = (
   <Provider store={Store}>
@@ -78,9 +73,10 @@ module.exports = (
       <Route path="all" component={AllWrapper}/>
       <Route path="login" component={Login}/>
       <Route path="login/signedUp" component={LoginAuthWrapper}/>
-      <Route path="login/reset" component={LoginResetWrapper}/>
+      <Route path="reset" component={SuccessfulReset}/>
       <Route path="logout" component={Logout}/>
       <Route path="signup" component={Signup}/>
+      <Route path="change_password" component={ResetPassword}/>
       <Route path="category/:category/:page" component={CategoryWrapper} />
       <Route path="category/:category" component={CategoryWrapper}/>
       <Route path="search/:search/:page" component={SearchWrapper} />

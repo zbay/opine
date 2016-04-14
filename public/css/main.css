@@ -181,7 +181,7 @@ footer {
   #actionBar a {
     color: #FFDAB9; }
 
-#loginForm, #signupForm, #loggedOut, #signupBlurb, #refresher {
+#loginForm, #signupForm, #loggedOut, #signupBlurb, #refresher, #pwChange, #resetNotice {
   margin-left: auto;
   margin-right: auto;
   text-align: center; }

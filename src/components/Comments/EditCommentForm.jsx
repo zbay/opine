@@ -27,7 +27,7 @@ module.exports = React.createClass({
          let commentData = {
             commentID: that.props.commentData._id,
             postID: that.props.postID,
-            text: that.state.text
+            text: that.state.text.trim().substr(0, 1000)
         };
         axios.post("/editComment", commentData).then(function(response){
             commentData.editable = true;

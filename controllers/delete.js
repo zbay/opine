@@ -20,7 +20,7 @@ module.exports = function(app) {
     app.post("/deleteComment", requireLogin, sanitizeBody, function(req, res){
         //console.log("commentID: "+ req.body.commentID);
         if(req.body.postID && req.body.commentID){
-            Posting.findOneAndUpdate({_id: req.body.postID}, {$pull: {comments: {_id: req.body.commentID}}}, function(err, doc){
+            Posting.findOneAndUpdate({_id: req.session.sessionID}, {$pull: {comments: {_id: req.body.commentID}}}, function(err, doc){
                if(err){
                    console.log("err" + err);
                    res.json({"error": err});

@@ -11,9 +11,10 @@ module.exports = function(app) {
     }
     else{
     Banning.findOne({"IP": req.body.IP}, function(err, doc){ 
-        if(doc === null || req.body.email){ // prevent posting if the user is not logged in and the IP address is banned
-            var newPost = new Posting({"question": req.body.question, "asker": req.body.asker, "howToContact": req.body.contact,
-            "deadline": req.body.deadline, "category": req.body.category, "IP": req.body.IP, "userID": req.body.userID});
+        if(doc === null || req.session.sessionID){ // prevent posting if the user is not logged in and the IP address is banned
+            var newPost = new Posting({"question": req.body.question.trim().substr(0, 1000), "asker": req.body.asker.trim().substr(0, 500),
+            "howToContact": req.body.contact.trim().substr(0, 500),
+            "deadline": req.body.deadline, "category": req.body.category, "IP": req.body.IP, "userID": req.session.sessionID});
             newPost.save(function(err, msg){
                 if(err){
                     res.json({"error": msg});

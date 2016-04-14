@@ -3,18 +3,17 @@ module.exports = function(app) {
     var mongoose = require('mongoose');
     var sanitizeBody = require("./helpers/sanitizeBody");
     var User = require("../dbmodels/user.js"); User = mongoose.model("User");
-    var PasswordReset = require("../dbmodels/passwordReset.js"); PasswordReset = mongoose.model("PasswordReset");
-    var nodemailer = require('nodemailer');
-    //var transporter = nodemailer.createTransport('smtps://usgmail.com:pass@smtp.gmail.com');
-    
+    var requireLogin = require("./helpers/requireLogin");
+    var bcrypt = require("bcrypt");
+
 app.post('/login', sanitizeBody, function(req, res){ //submit new account info
 	if(req.body.loggedIn && req.session.sessionID){
 		res.json({"error": "You are already logged in!"});
 	}
 else{
-  var email = req.body.email;
+  var username = req.body.username;
   var password = req.body.password;
-  User.findOne({"email": email}, function(err, doc){
+  User.findOne({"username": username}, function(err, doc){
   	if(!err && doc != null){
   		var hashedPassword = doc.password;
   		if(bcrypt.compareSync(password, hashedPassword)){
@@ -22,11 +21,11 @@ else{
             res.json({"userID": doc._id});
   		}
   		else{
-            res.json({"error": "Wrong password!"});
+            res.json({"error": "Wrong username or password!"});
     }
   	}
     else{
-    	res.json({"error": "Error: that email is not registered with an account. Try again."});
+    	res.json({"error": "Error: that username is not registered with an account. Try again."});
     }
   });
 }
@@ -37,28 +36,25 @@ app.post('/logout', sanitizeBody, function(req, res){
   res.json({success: "Logged out!"});
 });
 
-app.post('/requestReset', sanitizeBody, function(req, res){
-  User.findOne({email: req.body.email}, function(err, doc){
+app.post('/newPassword', requireLogin, sanitizeBody, function(req, res){
+  User.findOne({username: req.body.username}, function(err, doc){
     if(doc && !err){
-      var NewPasswordReset = new PasswordReset({email: req.body.email});
-      NewPasswordReset.save(function(err, msg){
-        
-        res.json({success: "Check your email. We sent you a link to reset your password."});
-      }); 
+      if(bcrypt.compareSync(req.body.oldPassword, doc.password)){
+       User.findOneAndUpdate({username: req.body.username}, {$set: {password: bcrypt.hashSync(req.body.newPassword, 10)}}, function(error, msg){
+         if(msg && !error){
+           res.json({success: "Password successfully changed!"});   
+         }
+         else{
+           res.json({error: error});
+         }
+       }); 
+      }
+    else{
+      res.json({error: "Wrong username or password! Try again."});
+    }
     }
     else{
-      res.json({error: "That email is not in our system!"});
-    }
-  });
-});
-
-app.post('/resetPassword', sanitizeBody, function(req, res){
-  User.update({email: req.body.email}, {$set: {password: bcrypt.hashSync(req.body.password, 10)}}, function(err, msg){
-    if(err){
       res.json({error: err});
-    }
-    else{
-      res.json({success: msg});
     }
   });
 });

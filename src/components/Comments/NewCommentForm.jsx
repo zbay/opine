@@ -47,8 +47,7 @@ var NewCommentForm = React.createClass({
          e.preventDefault(); // so that only React handles the form data
          let that = this;
          if(this.state.comment.length > 0 && this.props.questionID){
-             let commentData = {"questionID": that.props.questionID, "commentText": that.state.comment, "IP": that.state.IP, "loggedIn": that.props.loggedIn,
-                 userID: that.props.userID
+             let commentData = {"questionID": that.props.questionID, "commentText": that.state.comment.trim().substr(0, 1000), "IP": that.state.IP, "loggedIn": that.props.loggedIn
              };
              axios.post("/addComment", commentData).then(function(response){
                  if(response.data.success){
@@ -66,7 +65,7 @@ var NewCommentForm = React.createClass({
     }
 });
 var mapStateToProps = function(state){
-    return {loggedIn:state.loggedIn.loggedIn, userID:state.loggedIn.userID};
+    return {loggedIn:state.loggedIn.loggedIn};
 };
 
 module.exports = ReactRedux.connect(mapStateToProps)(NewCommentForm);

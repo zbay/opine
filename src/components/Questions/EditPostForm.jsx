@@ -65,12 +65,11 @@ var EditPostForm = React.createClass({
         Date.parse(fixedDeadline).getTime()/1000 > (Math.floor(Date.now() / 1000) - (dailySeconds)) ){
          let postData = {
             id: that.props.postingData._id,
-            question: that.state.question,
-            asker: that.state.asker,
-            howToContact: that.state.howToContact,
+            question: that.state.question.trim().substr(0, 1000),
+            asker: that.state.asker.trim().substr(0, 500),
+            howToContact: that.state.howToContact.trim().substr(0, 500),
             deadline: fixedDeadline,
-            category: that.state.category,
-            userID: that.props.postingData.userID
+            category: that.state.category
         };
         axios.post("/editPosting", postData).then(function(response){
             postData.editable = true;

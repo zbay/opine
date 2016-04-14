@@ -14,7 +14,7 @@ module.exports = function(app) {
        Banning.findOne({"IP": req.body.IP}, function(err, doc){
        if(doc === null || req.body.userID){
        Posting.update({_id: ObjectId(req.body.questionID)}, {$addToSet: {comments: 
-            {text: req.body.commentText, IP: req.body.IP, userID: req.body.userID}}}).lean().exec(function(err, msg){
+            {text: req.body.commentText.trim().substr(0, 1000), IP: req.body.IP, userID: req.session.sessionID}}}).lean().exec(function(err, msg){
            if(err){
               res.json({"error": err});  
            }

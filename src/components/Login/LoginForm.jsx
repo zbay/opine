@@ -14,7 +14,7 @@ var LoginForm = React.createClass({
     },
     getInitialState: function(){
       return {
-          email: null,
+          username: null,
           password: null,
           successMessage: null,
           errorMessage: null
@@ -30,8 +30,8 @@ var LoginForm = React.createClass({
         {this.props.redirectMessage ? (<div id="signupNotice">{this.props.redirectMessage}</div>): (<div id="signupNotice">Don't have an account?&nbsp;
         <Link to="/signup">Sign up here.</Link></div>)}
         <FormAlert successMessage={this.state.successMessage} errorMessage={this.state.errorMessage}/><br />
-        <label>Email:</label><br />
-        <input name="email" value={this.state.email} onChange={this.onChange}/><br /><br />
+        <label>Username:</label><br />
+        <input name="username" value={this.state.username} onChange={this.onChange}/><br /><br />
         <label>Password:</label><br />
         <input name="password" type="password" value={this.state.password} onChange={this.onChange}/><br /><br />
         <button type="submit">Log In</button><br /><br />
@@ -42,21 +42,19 @@ var LoginForm = React.createClass({
          e.preventDefault();
          let that = this;
          if(!that.props.loggedIn){
-         if(that.state.email && that.state.password){
+         if(that.state.username && that.state.password){
             let loginData = {
-             email: that.state.email,
+             username: that.state.username,
              password: that.state.password,
              loggedIn: that.props.loggedIn
          };   
          axios.post("/login", loginData).then(function(response){
                   if(!response.data.error){
-                      console.log("login response: " + JSON.stringify(response.data));
                     if(localStorage){
                         localStorage.setItem("loggedIn", JSON.stringify({userID: response.data.userID}));
                     }
-                    console.log(response.data.userID);
                     that.props.reduxLogin(response.data.userID);
-                    BrowserHistory.push("/all/1");
+                    BrowserHistory.push("/");
               }
               else{
                  that.setState({"errorMessage": response.data.error});
@@ -64,7 +62,7 @@ var LoginForm = React.createClass({
          });
          }
          else{
-             that.setState({"errorMessage": "Please fill out both the username and the password!"});
+             that.setState({"errorMessage": "Please fill out your username and password!"});
          }
          }
          else{

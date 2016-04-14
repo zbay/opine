@@ -12,8 +12,9 @@ module.exports = function(app) {
         res.json({"error": "Please fill out the entire form."});
     }
     else{
-        if(req.body.userID){
-            Posting.update({_id: req.body.id}, {$set: {question: req.body.question, asker: req.body.asker, howToContact: req.body.howToContact, 
+        if(req.session.sessionID){
+            Posting.update({_id: req.body.id}, {$set: {question: req.body.question.trim().substr(0, 1000), asker: req.body.asker.trim().substr(0, 500),
+            howToContact: req.body.howToContact.trim().substr(0, 500), 
             deadline: req.body.deadline, category: req.body.category, timePosted: Date.now()}}, function(err, msg){
                 if(err){
                     res.json({"error": msg});
@@ -29,7 +30,7 @@ module.exports = function(app) {
     }
 });
 app.post("/addFavorite", requireLogin, sanitizeBody, function(req, res){
-    User.findOneAndUpdate({"_id": req.body.userID}, {$addToSet: {"favorites": req.body.postID}}, function(err, msg){
+    User.findOneAndUpdate({"_id": req.session.sessionID}, {$addToSet: {"favorites": req.body.postID}}, function(err, msg){
         if(err){
             res.json({"error": err});
         }
@@ -39,7 +40,7 @@ app.post("/addFavorite", requireLogin, sanitizeBody, function(req, res){
     });
 });
 app.post("/removeFavorite", requireLogin, sanitizeBody, function(req, res){
-    User.findOneAndUpdate({"_id": req.body.userID}, {$pull: {"favorites": req.body.postID}}, function(err, msg){
+    User.findOneAndUpdate({"_id": req.session.sessionID}, {$pull: {"favorites": req.body.postID}}, function(err, msg){
         if(err){
             res.json({"error": err});
         }
@@ -53,7 +54,8 @@ app.post("/editComment", requireLogin, sanitizeBody, function(req, res){
         res.json({"error": "Please fill out the comment field"});
     }
     else{
-        Posting.findOneAndUpdate({_id: req.body.postID, "comments._id": req.body.commentID}, {$set: {"comments.$.text": req.body.text}}, function(err, msg){
+        Posting.findOneAndUpdate({_id: req.body.postID, "comments._id": req.body.commentID}, 
+            {$set: {"comments.$.text": req.body.text.trim().substr(0, 1000)}}, function(err, msg){
         if(err){
             res.json({"error": err});
         }

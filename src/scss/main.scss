@@ -188,7 +188,7 @@ footer{
         color: $ear_peach;
     }
 }
-#loginForm, #signupForm, #loggedOut, #signupBlurb, #refresher{
+#loginForm, #signupForm, #loggedOut, #signupBlurb, #refresher, #pwChange, #resetNotice{
     @include fullCentered();
 }
 #signupBlurb{

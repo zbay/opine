@@ -20,6 +20,7 @@
     "client-sessions": "^0.7.0",
     "datejs": "^1.0.0-rc3",
     "dotenv": "^2.0.0",
+    "emailjs": "^1.0.4",
     "exec": "^0.2.1",
     "express": "^4.13.4",
     "gulp": "^3.8.11",
