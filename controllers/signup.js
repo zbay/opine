@@ -23,7 +23,7 @@ else{
         res.json({"success": "New account created!"});
    	}
    	else{
-   		res.json({"error": err});
+   		res.json({"error": "There was an error creating the account. Try another user name."});
    	}
    });
 

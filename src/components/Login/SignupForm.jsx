@@ -53,7 +53,7 @@ var SignupForm = React.createClass({
                   BrowserHistory.push("/login/signedUp");
               }
               else{
-                  that.setState({"errorMessage": JSON.stringify(response.data.error)});
+                  that.setState({"errorMessage": response.data.error});
               }
          });
          }
