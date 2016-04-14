@@ -41,7 +41,11 @@ module.exports = React.createClass({
             }
         }
         else{
-            return (<img src="/img/loading_spinner.gif"/>);
+            return (
+                <div className="container">
+                <div className="row">
+                <div className="col-sm-12">
+                <img src="/img/loading_spinner.gif"/></div></div></div>);
         }
         }
     }

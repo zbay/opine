@@ -7,10 +7,9 @@ var About = React.createClass({
     render: function(){
         return (<div>
        <div id="about" className="container-fluid">
-       {this.props.loggedIn ? (<div id="resetNotice" className="container">
-       <div className="row">
+       {this.props.loggedIn ? (<div id="resetNotice" className="row">
        <div className="col-sm-12">
-       Want to change your password? <Link to="/change_password">Click here</Link>.</div></div></div>): (<span></span>)}
+       Want to change your password? <Link to="/change_password">Click here</Link>.</div></div>): (<span></span>)}
        <br />
        <h2>Getting Started</h2>
        <p>Opine is a simple platform for soliciting opinions, and finding people who want to hear your opinions. Do you want people to call in to your
