@@ -1,5 +1,6 @@
 var React = require('react');
 var Comment = require('./Comment');
+var Refresher = require("../Navigation/Refresher");
 
 module.exports = React.createClass({
     propTypes: {
@@ -8,8 +9,10 @@ module.exports = React.createClass({
     render: function(){
         let that = this;
         return (
-        <div id="commentList" className="container">
-        {that.props.comments && that.props.comments.length > 0 ? (<h3 id="commentHeader">Comments:</h3>): (<span></span>)}
+        <div id="commentList">
+        {that.props.comments && that.props.comments.length > 0 ? 
+        (<div className="container"><div className="row"><div className="col-sm-12 col-md-12 col-lg 12"><h3 id="commentHeader">Recent Comments:</h3></div></div></div>): (<span></span>)}
+        <Refresher reload={that.props.refreshComments}/>
         {that.renderComments()}
         </div>);
     },

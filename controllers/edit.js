@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Posting = require(process.cwd() + "/dbmodels/posting.js"); Posting = mongoose.model("Posting");
+var Comment = require(process.cwd() + "/dbmodels/comment.js"); Comment = mongoose.model("Comment");
 var User = require(process.cwd() + "/dbmodels/user.js"); User = mongoose.model("User");
 
 var sanitizeBody = require("./helpers/sanitizeBody");
@@ -54,8 +55,7 @@ app.post("/editComment", requireLogin, sanitizeBody, function(req, res){
         res.json({"error": "Please fill out the comment field"});
     }
     else{
-        Posting.findOneAndUpdate({_id: req.body.postID, "comments._id": req.body.commentID}, 
-            {$set: {"comments.$.text": req.body.text.trim().substr(0, 1000)}}, function(err, msg){
+        Comment.findOneAndUpdate({_id: req.body.commentID}, {$set: {"text": req.body.text.trim().substr(0, 1000)}}, function(err, msg){
         if(err){
             res.json({"error": err});
         }

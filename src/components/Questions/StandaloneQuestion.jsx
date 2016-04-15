@@ -5,7 +5,6 @@ var actions = require("../../actions");
 
 var CommentsList = require("../Comments/CommentsList");
 var NewCommentForm = require("../Comments/NewCommentForm");
-var Refresher = require("../Navigation/Refresher");
 var Posting = require("./Posting");
 var localStorage = localStorage || window.localStorage;
 
@@ -19,9 +18,6 @@ var StandaloneQuestion = React.createClass({
     componentDidMount: function(){
         setTimeout(this.showError, 2000);
         this.props.navigate();
-    },
-    componentWillReceiveProps: function(){
-      this.showError();
     },
     showError: function(){
          this.setState({isLoading: false}); 
@@ -37,7 +33,6 @@ var StandaloneQuestion = React.createClass({
         <NewCommentForm questionID={this.props.questionID} refreshComments={this.retrieveComments}/>
         <br />
         <CommentsList comments={this.state.comments} postID={this.props.questionID} refreshComments={this.retrieveComments} /><br />
-        <Refresher reload={this.retrieveComments}/>
         </div>
         );            
         }
@@ -46,7 +41,9 @@ var StandaloneQuestion = React.createClass({
              return (<div id="errorMessage">The question could not be loaded. Either the URL is wrong, or the post has been deleted.</div>);   
             }
             else{
-             return (<div id="spinner"><img src="/img/loading_spinner.gif"/></div>);
+             return (<div id="spinner" className="container"><div className="row">
+             <div className="col-sm-12 col-md-12 col-lg-12">
+             <img src="/img/loading_spinner.gif"/></div></div></div>);
             }
         }
     },
@@ -61,30 +58,21 @@ var StandaloneQuestion = React.createClass({
     retrieveComments: function(){
          let that = this;
          console.log("retrieving comments");
-         let idData = {"id": that.props.questionID, "userID": that.props.userID}
+         let idData = {"id": that.props.questionID}
         axios.post("/comments", idData)
         .then(function(response){
-            console.log(response.data.postData);
-            if(response.data.postData.length <= 0){
-                that.setState({comments: response.data.postData}); 
+            console.log(response.data.commentData);
+            if(response.data.commentData.length <= 0){
+                that.setState({comments: []}); 
             }
             else{
         let iteratedOver = 0;
-         for(let i = 0; i < response.data.postData.length; i++){
+         for(let i = 0; i < response.data.commentData.length; i++){
            iteratedOver++;
-          if(that.props.userID && response.data.postData[i].userID && response.data.postData[i].userID === that.props.userID){
-              response.data.postData[i]["editable"] = true;
-              console.log(response.data.postData[i]);
-          if(iteratedOver >= response.data.postData.length){
-                that.setState({"comments": response.data.postData});   
+          if(iteratedOver >= response.data.commentData.length){
+                console.log(response.data.commentData);
+                that.setState({"comments": response.data.commentData});   
           }
-          }
-          else{
-            if(iteratedOver >= response.data.postData.length){
-                that.setState({"comments": response.data.postData});   
-          }
-          }
-
       }   
             }
         });       

@@ -2,6 +2,7 @@
 var mongoose = require('mongoose');
 var ObjectId = mongoose.Types.ObjectId;
 var Posting = require(process.cwd() + "/dbmodels/posting.js"); Posting = mongoose.model("Posting");
+var Comment = require(process.cwd() + "/dbmodels/comment.js"); Comment = mongoose.model("Comment");
 var User = require(process.cwd() + "/dbmodels/user.js"); User = mongoose.model("User");
 var sanitizeBody = require("./helpers/sanitizeBody");
 const perPage = 20;
@@ -132,10 +133,19 @@ app.post("/testIfFavorite", sanitizeBody, function(req, res){
     });
 });
 app.post("/comments", sanitizeBody, function(req, res){ // retrieve a post's comments
-  let postID = ObjectId(req.body.id);
-  var postingStream = Posting.findOne({_id: postID}).stream();
-  postingStream.on("data", function(doc){
-          res.json({"postData": doc.comments});  
+  let commentData = [];
+  var commentStream = Comment.find({postID: req.body.id}).sort({timePosted: -1}).stream();
+  commentStream.on("data", function(doc){
+          if(doc.userID == req.session.sessionID){
+              doc["editable"] = true;
+              commentData.push(doc);
+          }
+          else{
+              commentData.push(doc);
+          }
+  });
+  commentStream.on("end", function(){
+      res.json({"commentData": commentData});
   });
 });
 }

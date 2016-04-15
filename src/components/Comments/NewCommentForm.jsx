@@ -50,6 +50,7 @@ var NewCommentForm = React.createClass({
              let commentData = {"questionID": that.props.questionID, "commentText": that.state.comment.trim().substr(0, 1000), "IP": that.state.IP, "loggedIn": that.props.loggedIn
              };
              axios.post("/addComment", commentData).then(function(response){
+                 
                  if(response.data.success){
                      that.setState({successMessage: "Comment successfully posted!", errorMessage: null, comment: ""});
                      that.props.refreshComments(); // sends call up to show all the post's comments, including the new one

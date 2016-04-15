@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Posting = require(process.cwd() + "/dbmodels/posting.js"); Posting = mongoose.model("Posting");
+var Comment = require(process.cwd() + "/dbmodels/comment.js"); Comment = mongoose.model("Comment");
 var sanitizeBody = require("./helpers/sanitizeBody");
 var requireLogin = require("./helpers/requireLogin");
 
@@ -18,9 +19,8 @@ module.exports = function(app) {
     }
 });
     app.post("/deleteComment", requireLogin, sanitizeBody, function(req, res){
-        //console.log("commentID: "+ req.body.commentID);
-        if(req.body.postID && req.body.commentID){
-            Posting.findOneAndUpdate({_id: req.session.sessionID}, {$pull: {comments: {_id: req.body.commentID}}}, function(err, doc){
+        if(req.body.commentID){
+            Comment.remove({_id: req.body.commentID}, function(err, doc){
                if(err){
                    console.log("err" + err);
                    res.json({"error": err});
