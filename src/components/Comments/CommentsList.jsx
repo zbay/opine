@@ -12,6 +12,7 @@ module.exports = React.createClass({
         <div id="commentList">
         {that.props.comments && that.props.comments.length > 0 ? 
         (<div className="container"><div className="row"><div className="col-sm-12 col-md-12 col-lg 12"><h3 id="commentHeader">Recent Comments:</h3></div></div></div>): (<span></span>)}
+        <br />
         <Refresher reload={that.props.refreshComments}/>
         {that.renderComments()}
         </div>);

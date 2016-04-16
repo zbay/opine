@@ -125,12 +125,16 @@ label, #commentHeader {
   text-align: center; }
 
 .comment {
+  margin-left: auto;
+  margin-right: auto;
   background-color: #d3d3d3;
   border: 3px solid #FFDAB9;
   margin-top: 10px;
   margin-bottom: 10px;
   padding: 10px;
-  border-radius: 10px; }
+  padding-left: 20px;
+  border-radius: 10px;
+  max-width: 90%; }
   .comment textarea {
     min-width: 100%;
     max-width: 100%; }

@@ -6,6 +6,7 @@ var Comment = require(process.cwd() + "/dbmodels/comment.js"); Comment = mongoos
 var User = require(process.cwd() + "/dbmodels/user.js"); User = mongoose.model("User");
 var sanitizeBody = require("./helpers/sanitizeBody");
 const perPage = 20;
+const perPageComments = 100;
 
 module.exports = function(app) {
 
@@ -134,7 +135,8 @@ app.post("/testIfFavorite", sanitizeBody, function(req, res){
 });
 app.post("/comments", sanitizeBody, function(req, res){ // retrieve a post's comments
   let commentData = [];
-  var commentStream = Comment.find({postID: req.body.id}).sort({timePosted: -1}).stream();
+  let page = req.body.page - 1;
+  var commentStream = Comment.find({postID: req.body.id}).sort({timePosted: -1}).skip(page*perPageComments).limit(perPageComments).stream();
   commentStream.on("data", function(doc){
           if(doc.userID == req.session.sessionID){
               doc["editable"] = true;

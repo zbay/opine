@@ -51,7 +51,7 @@ var MyPostWrapper = React.createClass({
 
 var QuestionWrapper = React.createClass({
     render: function(){
-        return (<Question questionID={this.props.routeParams.id} />);
+        return (<Question questionID={this.props.routeParams.id} page={this.props.routeParams.page || 1}/>);
     }
 });
 
@@ -84,6 +84,7 @@ module.exports = (
       <Route path="myPosts/:page" component={MyPostWrapper} />
       <Route path="myPosts" component={MyPostWrapper} />
       <Route path="question/:id" component={QuestionWrapper}/>
+      <Route path="question/:id/:page" component={QuestionWrapper}/>
       <Route path="favorites" component={FavoriteWrapper}/>
       <Route path="*" status={404} component={BadLink}/>
     </Route>

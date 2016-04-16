@@ -4,7 +4,7 @@ module.exports = React.createClass({
     render: function(){
         return (
         <div id="formAlert">
-        {this.props.successMessage ? (<div id="formSuccess">{this.propst.successMessage}&nbsp;&nbsp;
+        {this.props.successMessage ? (<div id="formSuccess">{this.props.successMessage}&nbsp;&nbsp;
         {this.props.newPostURL ? 
         (<a href={this.props.newPostURL} target="_blank">View it now.</a>):
         (<span></span>)}</div>): (<span></span>)}

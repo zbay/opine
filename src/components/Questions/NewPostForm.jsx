@@ -29,20 +29,21 @@ var NewPostForm = React.createClass({
     });
     },
     render: function(){
-    if(this.props.visible){
-        return (<form id="newPostForm" className="container-fluid" onSubmit={this.newPost}>
-        <FormAlert successMessage={this.state.successMessage} newPostURL={this.state.newPostURL} errorMessage={this.state.errorMessage}/>
+        let that = this;
+    if(that.props.visible){
+        return (<form id="newPostForm" className="container-fluid" onSubmit={that.newPost}>
+        <FormAlert successMessage={that.state.successMessage} newPostURL={that.state.newPostURL} errorMessage={that.state.errorMessage}/>
         <br />
         <div className="row"><label>Question:</label></div>
-         <div className="row"><textarea rows="1" placeholder="What are you asking?" name="question" id="" value={this.state.question} onChange={this.onChange}></textarea></div><br />
+         <div className="row"><textarea rows="1" placeholder="What are you asking?" name="question" id="" value={that.state.question} onChange={that.onChange}></textarea></div><br />
          <div className="row"><label>Asker:</label></div>
-         <div className="row"><textarea rows="1" placeholder="Who's asking?" name="asker" value={this.state.asker} onChange={this.onChange}></textarea></div><br />
+         <div className="row"><textarea rows="1" placeholder="Who's asking?" name="asker" value={that.state.asker} onChange={that.onChange}></textarea></div><br />
          <div className="row"><label>How to contact:</label></div>
-         <div className="row"><textarea rows="1" placeholder="URL, email, phone, etc." name="contact" value={this.state.contact} onChange={this.onChange}></textarea></div><br />
+         <div className="row"><textarea rows="1" placeholder="URL, email, phone, etc." name="contact" value={that.state.contact} onChange={that.onChange}></textarea></div><br />
          <div className="row"><label>Deadline:</label></div>
-         <div className="row"><input placeholder="Format: YYYY/MM/DD" type="date" name="deadline" value={this.state.deadline} onChange={this.onChange}/></div><br />
+         <div className="row"><input placeholder="Format: YYYY/MM/DD" type="date" name="deadline" value={that.state.deadline} onChange={that.onChange}/></div><br />
          <div className="row"> <label>Category:</label></div>
-         <div className="row"> <select name="category" value={this.state.category} onChange={this.onChange}>
+         <div className="row"> <select name="category" value={that.state.category} onChange={that.onChange}>
             <option>---</option>
             <option value="Politics">Politics</option>
             <option value="Sports">Sports</option>
@@ -89,7 +90,7 @@ var NewPostForm = React.createClass({
                     deadline: "",
                     category: "Miscellaneous",
                     errorMessage: null,
-                    newPostURL: "/question/" + response.data.success
+                    newPostURL: "/question/" + response.data.success + "/1"
                 });
             }
             else{ //if the posting was unsuccessful

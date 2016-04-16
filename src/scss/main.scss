@@ -130,12 +130,15 @@ label, #commentHeader{
     text-align:center;
 }
 .comment{
+    @include marginCentered();
     background-color: #d3d3d3;
     border: 3px solid $ear_peach;
     margin-top: $standard_space;
     margin-bottom: $standard_space;
     padding: $standard_space;
+    padding-left: $standard_space*2;
     border-radius: $standard_space;
+    max-width:90%;
     
     textarea{
         min-width:100%;

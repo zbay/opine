@@ -5,12 +5,13 @@ var actions = require("../../actions");
 
 var CommentsList = require("../Comments/CommentsList");
 var NewCommentForm = require("../Comments/NewCommentForm");
+var PageBar = require("../Navigation/PageBar");
 var Posting = require("./Posting");
 var localStorage = localStorage || window.localStorage;
 
 var StandaloneQuestion = React.createClass({
     propTypes: {
-        questionID: React.PropTypes.string.isRequired
+        questionID: React.PropTypes.string.isRequired,
     },
     getInitialState: function(){
       return {question: null, comments: [], isLoading: true, favorited: false}  
@@ -26,6 +27,10 @@ var StandaloneQuestion = React.createClass({
       this.retrieveQuestion();  
       this.retrieveComments();
     },
+    componentWillReceiveProps: function(nextprops){
+       this.retrieveQuestion();  
+       this.retrieveComments(nextprops.page);       
+    },
     render: function(){
         if(this.state.question !== null){
         return (<div>
@@ -33,6 +38,7 @@ var StandaloneQuestion = React.createClass({
         <NewCommentForm questionID={this.props.questionID} refreshComments={this.retrieveComments}/>
         <br />
         <CommentsList comments={this.state.comments} postID={this.props.questionID} refreshComments={this.retrieveComments} /><br />
+        <PageBar criteria="question" addendum={this.props.questionID + "/"} page={this.props.page} hasNext={this.state.comments.length > 0}/>
         </div>
         );            
         }
@@ -55,10 +61,10 @@ var StandaloneQuestion = React.createClass({
             that.setState({question: response.data.postData});
         });
     },
-    retrieveComments: function(){
+    retrieveComments: function(page){
          let that = this;
          console.log("retrieving comments");
-         let idData = {"id": that.props.questionID}
+         let idData = {"id": that.props.questionID, "page": page || that.props.page}
         axios.post("/comments", idData)
         .then(function(response){
             console.log(response.data.commentData);

@@ -8,15 +8,17 @@ var Comment = React.createClass({
       return {editing: false, deleted: false, commentData: this.props.commentData}  
     },
     render: function(){
+        console.log(this.state.commentData);
         if(!this.state.deleted){
         if(!this.state.editing){
-          return (<div className="comment"><span className="commentNumber">{this.props.index+1}.&nbsp;&nbsp;</span>{this.state.commentData.text}
+          return (<div className="comment">
+          <span className="commentNumber">{this.props.index+1}.&nbsp;&nbsp;</span>{this.state.commentData.text}
           {this.state.commentData.editable ? 
           (<div><br /><button onClick={this.editify}>Edit Comment</button>&nbsp;<button onClick={this.deleteComment}>Delete Comment</button></div>): (<span></span>)}
           </div>);      
         }
         else{
-            return (<EditCommentForm commentData={this.state.commentData} cancelEdit={this.cancelEdit} saveEditRender={this.saveEditRender}
+            return (<EditCommentForm commentData={this.state.commentData} id={this.props.commentData._id} cancelEdit={this.cancelEdit} saveEditRender={this.saveEditRender}
             postID={this.props.postID} index={this.props.index}/>);
         }
         }
@@ -43,6 +45,7 @@ var Comment = React.createClass({
         this.setState({editing: false});
     },
     saveEditRender: function(newComment){
+        console.log("new comment: " + newComment);
       this.setState({editing: false, commentData: newComment});
     }
 });
