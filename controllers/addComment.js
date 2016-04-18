@@ -6,14 +6,13 @@ var sanitizeBody = require("./helpers/sanitizeBody");
 
 module.exports = function(app) {
     
-    app.post("/addComment", sanitizeBody, function(req, res){
+    app.post("/addParentComment", sanitizeBody, function(req, res){
     if(!req.body.commentText || !req.body.questionID){
-        res.json({"error": "Please submit a comment."});
+        res.json({"error": "Please submit a valid omment."});
     }
     else{
        Banning.findOne({"IP": req.body.IP}, function(err, doc){
        if(doc === null || req.body.userID){
-           console.log("sessionID: " + req.session.sessionID);
        var newComment = new Comment({text: req.body.commentText.trim().substr(0, 1000), IP: req.body.IP, userID: req.session.sessionID, postID: req.body.questionID});
        newComment.save(function(err){
            if(err){
@@ -21,6 +20,35 @@ module.exports = function(app) {
            }
            else{
               res.json({"success": "Comment successfully posted."});
+           }    
+       });
+       }
+       else{
+           res.json({"error": "You must have been a little naughty. Anonymous posting is currently banned for this IP address. Please log in."});
+       }
+       });
+    }
+});
+app.post("/addChildComment", sanitizeBody, function(req, res){
+    if(!req.body.commentText || !req.body.questionID || !req.body.parentID){
+        res.json({"error": "Please submit a valid comment."});
+    }    
+    else{
+       Banning.findOne({"IP": req.body.IP}, function(err, doc){
+       if(doc === null || req.body.userID){
+       var newComment = new Comment({text: req.body.commentText.trim().substr(0, 1000), IP: req.body.IP, userID: req.session.sessionID, postID: req.body.questionID,
+           isChild: true
+       });
+       newComment.save(function(error, newComment){
+           if(err){
+              res.json({"error": err});  
+           }
+           else{
+              Comment.findOneAndUpdate({_id: req.body.questionID}, {$addToSet: {childComments: newComment._id}}, function(error2, confirmation){
+                  if(!error2){
+                   res.json({"success": "Comment successfully posted."});   
+                  }
+              });
            }    
        });
        }
