@@ -1,4 +1,5 @@
 var React = require('react');
+var axios = require('axios');
 var Jumbotron = require("./StatelessUI/Jumbotron");
 var Footer = require("./StatelessUI/Footer");
 var ActionBar = require("./Navigation/ActionBar");
@@ -7,11 +8,19 @@ var actions = require("../actions");
 var localStorage = localStorage || window.localStorage;
 
 var Main = React.createClass({
-    componentWillMount: function(){
-        let that = this
+    componentDidMount: function(){
+        let that = this;
+        axios.post("/testLoggedIn").then(function(response){
+            if(!response.data.loggedIn){
+                localStorage.removeItem("loggedIn");
+                that.props.logout();
+            }
+            else{
         if(!that.props.userID && localStorage && localStorage.getItem("loggedIn")){
             that.props.reduxLogin(JSON.parse(localStorage.getItem("loggedIn")).userID);
-        }   
+        }                   
+            }
+        });
     },
     render: function(){
         return (<div>
@@ -29,7 +38,10 @@ var mapStateToProps = function(state){
 var mapDispatchToProps = function(dispatch){
     return {
         reduxLogin: function(userID){ 
-            dispatch(actions.login(userID)); }
+            dispatch(actions.login(userID)); },
+        logout: function(){
+            dispatch(actions.logout());
+        }
     }
 };
 module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(Main);

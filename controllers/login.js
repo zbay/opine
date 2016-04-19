@@ -58,4 +58,13 @@ app.post('/newPassword', requireLogin, sanitizeBody, function(req, res){
     }
   });
 });
+
+app.post('/testLoggedIn', function(req, res){
+  if(req.session.sessionID){
+    res.json({"loggedIn": true});
+  }
+  else{
+    res.json({"loggedIn": false});
+  }
+});
 }
