@@ -6,6 +6,7 @@ var login = require("./login.js"); login(app);
 var signup = require("./signup.js"); signup(app);
 var deletePost = require("./delete.js"); deletePost(app);
 var editPost = require("./edit.js"); editPost(app);
+var reset = require("./reset.js"); reset(app);
 }
 
 module.exports = routers;

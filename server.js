@@ -9,6 +9,7 @@ var db = mongoose.connection;
 var mongo = require('mongodb');
 var session = require('client-sessions');
 
+
 //https://ifelse.io/2015/08/27/server-side-rendering-with-react-and-react-router/ try this
 
 var dotenv = require('dotenv').load();
@@ -28,8 +29,8 @@ app.use(bodyParser.urlencoded({
 app.use(session({
   cookieName: 'session',
   secret: process.env.SESSION_SECRET,
-  duration: 30 * 60 * 1000,
-  activeDuration: 5 * 60 * 1000,
+  duration: 60 * 60 * 500,
+  activeDuration: 60 * 60 * 500,
   sessionID: null
 }));
 

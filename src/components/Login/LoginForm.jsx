@@ -28,7 +28,7 @@ var LoginForm = React.createClass({
         <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <form id="loginForm" onSubmit={this.login}>
         {this.props.redirectMessage ? (<div id="signupNotice">{this.props.redirectMessage}</div>): (<div id="signupNotice">Don't have an account?&nbsp;
-        <Link to="/signup">Sign up here.</Link></div>)}
+        <Link to="/signup">Sign up here.</Link><br /><br />Forgot your username or password? <Link to="/password_request">Request them here</Link>.</div>)}
         <FormAlert successMessage={this.state.successMessage} errorMessage={this.state.errorMessage}/><br />
         <label>Username:</label><br />
         <input name="username" value={this.state.username} onChange={this.onChange}/><br /><br />

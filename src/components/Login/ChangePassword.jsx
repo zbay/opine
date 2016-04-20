@@ -17,8 +17,9 @@ var ChangePassword = React.createClass({
     },
     render: function(){
         return (<div><form id="signupForm" onSubmit={this.changePassword}>
-        <div>Here, you can change your password if you know your email and the old password. If you have forgotten your old password, you'll have to make a
-        new account for now. Sorry!</div>
+        <div className="container"><div className="row"><div className="col-sm-12">
+        Here, you can change your password if you know your email and the old password.
+        </div></div></div>
         <FormAlert successMessage={this.state.successMessage} errorMessage={this.state.errorMessage}/><br />
         <label>Username:</label><br />
         <input name="username" value={this.state.username} onChange={this.onChange}/><br /><br />
@@ -27,6 +28,8 @@ var ChangePassword = React.createClass({
         <label>New Password:</label><br />
         <input name="newPassword" type="password" value={this.state.newPassword} onChange={this.onChange}/><br /><br />
         <button type="submit">Reset Password</button>
+        <br />
+        <br />
         </form>
         </div>);
     },

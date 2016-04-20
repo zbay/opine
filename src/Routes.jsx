@@ -1,3 +1,4 @@
+// Resume from this: http://spraso.com/real-time-data-flow-with-redux-and-socket-io/
 var React = require('react');
 var ReactRouter = require('react-router');
 var IndexRoute = require('react-router').IndexRoute;
@@ -18,6 +19,8 @@ var Signup = require("./components/Login/SignupForm");
 var Logout = require("./components/Login/Logout");
 var SuccessfulReset = require('./components/StatelessContent/SuccessfulReset');
 var ResetPassword = require('./components/Login/ChangePassword');
+var PasswordRequest = require('./components/Login/RequestPassword');
+var ResetPasswordForgot = require('./components/Login/ChangePasswordForgot');
 
 var AllWrapper = React.createClass({
     render: function(){
@@ -61,8 +64,17 @@ var LoginAuthWrapper = React.createClass({
     }
 });
 
-/*      <Route path="password_request" component={PasswordRequest}/>
-     */
+var LoginResetWrapper = React.createClass({
+    render: function(){
+        return (<Login redirectMessage="Password successfully changed! You can now log in."/>);
+    }
+});
+
+var ResetPasswordForgotWrapper = React.createClass({
+    render: function(){
+        return (<ResetPasswordForgot resetID={this.props.routeParams.resetID}/>);
+    }
+});
 
 module.exports = (
   <Provider store={Store}>
@@ -73,10 +85,13 @@ module.exports = (
       <Route path="all" component={AllWrapper}/>
       <Route path="login" component={Login}/>
       <Route path="login/signedUp" component={LoginAuthWrapper}/>
+      <Route path="login/reset" component={LoginResetWrapper}/>
       <Route path="reset" component={SuccessfulReset}/>
       <Route path="logout" component={Logout}/>
       <Route path="signup" component={Signup}/>
       <Route path="change_password" component={ResetPassword}/>
+      <Route path="password_request" component={PasswordRequest}/>
+      <Route path="change_password_forgot/:resetID" component={ResetPasswordForgotWrapper}/>
       <Route path="category/:category/:page" component={CategoryWrapper} />
       <Route path="category/:category" component={CategoryWrapper}/>
       <Route path="search/:search/:page" component={SearchWrapper} />

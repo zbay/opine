@@ -59,7 +59,7 @@ app.post('/newPassword', requireLogin, sanitizeBody, function(req, res){
   });
 });
 
-app.post('/testLoggedIn', function(req, res){
+app.post('/testLoggedIn', function(req, res){ //check if there is a session in progress
   if(req.session.sessionID){
     res.json({"loggedIn": true});
   }
