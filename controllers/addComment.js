@@ -6,13 +6,14 @@ var sanitizeBody = require("./helpers/sanitizeBody");
 
 module.exports = function(app) {
     
-    app.post("/addParentComment", sanitizeBody, function(req, res){
+    app.post("/addComment", sanitizeBody, function(req, res){
     if(!req.body.commentText || !req.body.questionID){
-        res.json({"error": "Please submit a valid omment."});
+        res.json({"error": "Please submit a valid comment."});
     }
     else{
-       Banning.findOne({"IP": req.body.IP}, function(err, doc){
+       Banning.findOne({"IP": req.body.IP || "dummy"}, function(err, doc){
        if(doc === null || req.body.userID){
+          console.log("IP: " + req.body.IP);
        var newComment = new Comment({text: req.body.commentText.trim().substr(0, 1000), IP: req.body.IP, userID: req.session.sessionID, postID: req.body.questionID});
        newComment.save(function(err){
            if(err){
@@ -29,7 +30,7 @@ module.exports = function(app) {
        });
     }
 });
-app.post("/addChildComment", sanitizeBody, function(req, res){
+/*app.post("/addChildComment", sanitizeBody, function(req, res){
     if(!req.body.commentText || !req.body.questionID || !req.body.parentID){
         res.json({"error": "Please submit a valid comment."});
     }    
@@ -57,5 +58,5 @@ app.post("/addChildComment", sanitizeBody, function(req, res){
        }
        });
     }
-});
+});*/
 }
