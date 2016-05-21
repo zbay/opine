@@ -20,8 +20,5 @@ I'll revisit this project, especially if my job hunt goes poorly, to better demo
 
 **Future to-do list:**
 
-1. Enable password resetting via email
-2. Enable nested comment threads
-2. Add web socket functionality, integrated with Redux, to load new questions and comments without having to refresh
-3. Comprehensive security testing (sanitization, etc).
+1. Enable nested comment threads
 
