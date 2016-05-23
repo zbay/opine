@@ -29,8 +29,8 @@ app.use(bodyParser.urlencoded({
 app.use(session({
   cookieName: 'session',
   secret: process.env.SESSION_SECRET,
-  duration: 60 * 60 * 500,
-  activeDuration: 60 * 60 * 500,
+  duration: 60 * 60 * 1000,
+  activeDuration: 60 * 60 * 1000,
   sessionID: null
 }));
 

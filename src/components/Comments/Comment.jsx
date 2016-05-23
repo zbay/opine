@@ -3,6 +3,7 @@ var axios = require('axios');
 var EditCommentForm = require('./EditCommentForm');
 var ReactRedux = require('react-redux');
 var moment = require('moment');
+var marked = require('marked');
 
 var Comment = React.createClass({
     getInitialState: function(){
@@ -17,7 +18,8 @@ var Comment = React.createClass({
            Posted: {moment(this.state.commentData.timePosted).format('MMMM Do YYYY, h:mm a')} by {this.state.commentData.author || "anonymous"}
           </div>
           <br />
-         {this.state.commentData.text}
+          <div class="commentContent" dangerouslySetInnerHTML={this.rawMarkup(this.state.commentData.text)}>
+         </div>
           {this.state.commentData.editable ? 
           (<div><br /><button onClick={this.editify}>Edit Comment</button>&nbsp;<button onClick={this.deleteComment}>Delete Comment</button></div>): (<span></span>)}
           </div>);      
@@ -50,8 +52,11 @@ var Comment = React.createClass({
         this.setState({editing: false});
     },
     saveEditRender: function(newComment){
-        console.log("new comment: " + newComment);
       this.setState({editing: false, commentData: newComment});
+    },
+    rawMarkup: function(value) {
+      var rawMarkup = marked(value, {sanitize: true});
+      return { __html: rawMarkup };
     }
 });
 

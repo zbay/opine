@@ -29,7 +29,7 @@ var NewCommentForm = React.createClass({
         <br />
         <input id="authorInput" name="author" value={this.state.author} onChange={this.onChange}/>
         <br /><br />
-        <label>Text:</label>
+        <label>Text: (<a href="http://assemble.io/docs/Cheatsheet-Markdown.html" target="_blank">Markdown</a> formatting is supported)</label>
         <br />
         <textarea id="commentInput" name="comment" value={this.state.comment} onChange={this.onChange}/>
         <br />
