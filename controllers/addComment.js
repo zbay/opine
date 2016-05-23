@@ -14,7 +14,8 @@ module.exports = function(app) {
        Banning.findOne({"IP": req.body.IP || "dummy"}, function(err, doc){
        if(doc === null || req.body.userID){
           console.log("IP: " + req.body.IP);
-       var newComment = new Comment({text: req.body.commentText.trim().substr(0, 1000), IP: req.body.IP, userID: req.session.sessionID, postID: req.body.questionID});
+       var newComment = new Comment({text: req.body.commentText.trim().substr(0, 1000), author: req.body.author.trim().substr(0, 100),
+       IP: req.body.IP, userID: req.session.sessionID, postID: req.body.questionID});
        newComment.save(function(err){
            if(err){
               res.json({"error": err});  

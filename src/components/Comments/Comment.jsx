@@ -2,6 +2,7 @@ var React = require('react');
 var axios = require('axios');
 var EditCommentForm = require('./EditCommentForm');
 var ReactRedux = require('react-redux');
+var moment = require('moment');
 
 var Comment = React.createClass({
     getInitialState: function(){
@@ -12,7 +13,11 @@ var Comment = React.createClass({
         if(!this.state.deleted){
         if(!this.state.editing){
           return (<div className="comment">
-          <span className="commentNumber">{this.props.index+1}.&nbsp;&nbsp;</span>{this.state.commentData.text}
+          <div className="commentInfo">
+           Posted: {moment(this.state.commentData.timePosted).format('MMMM Do YYYY, h:mm a')} by {this.state.commentData.author || "anonymous"}
+          </div>
+          <br />
+         {this.state.commentData.text}
           {this.state.commentData.editable ? 
           (<div><br /><button onClick={this.editify}>Edit Comment</button>&nbsp;<button onClick={this.deleteComment}>Delete Comment</button></div>): (<span></span>)}
           </div>);      

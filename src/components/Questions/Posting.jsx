@@ -5,6 +5,7 @@ var EditPostForm = require("./EditPostForm");
 var FaveButton = require("./Stateless/FaveButton");
 var ReactRedux = require('react-redux');
 var localStorage = localStorage || window.localStorage;
+var moment = require("moment");
 
 var Posting = React.createClass({
     propTypes: {
@@ -43,9 +44,9 @@ var Posting = React.createClass({
             <h3>Filed Under:</h3>
             {this.state.displayData.category}</div>): (<span></span>)}
         <h3>Posted On: </h3>
-        {this.props.postingData.timePosted.substring(0,10)}
+        {moment(this.props.postingData.timePosted).format('MMMM Do YYYY, h:mm a')}
         <h3>Deadline: </h3>
-        {this.props.postingData.deadline.substring(0,10)}
+        {moment(this.props.postingData.deadline).format('MMMM Do YYYY, h:mm a')}
         {!this.props.loggedIn ? (<span></span>): <div><br /><FaveButton toggleFavorite={this.toggleFavorite} favorited={this.state.favorited}/><br /></div>}
         {this.state.displayData.editable ? 
             (<div><br /><button onClick={this.editify}>Edit Post</button>&nbsp;

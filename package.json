@@ -28,6 +28,7 @@
     "gulp-react": "^3.0.1",
     "gulp-sass": "^2.2.0",
     "gulp-util": "^3.0.4",
+    "moment": "^2.13.0",
     "mongo-sanitize": "^1.0.0",
     "mongodb": "^2.1.7",
     "mongoose": "^4.4.7",

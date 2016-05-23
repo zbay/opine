@@ -9,7 +9,7 @@ var NewCommentForm = React.createClass({
       refreshComments: React.PropTypes.func.isRequired
     },
     getInitialState: function(){
-      return {visible: true, comment: "", errorMessage: null, successMessage: null}  
+      return {visible: true, comment: "", author: "anonymous", errorMessage: null, successMessage: null}  
     },
     componentDidMount: function(){
     let that = this;
@@ -24,6 +24,12 @@ var NewCommentForm = React.createClass({
         <button onClick={this.toggleVisible}>{this.state.visible ? "Hide Comment Form": "Write Comment"}</button>
         {this.state.visible ? 
         (<form id="commentForm" onSubmit={this.postComment}>
+        <br />
+        <label>Author (optional):</label>
+        <br />
+        <input id="authorInput" name="author" value={this.state.author} onChange={this.onChange}/>
+        <br /><br />
+        <label>Text:</label>
         <br />
         <textarea id="commentInput" name="comment" value={this.state.comment} onChange={this.onChange}/>
         <br />
@@ -47,7 +53,8 @@ var NewCommentForm = React.createClass({
          e.preventDefault(); // so that only React handles the form data
          let that = this;
          if(this.state.comment.length > 0 && this.props.questionID){
-             let commentData = {"questionID": that.props.questionID, "commentText": that.state.comment.trim().substr(0, 1000), "IP": that.state.IP, "loggedIn": that.props.loggedIn
+             let commentData = {"questionID": that.props.questionID, "commentText": that.state.comment.trim().substr(0, 1000), "author": that.state.author,
+             "IP": that.state.IP, "loggedIn": that.props.loggedIn
              };
              axios.post("/addComment", commentData).then(function(response){
                  
