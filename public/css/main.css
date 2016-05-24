@@ -45,6 +45,9 @@ select {
   margin-right: auto;
   text-align: center; }
 
+#fourohfour {
+  font-size: 150%; }
+
 #formError, #errorMessage, #fourohfour {
   color: red; }
 
