@@ -23,7 +23,7 @@ var Main = React.createClass({
         });
     },
     render: function(){
-        return (<div>
+        return (<div id="main">
         <Jumbotron />
         <ActionBar />
        {this.props.children}

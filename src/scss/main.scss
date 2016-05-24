@@ -16,7 +16,7 @@ $standard_space: 10px;
 #spinner{
     @include fullCentered();
 }
-.jumbotron, footer{
+.jumbotron, #footer{
     text-align:center;
     color: $header_footer_font;
     font-family: verdana;
@@ -28,7 +28,7 @@ select{
     color:  $header_footer_font;
     background-color: $header_footer_background;
 }
-footer{
+#footer{
     margin-top: $standard_space;
     padding-top: $standard_space;
     padding-bottom: $standard_space;
@@ -51,6 +51,9 @@ footer{
     margin-top:$standard_space;    
     max-width:95%;
     @include fullCentered();
+}
+#fourohfour{
+    font-size:150%;
 }
 #formError, #errorMessage, #fourohfour{
     color:$error_color;
@@ -145,10 +148,26 @@ label, #commentHeader{
         max-width:100%;
     }
 }
-footer{
-   min-width:100%;
-   margin-top:$standard_space;
+#main{
+     display: flex;
+     min-height: 100vh;
+     flex-direction: column;
 }
+#footer{
+   min-width:100%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   color: white;
+   font-size: 150%;
+   flex: 1;
+   align-self:center;
+}
+.VertCenterTop {
+     align-self: flex-start; }
+.VertCenterBottom {
+   align-self: flex-end; }
+ 
 .commentNumber{
     color: $tree_green;
     font-weight: bold;
