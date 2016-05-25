@@ -31,6 +31,9 @@ Posting.find({}, function(error, docs){
             }
             });
         }
+        else{
+            iterated++;
+        }
       if(iterated == docs.length-1){
           process.exit();
       }  
