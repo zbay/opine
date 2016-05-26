@@ -14,7 +14,7 @@ module.exports = function(app) {
         if(doc === null || req.session.sessionID){ // prevent posting if the user is not logged in and the IP address is banned
             var newPost = new Posting({"question": req.body.question.trim().substr(0, 1000), "asker": req.body.asker.trim().substr(0, 500),
             "howToContact": req.body.contact.trim().substr(0, 500),
-            "deadline": new Date(req.body.deadline) + 4320000, "category": req.body.category, "IP": req.body.IP, "userID": req.session.sessionID});
+            "deadline": new Date(req.body.deadline), "category": req.body.category, "IP": req.body.IP, "userID": req.session.sessionID});
             newPost.save(function(err, msg){
                 if(err){
                     res.json({"error": msg});

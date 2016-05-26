@@ -46,7 +46,7 @@ var Posting = React.createClass({
         <h3>Posted On: </h3>
         {moment(this.props.postingData.timePosted).format('MMMM Do YYYY, h:mm a')}
         <h3>Deadline: </h3>
-        {moment(this.props.postingData.deadline).format('MMMM Do YYYY')}
+        {moment(this.props.postingData.deadline).add(12, "h").format('MMMM Do YYYY')}
         {!this.props.loggedIn ? (<span></span>): <div><br /><FaveButton toggleFavorite={this.toggleFavorite} favorited={this.state.favorited}/><br /></div>}
         {this.state.displayData.editable ? 
             (<div><br /><button onClick={this.editify}>Edit Post</button>&nbsp;
