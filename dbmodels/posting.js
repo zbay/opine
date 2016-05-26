@@ -6,6 +6,6 @@ var PostingSchema = new Schema({"question": {type: String}, "timePosted": {type:
 });
 
 PostingSchema.index({ question: "text", howToContact: "text", asker: "text"});
-PostingSchema.index({"deadline": 1}, {expireAfterSeconds: 43200});
+PostingSchema.index({"deadline": 1}, {expireAfterSeconds: 86400});
 
 mongoose.model('Posting', PostingSchema);
